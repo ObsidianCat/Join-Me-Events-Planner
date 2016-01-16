@@ -1,0 +1,41 @@
+{
+  "name": "Join Me",
+  "dependencies": {
+    "chai": "~3.4.2",
+    "bootstrap": "~3.3.6",
+    "jquery": "~2.2.0",
+    "modernizr": "~2.8.1",
+    "mocha": "~2.3.4",
+    "angular": "~1.4.8",
+    "angular-route": "~1.4.8"
+  },
+  "overrides": {
+    "bootstrap-sass": {
+      "main": [
+        "assets/stylesheets/_bootstrap.scss",
+        "assets/fonts/bootstrap/*",
+        "assets/javascripts/bootstrap.js"
+      ]
+    }
+  },
+  "authors": [
+    "Lula Leus opheliaandcat@gmail.com"
+  ],
+  "description": "Events planner web application",
+  "main": "",
+  "moduleType": [
+    "es6",
+    "globals",
+    "node",
+    "yui"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
