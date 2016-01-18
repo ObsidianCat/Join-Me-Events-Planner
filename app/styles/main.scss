@@ -1,8 +1,10 @@
 $icon-font-path: '../fonts/';
 
 // bower:scss
-// endbower
+@import "bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
 @import "_reset.scss";
+
+// endbower
 
 h1{
   color: hotpink !important;

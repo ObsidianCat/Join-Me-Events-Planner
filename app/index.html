@@ -1,11 +1,10 @@
 <!doctype html>
-<html lang="">
+<html lang="" ng-app="joinMeApp">
   <head>
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Join Me: Events planner</title>
-
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
     <!-- Place favicon.ico in the root directory -->
 
@@ -16,7 +15,9 @@
     <!-- endbuild -->
 
     <!-- build:css styles/main.css -->
+    <!--<link rel="stylesheet" href="styles/main.css">-->
     <link rel="stylesheet" href="styles/main.css">
+
     <!-- endbuild -->
 
   </head>
@@ -28,13 +29,13 @@
     <div class="container">
       <div class="header">
         <ul class="nav nav-pills pull-right">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#log-in">Log In</a></li>
-          <li><a href="#sign-up">Sign Up</a></li>
+          <li class="active"><a href="#/welcome">Home</a></li>
+          <li><a href="#/log-in">Log In</a></li>
+          <li><a href="#/sign-up">Sign Up</a></li>
         </ul>
         <h3 class="text-muted">join me gulp webapp</h3>
       </div>
-      <div></div>
+      <div ng-view class="content-wrapper"></div>
       <div class="footer">
         <p>@ 2016, Lula Leus</p>
       </div>
@@ -69,6 +70,9 @@
 
     <!-- build:js scripts/main.js -->
     <script src="scripts/main.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/controllers.js"></script>
+
     <!-- endbuild -->
   </body>
 </html>
