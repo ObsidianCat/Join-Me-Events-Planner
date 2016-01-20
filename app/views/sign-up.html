@@ -1,1 +1,39 @@
-Sign up
+<form class="signup-form form-horizontal" id="user_new" method="post">
+  <form-group>
+    <label class="control-label" for="user_first_name">First Name
+    </label>
+    <input  id="user_first_name" class="form-control" type="text" name="first_name" placeholder="John" autocomplete="given-name">
+  </form-group>
+  <form-group>
+    <label class="control-label" for="user_last_name">Last Name
+    </label>
+    <input id="user_last_name" class="form-control" type="text" name="last_name" placeholder="Doe" autocomplete="family-name">
+  </form-group>
+  <form-group>
+    <label for="user_email">Email </label>
+      <input id="user_email" class="form-control" type="email" name="email" placeholder="example@example.com" autocomplete="email">
+  </form-group>
+  <form-group>
+    <label for="user_password">Password (min. 8 characters)</label>
+    <input id="user_password" class="form-control" type="password" name="password" autocomplete="off">
+  </form-group>
+  <form-group>
+    <label for="user_password_repeat">Please repeat your password</label>
+    <input id="user_password_repeat" class="form-control" type="password" name="password" autocomplete="off">
+  </form-group>
+  <form-group>
+    <label for="user_bday">Birthday</label>
+    <input id="user_bday" class="form-control" type="date" name="bday" autocomplete="bday">
+  </form-group>
+  <form-group>
+    <label for="user_favourite_event">You favorite type of event:</label>
+    <input id="user_favourite_event" class="form-control" list="event-types" name="favorite_event">
+    <datalist id="event-types">
+      <option value="Birthday party">
+      <option value="Masquerade ball">
+      <option value="Conference">
+      <option value="Dining out">
+      <option value="Going out to the movies">
+    </datalist>
+  </form-group>
+</form>
