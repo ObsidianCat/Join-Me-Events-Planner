@@ -5,4 +5,9 @@ Web application for creating and sharing events
 Demo of the application will be availabe soon!
 
 The application required installed node.js 
-For running type "gulp serve"
+For running type 
+
+```console
+gulp wiredep
+gulp serve
+```
