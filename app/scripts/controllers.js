@@ -5,11 +5,14 @@ angular.module('joinMeApp').controller('WelcomeController', function() {
   console.log('WelcomeController');
 })
 .controller('SignUpController', function($scope, validateService) {
-  //$scope.newUser = [];
+    window.validate = validateService;
     console.log('SignUpController');
-  $scope.submitSignUp = function(){
-    console.log($scope.newUser);
-    console.log(validateService.name);
+  $scope.submitSignUp = function(newUser){
+    var firstName = document.querySelector('#user_first_name');
+    var lastName = document.querySelector('#user_last_name');
+    var password = document.querySelector('#user_password');
+    var repeatPassword = document.querySelector('#user_password_repeat');
+    validateService.collection.checkName(newUser.firstName, validateService.firstNameIssuesTracker)
   }
 
 })

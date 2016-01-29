@@ -2,7 +2,7 @@
  * Created by Lula on 1/25/2016.
  */
 angular.module('joinMeApp')
-  .factory('validateService', function() {
+  .service('validateService', function() {
     function IssueTracker() {
       this.issues = [];
     }
@@ -27,21 +27,38 @@ angular.module('joinMeApp')
       }
     };
 
-    var validationFieldsChoice = {
-      checkName:function(valueForCheck){
-        if (valueForCheck.length < 1) {
-          firstInputIssuesTracker.add("fewer than 1 character");
-        } else if (valueForCheck.length > 60) {
-          firstInputIssuesTracker.add("greater than 600 characters");
-        }
-      },
-      checkEmail:function(){},
-      checkPassword:function(){}
-    }
-
     var serviceInstance = {
-      name:'cat-dog'
+      firstNameIssuesTracker:new IssueTracker(),
+      lastNameIssuesTracker:new IssueTracker(),
+      passwordIssuesTracker:new IssueTracker(),
+      repeatIssuesTracker:new IssueTracker(),
+      collection:{
+        checkName:function(valueForCheck, tracker){
+          if (valueForCheck.length < 2) {
+            tracker.add("fewer than 1 character");
+          } else if (valueForCheck.length > 60) {
+            tracker.add("greater than 600 characters");
+          }
+        },
+        checkPassword:function(valueForCheck, tracker){
+          if (valueForCheck.length < 16) {
+            tracker.add("fewer than 16 characters");
+          } else if (valueForCheck.length > 100) {
+            tracker.add("greater than 100 characters");
+          }
+        },
+        checkPasswordRepeat:function(valueForCheck, valueForCompare, tracker){
+          if (valueForCheck === valueForCompare && valueForCheck.length > 0) {
+            /*
+             They match, so make sure the rest of the requirements have been met.
+             */
+            checkRequirements();
+          } else {
+            tracker.add("Passwords must match!");
+          }
+        }
+      }
     };
     // Our first service
     return serviceInstance;
-  })
+  });
