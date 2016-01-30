@@ -7,6 +7,9 @@ angular.module('joinMeApp')
       this.issues = [];
     }
     IssueTracker.prototype = {
+      clear: function(){
+        this.issues = [];
+      },
       add: function (issue) {
         this.issues.push(issue);
       },
@@ -28,21 +31,20 @@ angular.module('joinMeApp')
     };
 
     var serviceInstance = {
-      firstNameIssuesTracker:new IssueTracker(),
-      lastNameIssuesTracker:new IssueTracker(),
-      passwordIssuesTracker:new IssueTracker(),
-      repeatIssuesTracker:new IssueTracker(),
+      createTracker:function(trackerName){
+        this[trackerName] = new IssueTracker();
+      },
       collection:{
         checkName:function(valueForCheck, tracker){
-          if (valueForCheck.length < 2) {
+          if (!valueForCheck || valueForCheck.length < 2) {
             tracker.add("fewer than 1 character");
           } else if (valueForCheck.length > 60) {
             tracker.add("greater than 600 characters");
           }
         },
         checkPassword:function(valueForCheck, tracker){
-          if (valueForCheck.length < 16) {
-            tracker.add("fewer than 16 characters");
+          if (valueForCheck.length < 8) {
+            tracker.add("fewer than 8 characters");
           } else if (valueForCheck.length > 100) {
             tracker.add("greater than 100 characters");
           }
@@ -52,7 +54,7 @@ angular.module('joinMeApp')
             /*
              They match, so make sure the rest of the requirements have been met.
              */
-            checkRequirements();
+            //checkRequirements();
           } else {
             tracker.add("Passwords must match!");
           }
