@@ -39,31 +39,38 @@ angular.module('joinMeApp')
         validatedInput.setCustomValidity("");
       },
       collection:{
-        checkName:function(valueForCheck, tracker){
-          if (!valueForCheck || valueForCheck.length < 2) {
+        checkName:function(inputForCheck, tracker){
+          if (!inputForCheck.value || inputForCheck.value.length < 2) {
             tracker.add("fewer than 1 character");
-          } else if (valueForCheck.length > 60) {
+          } else if (inputForCheck.value.length > 60) {
             tracker.add("greater than 60 characters");
           }
-        },
-        checkPassword:function(valueForCheck, tracker){
-          if (valueForCheck.length < 8) {
-            tracker.add("fewer than 8 characters");
-          } else if (valueForCheck.length > 100) {
-            tracker.add("greater than 100 characters");
+          else{
+            serviceInstance.setAsValid(inputForCheck);
           }
         },
-        checkPasswordRepeat:function(valueForCheck, valueForCompare, tracker){
-          if (valueForCheck === valueForCompare && valueForCheck.length > 0) {
+        checkPassword:function(inputForCheck, tracker){
+          if (!inputForCheck.value ||inputForCheck.value.length < 8) {
+            tracker.add("fewer than 8 characters");
+          } else if (inputForCheck.value.length > 100) {
+            tracker.add("greater than 100 characters");
+          }
+          else{
+            serviceInstance.setAsValid(inputForCheck);
+          }
+        },
+        checkPasswordRepeat:function(inputForCheck, valueForCompare, tracker){
+          if (inputForCheck.value === valueForCompare && inputForCheck.value.length > 0) {
             /*
              They match, so make sure the rest of the requirements have been met.
              */
-            //checkRequirements();
-          } else {
+            serviceInstance.setAsValid(inputForCheck);
+          }
+          else {
             tracker.add("Passwords must match!");
           }
-        }
-      }
+        }//end of check password repeat
+      }//end of collection
     };
     // Our first service
     return serviceInstance;
