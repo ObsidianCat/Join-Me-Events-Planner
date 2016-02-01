@@ -1,25 +1,25 @@
 <form class="signup-form form-horizontal" id="user_new"  >
   <form-group>
-    <label class="control-label" for="user_first_name">*First Name
+    <label class="control-label" for="{{newUser.firstNameId}}">*First Name
     </label>
-    <input  required ng-model="newUser.firstName" id="user_first_name" class="custom-validation form-control" type="text" name="first_name" placeholder="John" autocomplete="given-name">
+    <input  required ng-model="newUser.firstName" id="{{newUser.firstNameId}}" class="custom-validation form-control" type="text" name="first_name" placeholder="John" autocomplete="given-name">
   </form-group>
   <form-group>
-    <label class="control-label" for="user_last_name">*Last Name
+    <label class="control-label" for="{{newUser.lastNameId}}">*Last Name
     </label>
-    <input required id="user_last_name" ng-model="newUser.lastName" class="custom-validation form-control" type="text" name="last_name" placeholder="Doe" autocomplete="family-name">
+    <input required id="{{newUser.lastNameId}}" ng-model="newUser.lastName" class="custom-validation form-control" type="text" name="last_name" placeholder="Doe" autocomplete="family-name">
   </form-group>
   <form-group>
     <label for="user_email">*Email </label>
       <input required pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" id="user_email" ng-model="newUser.email" class="form-control" type="email" name="email" placeholder="example@example.com" autocomplete="email">
   </form-group>
   <form-group>
-    <label for="user_password">*Password (min. 8 characters)</label>
-    <input required id="user_password" ng-model="newUser.password" class="custom-validation form-control" type="password" name="password" autocomplete="off">
+    <label for="{{newUser.passwordId}}">*Password (min. 8 characters)</label>
+    <input required id="{{newUser.passwordId}}" ng-model="newUser.password" class="custom-validation form-control" type="password" name="password" autocomplete="off">
   </form-group>
   <form-group>
-    <label for="user_password_repeat">*Please repeat your password</label>
-    <input required id="user_password_repeat" ng-model="newUser.repeatPassword" class="custom-validation form-control" type="password" name="password" autocomplete="off">
+    <label for="{{newUser.repeatPasswordId}}">*Please repeat your password</label>
+    <input required id="{{newUser.repeatPasswordId}}" ng-model="newUser.repeatPassword" class="custom-validation form-control" type="password" name="password" autocomplete="off">
   </form-group>
   <form-group>
     <label for="user_bday">Birthday</label>

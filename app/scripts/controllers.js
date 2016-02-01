@@ -6,50 +6,53 @@ angular.module('joinMeApp').controller('WelcomeController', function() {
 })
 .controller('SignUpController', function($scope, validateService) {
     window.validate = validateService;
-    console.log('SignUpController');
 
     $scope.newUser = {
       "firstName": "Alexey",
+      "firstNameId":'user_first_name',
       "lastName": "Soshin",
+      "lastNameId":"user_last_name",
       "password": "abcd",
+      "passwordId": "user_password",
+      "repeatPasswordId": "user_repeat_password",
       "repeatPassword": "abcd",
       "email": "alexey@gmail.com"
     };
 
+
     $scope.submitSignUp = function(newUser){
+      var formValitityStatus = signUpFormValidation(newUser);
+      console.log('formValitityStatus');
+      console.log(formValitityStatus);
+    };
+
+    function signUpFormValidation(newUser){
+      var listForValidation = new Map();
+
       var elementsForValidation=$('.signup-form .custom-validation');
       elementsForValidation.each(function(){
         validateService.createTracker($(this).attr('id'));
+        listForValidation.set($(this).attr('id'), this);
       });
 
-      var listForValidation = new Map();
-      listForValidation.set('firstName', document.querySelector('#user_first_name'));
-      listForValidation.set('lastName', document.querySelector('#user_last_name'));
-      listForValidation.set('password', document.querySelector('#user_password'));
-      listForValidation.set('repeatPassword', document.querySelector('#user_password_repeat'));
+
+      for (var key of listForValidation.keys()) {
+        validateService.createTracker(key);
+      }
 
 
-      validateService.collection.checkName(newUser.firstName, validateService[firstName.id]);
-      validateService.collection.checkName(newUser.lastName, validateService[lastName.id]);
-      validateService.collection.checkPassword(newUser.password, validateService[password.id]);
-      validateService.collection.checkPasswordRepeat(newUser.repeatPassword, newUser.password, validateService[repeatPassword.id]);
+      validateService.collection.checkName(newUser.firstName, validateService.trackers[newUser.firstNameId]);
+      validateService.collection.checkName(newUser.lastName, validateService.trackers[newUser.lastNameId]);
+      validateService.collection.checkPassword(newUser.password, validateService.trackers[newUser.passwordId]);
+      validateService.collection.checkPasswordRepeat(newUser.repeatPassword, newUser.password, validateService.trackers[newUser.repeatPasswordId]);
 
-
-      var firstNameIssues = validateService.firstNameIssuesTracker.retrieve();
-      var lastNameIssues = validateService.lastNameIssuesTracker.retrieve();
-      var passwordIssues = validateService.passwordIssuesTracker.retrieve();
-      var repeatPasswordIssues = validateService.repeatIssuesTracker.retrieve();
-
-      firstName.setCustomValidity(firstNameIssues);
-      lastName.setCustomValidity(lastNameIssues);
-      password.setCustomValidity(passwordIssues);
-      repeatPassword.setCustomValidity(repeatPasswordIssues);
-
-      validateService.passwordIssuesTracker.clear();
-      validateService.repeatIssuesTracker.clear();
-
-    };
-
+      for (var [key, value] of listForValidation) {
+        console.log(key + " = " + value);
+        value.setCustomValidity(validateService.trackers[key].retrieve());
+      }
+      var form = document.getElementById("user_new");
+      return form.checkValidity();
+    }
 })
 .controller('LogInController', function() {
   console.log('LogInController');

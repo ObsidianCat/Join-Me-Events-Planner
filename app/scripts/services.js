@@ -32,14 +32,18 @@ angular.module('joinMeApp')
 
     var serviceInstance = {
       createTracker:function(trackerName){
-        this[trackerName] = new IssueTracker();
+        this.trackers[trackerName] = new IssueTracker();
+      },
+      trackers:{},
+      setAsValid:function(validatedInput){
+        validatedInput.setCustomValidity("");
       },
       collection:{
         checkName:function(valueForCheck, tracker){
           if (!valueForCheck || valueForCheck.length < 2) {
             tracker.add("fewer than 1 character");
           } else if (valueForCheck.length > 60) {
-            tracker.add("greater than 600 characters");
+            tracker.add("greater than 60 characters");
           }
         },
         checkPassword:function(valueForCheck, tracker){
