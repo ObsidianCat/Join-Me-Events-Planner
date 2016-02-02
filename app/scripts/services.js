@@ -2,7 +2,7 @@
  * Created by Lula on 1/25/2016.
  */
 angular.module('joinMeApp')
-  .service('validateService', function() {
+  .service('ValidateService', function() {
     function IssueTracker() {
       this.issues = [];
     }
@@ -74,4 +74,10 @@ angular.module('joinMeApp')
     };
     // Our first service
     return serviceInstance;
+  })
+  .factory('Auth', function($firebaseAuth, FirebaseUrl){
+    var ref = new Firebase(FirebaseUrl);
+    var auth = $firebaseAuth(ref);
+
+    return auth;
   });

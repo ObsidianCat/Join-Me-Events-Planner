@@ -1,7 +1,7 @@
 /**
  * Created by Lula on 1/18/2016.
  */
-angular.module('joinMeApp', ['ngRoute'])
+angular.module('joinMeApp', ['ngRoute', 'firebase'])
   .config(function($routeProvider) {
       $routeProvider.
         when('/welcome', {
@@ -10,13 +10,14 @@ angular.module('joinMeApp', ['ngRoute'])
         }).
         when('/sign-up', {
           templateUrl: 'views/sign-up.html',
-          controller: 'SignUpController as signUpCtrl'
+          controller: 'AuthController as AuthCtrl'
         }).
         when('/log-in', {
           templateUrl: 'views/log-in.html',
-          controller: 'LogInController as logInCtrl'
+          controller: 'AuthController as AuthCtrl'
         }).
         otherwise({
           redirectTo: '/welcome'
         });
-    });
+    })
+  .constant('FirebaseUrl', 'https://popping-fire-8740.firebaseio.com/');
