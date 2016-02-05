@@ -11,12 +11,12 @@ angular.module('joinMeApp', ['ui.router', 'firebase'])
         })
         .state('signup', {
           url:'/signup',
-          templateUrl: 'views/sign-up.html',
+          templateUrl: 'views/signup.html',
           controller: 'AuthController as AuthCtrl'
         })
         .state('login', {
           url:"/login",
-          templateUrl: 'views/log-in.html',
+          templateUrl: 'views/login.html',
           controller: 'AuthController as AuthCtrl'
         });
     $urlRouterProvider.otherwise('/welcome');
