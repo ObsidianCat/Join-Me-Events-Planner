@@ -25,7 +25,7 @@ angular.module('joinMeApp').controller('WelcomeController', function() {
 
     authCtrl.login = function(){
       Auth.$authWithPassword( $scope.user).then(function(auth){
-        $state.go('/welcome');
+        $state.go('welcome');
       }, function(error){
         authCtrl.error = error;
       });//end of then
