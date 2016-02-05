@@ -4,7 +4,7 @@
 angular.module('joinMeApp').controller('WelcomeController', function() {
   console.log('WelcomeController');
 })
-.controller('AuthController', function($scope, ValidateService, Auth, $location) {
+.controller('AuthController', function($scope, ValidateService, Auth, $state) {
     var authCtrl = this;
 
     //data from form
@@ -25,7 +25,7 @@ angular.module('joinMeApp').controller('WelcomeController', function() {
 
     authCtrl.login = function(){
       Auth.$authWithPassword( $scope.user).then(function(auth){
-        $location.url('/welcome');
+        $state.go('/welcome');
       }, function(error){
         authCtrl.error = error;
       });//end of then
