@@ -5,10 +5,12 @@ angular.module('joinMeApp').controller('WelcomeController', function() {
   console.log('WelcomeController');
 })
 .controller('AuthController', function($scope, ValidateService, Auth, $location) {
-    //data from sign in form
+    var authCtrl = this;
+
+    //data from form
     //id`s to use in sign in form
     //currently some values filled with dummy date for sake of development
-    $scope.newUser = {
+    $scope.user = {
       "firstName": "Alexey",
       "firstNameId":'user_first_name',
       "lastName": "Soshin",
@@ -20,31 +22,35 @@ angular.module('joinMeApp').controller('WelcomeController', function() {
       "email": "alexey@gmail.com"
     };
 
-    var authCtrl = this;
-    authCtrl.user = {
-      email:'',
-      password:''
-    };
 
     authCtrl.login = function(){
-      Auth.$authWithPassword(authCtrl.user).then(function(auth){
-
+      Auth.$authWithPassword( $scope.user).then(function(auth){
         $location.url('/welcome');
-      })
+      }, function(error){
+        authCtrl.error = error;
+      });//end of then
+    };//end of login
+
+    authCtrl.register = function(){
+      Auth.$createUser( $scope.user).then(function(user){
+        authCtrl.login();
+      }, function(error){
+        authCtrl.error = error;
+      });//end of then
     };
 
 
 
-    $scope.submitSignUp = function(newUser){
 
-
+    $scope.submitSignUp = function(user){
       //get validity status of the form
-      var formValitityStatus = signUpFormValidation(newUser);
+      var formValitityStatus = signUpFormValidation(user);
       console.log('formValitityStatus');
       console.log(formValitityStatus);
+      authCtrl.register();
     };
 
-    function signUpFormValidation(newUser){
+    function signUpFormValidation(user){
       //create a map of id of input ->input
       //map contains all field with custom validation
       var listForValidation = new Map();
@@ -59,10 +65,10 @@ angular.module('joinMeApp').controller('WelcomeController', function() {
       }
 
       //check every field that required custom validation
-      ValidateService.collection.checkName(listForValidation.get(newUser.firstNameId), ValidateService.trackers[newUser.firstNameId]);
-      ValidateService.collection.checkName(listForValidation.get(newUser.lastNameId), ValidateService.trackers[newUser.lastNameId]);
-      ValidateService.collection.checkPassword(listForValidation.get(newUser.passwordId), ValidateService.trackers[newUser.passwordId]);
-      ValidateService.collection.checkPasswordRepeat(listForValidation.get(newUser.repeatPasswordId), newUser.password, ValidateService.trackers[newUser.repeatPasswordId]);
+      ValidateService.collection.checkName(listForValidation.get(user.firstNameId), ValidateService.trackers[user.firstNameId]);
+      ValidateService.collection.checkName(listForValidation.get(user.lastNameId), ValidateService.trackers[user.lastNameId]);
+      ValidateService.collection.checkPassword(listForValidation.get(user.passwordId), ValidateService.trackers[user.passwordId]);
+      ValidateService.collection.checkPasswordRepeat(listForValidation.get(user.repeatPasswordId), user.password, ValidateService.trackers[user.repeatPasswordId]);
 
       //set custom validation messages to form fields
       for (var [key, value] of listForValidation) {

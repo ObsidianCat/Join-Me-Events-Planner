@@ -1,33 +1,37 @@
+<div ng-show="authCtrl.error">
+  <span>{{authCtrl.error.message}}</span>
+</div>
+
 <form class="signup-form form-horizontal" id="user_new"  >
   <form-group>
-    <label class="control-label" for="{{newUser.firstNameId}}">*First Name
+    <label class="control-label" for="{{user.firstNameId}}">*First Name
     </label>
-    <input  required ng-model="newUser.firstName" id="{{newUser.firstNameId}}" class="custom-validation form-control" type="text" name="first_name" placeholder="John" autocomplete="given-name">
+    <input  required ng-model="user.firstName" id="{{user.firstNameId}}" class="custom-validation form-control" type="text" name="first_name" placeholder="John" autocomplete="given-name">
   </form-group>
   <form-group>
-    <label class="control-label" for="{{newUser.lastNameId}}">*Last Name
+    <label class="control-label" for="{{user.lastNameId}}">*Last Name
     </label>
-    <input required id="{{newUser.lastNameId}}" ng-model="newUser.lastName" class="custom-validation form-control" type="text" name="last_name" placeholder="Doe" autocomplete="family-name">
+    <input required id="{{user.lastNameId}}" ng-model="user.lastName" class="custom-validation form-control" type="text" name="last_name" placeholder="Doe" autocomplete="family-name">
   </form-group>
   <form-group>
     <label for="user_email">*Email </label>
-      <input required pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" id="user_email" ng-model="newUser.email" class="form-control" type="email" name="email" placeholder="example@example.com" autocomplete="email">
+      <input required pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" id="user_email" ng-model="user.email" class="form-control" type="email" name="email" placeholder="example@example.com" autocomplete="email">
   </form-group>
   <form-group>
-    <label for="{{newUser.passwordId}}">*Password (min. 8 characters)</label>
-    <input required id="{{newUser.passwordId}}" ng-model="newUser.password" class="custom-validation form-control" type="password" name="password" autocomplete="off">
+    <label for="{{user.passwordId}}">*Password (min. 8 characters)</label>
+    <input required id="{{user.passwordId}}" ng-model="user.password" class="custom-validation form-control" type="password" name="password" autocomplete="off">
   </form-group>
   <form-group>
-    <label for="{{newUser.repeatPasswordId}}">*Please repeat your password</label>
-    <input required id="{{newUser.repeatPasswordId}}" ng-model="newUser.repeatPassword" class="custom-validation form-control" type="password" name="password" autocomplete="off">
+    <label for="{{user.repeatPasswordId}}">*Please repeat your password</label>
+    <input required id="{{user.repeatPasswordId}}" ng-model="user.repeatPassword" class="custom-validation form-control" type="password" name="password" autocomplete="off">
   </form-group>
   <form-group>
     <label for="user_bday">Birthday</label>
-    <input id="user_bday" class="form-control" ng-model="newUser.bday" type="date" name="bday" autocomplete="bday">
+    <input id="user_bday" class="form-control" ng-model="user.bday" type="date" name="bday" autocomplete="bday">
   </form-group>
   <form-group>
     <label for="user_favourite_event">You favorite type of event:</label>
-    <input id="user_favourite_event" class="form-control" ng-model="newUser.favorite" list="event-types" name="favorite_event">
+    <input id="user_favourite_event" class="form-control" ng-model="user.favorite" list="event-types" name="favorite_event">
     <datalist id="event-types">
       <option value="Birthday party">
       <option value="Masquerade ball">
@@ -36,5 +40,5 @@
       <option value="Going out to the movies">
     </datalist>
   </form-group>
-  <button type="submit" class="btn btn-default" ng-click="submitSignUp(newUser)">Submit</button>
+  <button type="submit" class="btn btn-default" ng-click="submitSignUp(user, 'signup')">Submit</button>
 </form>
