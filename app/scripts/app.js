@@ -41,7 +41,7 @@ angular.module('joinMeApp', ['ui.router', 'firebase'])
             }
           }
         })
-        .state('create', {
+        .state('event', {
         url:"/create-event",
         templateUrl: 'views/event.html',
         controller: 'EventController as EventCtrl'

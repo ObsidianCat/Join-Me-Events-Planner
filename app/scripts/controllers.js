@@ -93,6 +93,6 @@ angular.module('joinMeApp').controller('WelcomeController', function($scope, Aut
       return form.checkValidity();
     }
 })
-.controller('eventController', function() {
-  console.log('eventController');
+.controller('EventController', function() {
+  console.log('EventController');
 });
