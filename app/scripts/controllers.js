@@ -1,8 +1,29 @@
 /**
  * Created by Lula on 1/18/2016.
  */
-angular.module('joinMeApp').controller('WelcomeController', function() {
+angular.module('joinMeApp').controller('WelcomeController', function($scope, Auth) {
   console.log('WelcomeController');
+
+
+  $scope.authObj = Auth;
+  $scope.authData = $scope.authObj.$getAuth();
+
+  //var authData = $scope.authObj.$getAuth();
+  //if (authData) {
+  //  console.log("Logged in as:", authData.uid);
+  //} else {
+  //  console.log("Logged out");
+  //}
+
+  // any time auth status updates, add the user data to scope
+  $scope.authObj.$onAuth(function(authData) {
+    $scope.authData = authData;
+    console.log($scope.authData);
+  });
+
+
+
+
 })
 .controller('AuthController', function($scope, ValidateService, Auth, $state) {
     var authCtrl = this;
@@ -11,10 +32,8 @@ angular.module('joinMeApp').controller('WelcomeController', function() {
     //id`s to use in sign in form
     //currently some values filled with dummy date for sake of development
     $scope.user = {
-      "firstName": "Alexey",
-      "firstNameId":'user_first_name',
-      "lastName": "Soshin",
-      "lastNameId":"user_last_name",
+      "name": "Alexey",
+      "nameId":'user_name',
       "password": "abcd",
       "passwordId": "user_password",
       "repeatPasswordId": "user_repeat_password",

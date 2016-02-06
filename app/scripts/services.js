@@ -80,4 +80,9 @@ angular.module('joinMeApp')
     var auth = $firebaseAuth(ref);
 
     return auth;
+  })
+  .factory('Users', function($firebaseArray, $firebaseObject, FirebaseUrl){
+    var Users = {};
+
+    return Users;
   });

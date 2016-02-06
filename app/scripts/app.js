@@ -7,17 +7,39 @@ angular.module('joinMeApp', ['ui.router', 'firebase'])
         .state('welcome', {
           url:'/welcome',
           templateUrl: 'views/welcome.html',
-          controller: 'WelcomeController as welcomeCtrl'
+          //controller: 'WelcomeController as welcomeCtrl'
+
         })
         .state('signup', {
           url:'/signup',
           templateUrl: 'views/signup.html',
-          controller: 'AuthController as AuthCtrl'
+          controller: 'AuthController as AuthCtrl',
+          resolve:{
+            requireNoAuth:function($state, Auth){
+              return Auth.$requireAuth().then(function(auth){
+                console.log('logged');
+                $state.go('welcome')
+              }, function(error){
+                console.log(error);
+                return;
+              })
+            }
+          }
         })
         .state('login', {
           url:"/login",
           templateUrl: 'views/login.html',
-          controller: 'AuthController as AuthCtrl'
+          controller: 'AuthController as AuthCtrl',
+          resolve:{
+            requireNoAuth:function($state, Auth){
+              return Auth.$requireAuth().then(function(auth){
+                $state.go('welcome')
+              }, function(error){
+                console.log(error);
+                return;
+              })
+            }
+          }
         });
     $urlRouterProvider.otherwise('/welcome');
 
