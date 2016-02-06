@@ -40,7 +40,12 @@ angular.module('joinMeApp', ['ui.router', 'firebase'])
               })
             }
           }
-        });
+        })
+        .state('create', {
+        url:"/create-event",
+        templateUrl: 'views/event.html',
+        controller: 'EventController as EventCtrl'
+      });
     $urlRouterProvider.otherwise('/welcome');
 
     })

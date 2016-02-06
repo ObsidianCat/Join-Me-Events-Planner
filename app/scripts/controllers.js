@@ -3,8 +3,6 @@
  */
 angular.module('joinMeApp').controller('WelcomeController', function($scope, Auth) {
   console.log('WelcomeController');
-
-
   $scope.authObj = Auth;
   $scope.authData = $scope.authObj.$getAuth();
 
@@ -20,9 +18,6 @@ angular.module('joinMeApp').controller('WelcomeController', function($scope, Aut
     $scope.authData = authData;
     console.log($scope.authData);
   });
-
-
-
 
 })
 .controller('AuthController', function($scope, ValidateService, Auth, $state) {
@@ -98,6 +93,6 @@ angular.module('joinMeApp').controller('WelcomeController', function($scope, Aut
       return form.checkValidity();
     }
 })
-.controller('LogInController', function() {
-  console.log('LogInController');
+.controller('eventController', function() {
+  console.log('eventController');
 });
