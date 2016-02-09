@@ -16,6 +16,7 @@ angular.module('joinMeApp').controller('WelcomeController', function($scope, Aut
   // any time auth status updates, add the user data to scope
   $scope.authObj.$onAuth(function(authData) {
     $scope.authData = authData;
+    console.log('$onAuth function');
     console.log($scope.authData);
   });
 
@@ -29,7 +30,7 @@ angular.module('joinMeApp').controller('WelcomeController', function($scope, Aut
     $scope.user = {
       "name": "Alexey",
       "nameId":'user_name',
-      "password": "abcd",
+      "password": "abcd1234",
       "passwordId": "user_password",
       "repeatPasswordId": "user_repeat_password",
       "repeatPassword": "abcd1",
@@ -37,7 +38,7 @@ angular.module('joinMeApp').controller('WelcomeController', function($scope, Aut
     };
 
 
-    authCtrl.login = function(){
+    $scope.login = function(){
       Auth.$authWithPassword( $scope.user).then(function(auth){
         $state.go('welcome');
       }, function(error){
