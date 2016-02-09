@@ -1,11 +1,55 @@
 <form class="signup-form form-horizontal" id="create-event" >
   <form-group>
-    <label for="user_email">*Email </label>
-    <input required pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" id="user_email" ng-model="user.email" class="form-control" type="email" name="email" placeholder="example@example.com" autocomplete="email">
+    <label for="event_name">*Name of event</label>
+    <input  id="event_name" ng-model="eventData.name" class="validation-text form-control" type="text" name="event_name" placeholder="Friday`s Dinner" required>
   </form-group>
   <form-group>
-    <label for="{{user.passwordId}}">*Password (min. 8 characters)</label>
-    <input required id="{{user.passwordId}}" ng-model="user.password" class="custom-validation form-control" type="password" name="password" autocomplete="off">
+    <label for="event_type">*Event type</label>
+    <input id="event_type" class="form-control validation-text" ng-model="eventData.type" list="event-types" name="event_type" placeholder="Dinner out">
+    <datalist id="event-types">
+      <option value="Birthday party">
+      <option value="Masquerade ball">
+      <option value="Conference">
+      <option value="Dinner out">
+      <option value="Going out to the movies">
+    </datalist>
+  </form-group>
+  <form-group>
+    <label for="event_host">*Name of event</label>
+    <input  id="event_host" ng-model="eventData.host" class="validation-text form-control" type="text" name="event_host" placeholder="Lula Leus" required>
+  </form-group>
+  <form-group>
+    <label for="event_start_time">*Event start time</label>
+    <input  id="event_start_time" ng-model="eventData.timeStart" class="validation-time form-control" type="time" name="event_start_time" placeholder="" required>
+  </form-group>
+  <form-group>
+    <label for="event_end_time">Event end time</label>
+    <input  id="event_end_time" ng-model="eventData.timeEnd" class="validation-time form-control" type="time" name="event_end_time" placeholder="" required>
+  </form-group>
+  <form-group>
+    <label for="event_start_date">*Event start date</label>
+    <input  id="event_start_date" ng-model="eventData.dateStart" class="validation-date form-control" type="date" name="event_start_date" placeholder="" required>
+  </form-group>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox"> Multi-days event
+    </label>
+  </div>
+  <form-group>
+    <label for="event_end_date">Event end date</label>
+    <input  id="event_end_date" ng-model="eventData.dateEnd" class="validation-date form-control" type="date" name="event_end_date" placeholder="" required>
+  </form-group>
+  <form-group>
+    <label>Guest list</label>
+    <button class="form-control btn btn-default">Add guest</button>
+  </form-group>
+  <form-group>
+    <label for="event_location">*Location</label>
+    <input  id="event_location" ng-model="eventData.location" class="validation-loation form-control" type="text" name="event_location" placeholder="" required>
+  </form-group>
+  <form-group>
+    <label for="event_message">Additional information</label>
+    <textarea id="event_message"  ng-model="eventData.message" class="form-control" rows="3" placeholder="Dress code is casual. Please bring with you a positive vibe and smiles :)"></textarea>
   </form-group>
 
   <button type="submit" class="btn btn-default" ng-click="createEvent(eventData)">Submit</button>
