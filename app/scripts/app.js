@@ -6,7 +6,7 @@ angular.module('joinMeApp', ['ui.router', 'firebase'])
     $stateProvider
         .state('welcome', {
           url:'/welcome',
-          templateUrl: 'views/welcome.html',
+          templateUrl: 'views/welcome.html'
           //controller: 'WelcomeController as welcomeCtrl'
 
         })
@@ -44,7 +44,7 @@ angular.module('joinMeApp', ['ui.router', 'firebase'])
         .state('event', {
         url:"/create-event",
         templateUrl: 'views/event.html',
-        controller: 'EventController as EventCtrl'
+        controller: 'EventController as eventCtrl'
       });
     $urlRouterProvider.otherwise('/welcome');
 

@@ -1,4 +1,4 @@
-<form class="signup-form form-horizontal" id="create-event" >
+<form class="form-horizontal" id="create-event" >
   <form-group>
     <label for="event_name">*Name of event</label>
     <input  id="event_name" ng-model="eventData.name" class="validation-text form-control" type="text" name="event_name" placeholder="Friday`s Dinner" required>
@@ -15,7 +15,7 @@
     </datalist>
   </form-group>
   <form-group>
-    <label for="event_host">*Name of event</label>
+    <label for="event_host">*Event Host</label>
     <input  id="event_host" ng-model="eventData.host" class="validation-text form-control" type="text" name="event_host" placeholder="Lula Leus" required>
   </form-group>
   <form-group>
@@ -30,11 +30,6 @@
     <label for="event_start_date">*Event start date</label>
     <input  id="event_start_date" ng-model="eventData.dateStart" class="validation-date form-control" type="date" name="event_start_date" placeholder="" required>
   </form-group>
-  <div class="checkbox">
-    <label>
-      <input type="checkbox"> Multi-days event
-    </label>
-  </div>
   <form-group>
     <label for="event_end_date">Event end date</label>
     <input  id="event_end_date" ng-model="eventData.dateEnd" class="validation-date form-control" type="date" name="event_end_date" placeholder="" required>

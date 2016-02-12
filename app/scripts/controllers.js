@@ -1,23 +1,29 @@
 /**
  * Created by Lula on 1/18/2016.
  */
-angular.module('joinMeApp').controller('WelcomeController', function($scope, Auth) {
+angular.module('joinMeApp').controller('WelcomeController', function($scope, $firebaseArray, Auth, chatMessages) {
   console.log('WelcomeController');
   $scope.authObj = Auth;
   $scope.authData = $scope.authObj.$getAuth();
-
-  //var authData = $scope.authObj.$getAuth();
-  //if (authData) {
-  //  console.log("Logged in as:", authData.uid);
-  //} else {
-  //  console.log("Logged out");
-  //}
 
   // any time auth status updates, add the user data to scope
   $scope.authObj.$onAuth(function(authData) {
     $scope.authData = authData;
     console.log('$onAuth function');
     console.log($scope.authData);
+  });
+
+  $scope.messages = chatMessages;
+
+  // if the messages are empty, add something for fun!
+  $scope.messages.$loaded(function() {
+    if ($scope.messages.length === 0) {
+      $scope.messages.$add({
+        name: "Friday Dinner",
+        type: "Dinner Out",
+        timestamp: Firebase.ServerValue.TIMESTAMP
+      });
+    }
   });
 
 })
@@ -94,6 +100,31 @@ angular.module('joinMeApp').controller('WelcomeController', function($scope, Aut
       return form.checkValidity();
     }
 })
-.controller('EventController', function() {
-  console.log('EventController');
-});
+.controller('EventController', function($scope, $firebaseArray, chatMessages) {
+    $scope.eventData = {
+      name:"Dinner",
+      type:"Dinner out",
+      host:"Alexey Soshin",
+      location:"Tel Aviv",
+      message:"This is private event"
+    };
+
+    $scope.createEvent= function(eventData){
+      console.log(eventData);
+      $scope.addMessage();
+    };
+
+    $scope.messages = chatMessages;
+
+    $scope.addMessage = function() {
+      // $add on a synchronized array is like Array.push() except it saves to the database!
+      $scope.messages.$add({
+        name: $scope.eventData.name,
+        type: $scope.eventData.type,
+        timestamp: Firebase.ServerValue.TIMESTAMP
+      });
+
+      $scope.message = "";
+    };
+
+  });

@@ -7,6 +7,12 @@
   <div class="col-lg-6">
     <ul class="events">
       <li class="event">Events will be showed there</li>
+      <li ng-repeat="message in messages | orderBy:orderBy">
+        {{ message.name }}: {{ message.type}}
+
+        <!-- delete a message using $remove -->
+        <a href="" ng-click="messages.$remove(message)">X</a>
+      </li>
     </ul>
   </div>
 </div>

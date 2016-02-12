@@ -83,6 +83,10 @@ angular.module('joinMeApp')
   })
   .factory('Users', function($firebaseArray, $firebaseObject, FirebaseUrl){
     var Users = {};
-
     return Users;
+  })
+  .factory("chatMessages", function($firebaseArray, FirebaseUrl) {
+      // create a reference to the database where we will store our data
+      var ref = new Firebase(FirebaseUrl);
+      return $firebaseArray(ref);
   });
