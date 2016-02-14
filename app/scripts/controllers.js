@@ -1,7 +1,7 @@
 /**
  * Created by Lula on 1/18/2016.
  */
-angular.module('joinMeApp').controller('WelcomeController', function($scope, $firebaseArray, Auth, chatMessages) {
+angular.module('joinMeApp').controller('WelcomeController', function($scope, $firebaseArray, Auth, eventsService) {
   console.log('WelcomeController');
   $scope.authObj = Auth;
   $scope.authData = $scope.authObj.$getAuth();
@@ -9,16 +9,14 @@ angular.module('joinMeApp').controller('WelcomeController', function($scope, $fi
   // any time auth status updates, add the user data to scope
   $scope.authObj.$onAuth(function(authData) {
     $scope.authData = authData;
-    console.log('$onAuth function');
-    console.log($scope.authData);
   });
 
-  $scope.messages = chatMessages;
+  $scope.meetUpEvents = eventsService;
 
   // if the messages are empty, add something for fun!
-  $scope.messages.$loaded(function() {
-    if ($scope.messages.length === 0) {
-      $scope.messages.$add({
+  $scope.meetUpEvents.$loaded(function() {
+    if ($scope.meetUpEvents.length === 0) {
+      $scope.meetUpEvents.$add({
         name: "Friday Dinner",
         type: "Dinner Out",
         timestamp: Firebase.ServerValue.TIMESTAMP
@@ -66,8 +64,6 @@ angular.module('joinMeApp').controller('WelcomeController', function($scope, $fi
     $scope.submitSignUp = function(user){
       //get validity status of the form
       var formValitityStatus = signUpFormValidation(user);
-      console.log('formValitityStatus');
-      console.log(formValitityStatus);
       authCtrl.register();
     };
 
@@ -100,7 +96,7 @@ angular.module('joinMeApp').controller('WelcomeController', function($scope, $fi
       return form.checkValidity();
     }
 })
-.controller('EventController', function($scope, $firebaseArray, chatMessages) {
+.controller('EventController', function($scope, $firebaseArray, eventsService) {
     $scope.eventData = {
       name:"Dinner",
       type:"Dinner out",
@@ -109,22 +105,28 @@ angular.module('joinMeApp').controller('WelcomeController', function($scope, $fi
       message:"This is private event"
     };
 
-    $scope.createEvent= function(eventData){
+    if ("geolocation" in navigator) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+        console.log(position)
+      });
+    }
+
+    $scope.createMeetUpEvent= function(eventData){
       console.log(eventData);
-      $scope.addMessage();
+      $scope.addMeetUpEvent();
     };
 
-    $scope.messages = chatMessages;
+    $scope.meetUpEvents = eventsService;
 
-    $scope.addMessage = function() {
+    $scope.addMeetUpEvent = function() {
       // $add on a synchronized array is like Array.push() except it saves to the database!
-      $scope.messages.$add({
+      $scope.meetUpEvents.$add({
         name: $scope.eventData.name,
         type: $scope.eventData.type,
         timestamp: Firebase.ServerValue.TIMESTAMP
       });
 
-      $scope.message = "";
+      $scope.meetUpEvent = "";
     };
 
   });

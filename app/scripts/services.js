@@ -85,8 +85,21 @@ angular.module('joinMeApp')
     var Users = {};
     return Users;
   })
-  .factory("chatMessages", function($firebaseArray, FirebaseUrl) {
+  .factory("eventsService", function($firebaseArray, FirebaseUrl) {
       // create a reference to the database where we will store our data
       var ref = new Firebase(FirebaseUrl);
       return $firebaseArray(ref);
+  })
+  .service('LocationService', function(){
+    var userPosition;
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        userPosition = position;
+      });
+
+    } else {
+      console.error('geo location unavailable')
+    }
+    return userPosition;
+
   });
