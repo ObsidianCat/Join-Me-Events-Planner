@@ -4,7 +4,7 @@ Web application for creating and sharing events
 "Join Me" is my personal project. I am working on it as part of my Udacity NanoDegree program.
 Demo of the application will be availabe soon!
 
-The application required installed node.js, npm, bower.js and yeoman
+The application requires installed node.js, npm, bower.js and yeoman
 For running type 
 
 ```console

@@ -1,91 +1,100 @@
 <form class="form-horizontal" id="create-event" >
-  <form-group>
-    <label for="event_name">*Name of event</label>
-    <input  id="event_name" ng-model="eventData.name" class="validation-text form-control" type="text" name="event_name" placeholder="Friday`s Dinner" required>
-  </form-group>
-  <form-group>
-    <label for="event_type">*Event type</label>
-    <input id="event_type" class="form-control validation-text" ng-model="eventData.type" list="event-types" name="event_type" placeholder="Dinner out">
-    <datalist id="event-types">
-      <option value="Birthday party">
-      <option value="Masquerade ball">
-      <option value="Conference">
-      <option value="Dinner out">
-      <option value="Going out to the movies">
-    </datalist>
-  </form-group>
-  <form-group>
-    <label for="event_host">*Event Host</label>
-    <input  id="event_host" ng-model="eventData.host" class="validation-text form-control" type="text" name="event_host" placeholder="Lula Leus" required>
-  </form-group>
-  <form-group>
-    <label for="event_start_time">*Event start time</label>
-    <input  id="event_start_time" ng-model="eventData.timeStart" class="validation-time form-control" type="time" name="event_start_time" placeholder="" required>
-  </form-group>
-  <form-group>
-    <label for="event_end_time">Event end time</label>
-    <input  id="event_end_time" ng-model="eventData.timeEnd" class="validation-time form-control" type="time" name="event_end_time" placeholder="" required>
-  </form-group>
-  <form-group>
-    <label for="event_start_date">*Event start date</label>
-    <input  id="event_start_date" ng-model="eventData.dateStart" class="validation-date form-control" type="date" name="event_start_date" placeholder="" required>
-  </form-group>
-  <form-group>
-    <label for="event_end_date">Event end date</label>
-    <input  id="event_end_date" ng-model="eventData.dateEnd" class="validation-date form-control" type="date" name="event_end_date" placeholder="" required>
-  </form-group>
-  <form-group>
-    <label>Guest list</label>
-    <button class="form-control btn btn-default">Add guest</button>
-  </form-group>
-  <form-group>
-    <label for="event_location">*Location</label>
-    <input  id="event_location" ng-model="eventData.location" class="validation-loation form-control" type="text" name="event_location" placeholder="" required>
-  </form-group>
-  <form-group id="location-auto-complete">
-    <div id="locationField">
-      <input id="autocomplete" placeholder="Enter your address"
-             onFocus="geolocate()" type="text"></input>
+  <fieldset id="event-basic-info">
+    <div class="form-group">
+      <label for="event_name">*Name of event</label>
+      <input  id="event_name" ng-model="eventData.name" class="validation-text form-control" type="text" name="event_name" placeholder="Friday`s Dinner" required>
     </div>
-    <table id="address">
-      <tr>
-        <td class="label">Street address</td>
-        <td class="slimField"><input class="field" id="street_number"
-                                     disabled="true"></input></td>
-        <td class="wideField" colspan="2"><input class="field" id="route"
-                                                 disabled="true"></input></td>
-      </tr>
-      <tr>
-        <td class="label">City</td>
-        <td class="wideField" colspan="3"><input class="field" id="locality"
-                                                 disabled="true"></input></td>
-      </tr>
-      <tr>
-        <td class="label">State</td>
-        <td class="slimField"><input class="field"
-                                     id="administrative_area_level_1" disabled="true"></input></td>
-        <td class="label">Zip code</td>
-        <td class="wideField"><input class="field" id="postal_code"
-                                     disabled="true"></input></td>
-      </tr>
-      <tr>
-        <td class="label">Country</td>
-        <td class="wideField" colspan="3"><input class="field"
-                                                 id="country" disabled="true"></input></td>
-      </tr>
-    </table>
-  </form-group>
-  <form-group>
+    <div class="form-group">
+      <label for="event_type">*Event type</label>
+      <input id="event_type" class="form-control validation-text" ng-model="eventData.type" list="event-types" name="event_type" placeholder="Dinner out">
+      <datalist id="event-types">
+        <option value="Birthday party">
+        <option value="Masquerade ball">
+        <option value="Conference">
+        <option value="Dinner out">
+        <option value="Going out to the movies">
+      </datalist>
+    </div>
+    <div class="form-group">
+      <label for="event_host">*Event Host</label>
+      <input  id="event_host" ng-model="eventData.host" class="validation-text form-control" type="text" name="name" placeholder="Lula Leus" autocomplete="name" required>
+    </div>
+  </fieldset>
+
+  <fieldset id="event-time-and-date">
+    <div class="form-group">
+      <label for="event_start_date">*Event start date</label>
+      <input  id="event_start_date" ng-model="eventData.dateStart" class="validation-date form-control" type="date" name="event_start_date" placeholder="" required>
+    </div>
+    <div class="form-group">
+      <label for="event_start_time">*Event start time</label>
+      <input  id="event_start_time" ng-model="eventData.timeStart" class="validation-time form-control" type="time" name="event_start_time" placeholder="" required>
+    </div>
+    <div class="form-group">
+      <label for="event_end_date">Event end date</label>
+      <input  id="event_end_date" ng-model="eventData.dateEnd" class="validation-date form-control" type="date" name="event_end_date" placeholder="" required>
+    </div>
+    <div class="form-group">
+      <label for="event_end_time">Event end time</label>
+      <input  id="event_end_time" ng-model="eventData.timeEnd" class="validation-time form-control" type="time" name="event_end_time" placeholder="" required>
+    </div>
+  </fieldset>
+
+
+  <fieldset id="event-location">
+    <div class="form-group" id="location-auto-complete">
+      <div id="locationField">
+        <input id="autocomplete" class="form-control" placeholder="Enter your address" onFocus="geolocate()" type="text">
+      </div>
+    </div>
+    <div class="form-group" id="address">
+        <label class="label">Street address</label>
+        <div class="slimField">
+          <input class="form-control field" id="street_number" disabled="true">
+        </div>
+        <div class="wideField" colspan="2">
+          <input class="form-control field" id="route" disabled="true">
+        </div>
+
+        <label class="label">City</label>
+        <div class="wideField" colspan="3">
+          <input class="form-control field" id="locality" disabled="true">
+        </div>
+
+        <label class="label">State</label>
+        <div class="slimField">
+          <input class="form-control field" id="administrative_area_level_1" disabled="true">
+        </div>
+
+        <label class="label">Zip code</label>
+        <div class="wideField">
+          <input class="form-control field" id="postal_code" disabled="true">
+        </div>
+
+        <label class="label">Country</label>
+        <div class="wideField" colspan="3">
+          <input class="form-control field" id="country" disabled="true">
+        </div>
+    </div>
+  </fieldset>
+
+  <fieldset id="event-additional-info">
+  <div class="form-group">
+    <label>Guest list</label>
+    <textarea id="event-emails=list"  ng-model="eventData.emails" class="form-control" rows="2" placeholder="example@example.com, example2@example.com, example@example.com"></textarea>
+  </div>
+  <div class="form-group">
     <label for="event_message">Additional information</label>
     <textarea id="event_message"  ng-model="eventData.message" class="form-control" rows="3" placeholder="Dress code is casual. Please bring with you a positive vibe and smiles :)"></textarea>
-  </form-group>
+  </div>
+  </fieldset>
 
   <button type="submit" class="btn btn-default" ng-click="createEvent(eventData)">Submit</button>
 </form>
+
+<!--START location auto-complete code-->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaXq-ThjcJ5sn0iIE2CQ2tT1McXEY6kLU&signed_in=true&libraries=places&callback=initAutocomplete"
         async defer></script>
-<!--<script src="http://maps.google.com/maps/api/js?sensor=false&libraries=places"></script>-->
-
 <script>
   // This example displays an address form, using the autocomplete feature
   // of the Google Places API to help users fill in the information.

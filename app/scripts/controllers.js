@@ -98,11 +98,15 @@ angular.module('joinMeApp').controller('WelcomeController', function($scope, $fi
 })
 .controller('EventController', function($scope, $firebaseArray, eventsService) {
     $scope.eventData = {
-      name:"Dinner",
+      name:"Friday`s Dinners",
       type:"Dinner out",
-      host:"Alexey Soshin",
       location:"Tel Aviv",
-      message:"This is private event"
+      message:"This is private event",
+      dateStart:new Date(),
+      dateEnd:new Date(),
+      timeStart:new Date(),
+      timeEnd:new Date()
+
     };
 
     if ("geolocation" in navigator) {
