@@ -1,7 +1,7 @@
 /**
  * Created by Lula on 1/18/2016.
  */
-angular.module('joinMeApp').controller('WelcomeController', function($scope, $firebaseArray, Auth, eventsService) {
+angular.module('joinMeApp').controller('WelcomeController', function($scope, $firebaseArray, $state, Auth, eventsService) {
   console.log('WelcomeController');
   $scope.authObj = Auth;
   $scope.authData = $scope.authObj.$getAuth();
@@ -10,6 +10,14 @@ angular.module('joinMeApp').controller('WelcomeController', function($scope, $fi
   $scope.authObj.$onAuth(function(authData) {
     $scope.authData = authData;
   });
+
+  $scope.setNavigationActive = function (urlName){
+    var stateClass = "";
+    if(urlName == $state.$current.name){
+      stateClass= 'active';
+    }
+    return stateClass;
+  };
 
   $scope.meetUpEvents = eventsService;
 

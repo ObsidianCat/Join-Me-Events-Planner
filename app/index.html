@@ -29,10 +29,10 @@
     <div class="container" ng-controller="WelcomeController as WelcomeCtrl">
       <div class="header">
         <ul class="nav nav-pills pull-right" ng-cloak >
-          <li class="active" set-active><a ui-sref="welcome">Home</a></li>
-          <li ng-hide="authData" set-active><a ui-sref="login">Log In</a></li>
-          <li ng-hide="authData" set-active><a ui-sref="signup">Sign Up</a></li>
-          <li ng-show="authData" set-active><a ui-sref="event">Create Event</a></li>
+          <li ng-class="setNavigationActive('welcome')" set-active><a ui-sref="welcome">Home</a></li>
+          <li ng-class="setNavigationActive('login')" ng-hide="authData" set-active><a ui-sref="login">Log In</a></li>
+          <li ng-class="setNavigationActive('signup')" ng-hide="authData" set-active><a ui-sref="signup">Sign Up</a></li>
+          <li ng-class="setNavigationActive('event')" ng-show="authData" set-active><a ui-sref="event">Create Event</a></li>
           <li ng-show="authData"><a href="#" ng-click="authObj.$unauth()">Log Out</a></li>
         </ul>
         <h3 class="text-muted">Join Me</h3>
