@@ -106,18 +106,28 @@ angular.module('joinMeApp').controller('WelcomeController', function($scope, $fi
 })
 .controller('EventController', function($scope, $firebaseArray, eventsService) {
     $scope.eventData = {
-      name:"Friday`s Dinners",
+      name:"Dinner",
       type:"Dinner out",
-      location:"Tel Aviv",
-      message:"This is private event",
+      host:"Alexey Soshin",
+      message:"This is public event",
       dateStart:new Date(),
       dateEnd:new Date(),
       timeStart:new Date(),
-      timeEnd:new Date()
-
+      timeEnd:new Date(),
+      address:{
+        streetPartOne:"",
+        streetPartTwo:"",
+        city:"",
+        administrativeArea:"",
+        postalCode:"",
+        country:""
+      },
+      guests:"example@example.com"
     };
 
-    if ("geolocation" in navigator) {
+    window.eventData = $scope.eventData;
+
+  if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(function(position) {
         console.log(position)
       });
@@ -125,7 +135,7 @@ angular.module('joinMeApp').controller('WelcomeController', function($scope, $fi
 
     $scope.createMeetUpEvent= function(eventData){
       console.log(eventData);
-      $scope.addMeetUpEvent();
+      //$scope.addMeetUpEvent();
     };
 
     $scope.meetUpEvents = eventsService;
@@ -135,6 +145,7 @@ angular.module('joinMeApp').controller('WelcomeController', function($scope, $fi
       $scope.meetUpEvents.$add({
         name: $scope.eventData.name,
         type: $scope.eventData.type,
+        host:$scope.eventData
         timestamp: Firebase.ServerValue.TIMESTAMP
       });
 
