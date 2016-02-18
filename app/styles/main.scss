@@ -1,13 +1,15 @@
 $icon-font-path: '../fonts/';
-
+$color-violet-dark: #8C288C;
 // bower:scss
 @import "bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
 // endbower
 
 h1{
-  color: hotpink !important;
+  color: $color-violet-dark !important;
 }
-
+a{
+  color: $color-violet-dark;
+}
 form#create-event .form-group#address{
   label{
     display: inline-block;
