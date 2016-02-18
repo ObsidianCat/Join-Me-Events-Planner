@@ -11,7 +11,7 @@
         {{ meetUpEvent.name }}: {{ meetUpEvent.type}}
 
         <!-- delete a message using $remove -->
-        <a href="" ng-click="meetUpEvents.$remove(meetUpEvent)">X</a>
+        <a href="" ng-click="meetUpEvents.$remove(meetUpEvent)"  ng-if="checkUid(meetUpEvent.uidOfuser)">X</a>
       </li>
     </ul>
   </div>

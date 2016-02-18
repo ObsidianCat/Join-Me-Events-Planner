@@ -5,7 +5,7 @@ angular.module('joinMeApp').controller('WelcomeController', function($scope, $fi
   console.log('WelcomeController');
   $scope.authObj = Auth;
   $scope.authData = $scope.authObj.$getAuth();
-
+  window.authObj = $scope.authObj;
   // any time auth status updates, add the user data to scope
   $scope.authObj.$onAuth(function(authData) {
     $scope.authData = authData;
@@ -17,6 +17,14 @@ angular.module('joinMeApp').controller('WelcomeController', function($scope, $fi
       stateClass= 'active';
     }
     return stateClass;
+  };
+
+  $scope.checkUid = function(eventCreatorUid){
+    var eventBelongToUser = false;
+    if($scope.authData && eventCreatorUid == $scope.authData.uid){
+      eventBelongToUser = true;
+    }
+    return eventBelongToUser;
   };
 
   $scope.meetUpEvents = eventsService;
@@ -60,9 +68,9 @@ angular.module('joinMeApp').controller('WelcomeController', function($scope, $fi
 
     authCtrl.register = function(){
       Auth.$createUser( $scope.user).then(function(user){
-        authCtrl.login();
+        $scope.login();
       }, function(error){
-        authCtrl.error = error;
+        $scope.error = error;
       });//end of then
     };
 
@@ -90,8 +98,7 @@ angular.module('joinMeApp').controller('WelcomeController', function($scope, $fi
       }
 
       //check every field that required custom validation
-      ValidateService.collection.checkName(listForValidation.get(user.firstNameId), ValidateService.trackers[user.firstNameId]);
-      ValidateService.collection.checkName(listForValidation.get(user.lastNameId), ValidateService.trackers[user.lastNameId]);
+      ValidateService.collection.checkName(listForValidation.get(user.nameId), ValidateService.trackers[user.nameId]);
       ValidateService.collection.checkPassword(listForValidation.get(user.passwordId), ValidateService.trackers[user.passwordId]);
       ValidateService.collection.checkPasswordRepeat(listForValidation.get(user.repeatPasswordId), user.password, ValidateService.trackers[user.repeatPasswordId]);
 
@@ -104,8 +111,11 @@ angular.module('joinMeApp').controller('WelcomeController', function($scope, $fi
       return form.checkValidity();
     }
 })
-.controller('EventController', function($scope, $firebaseArray, eventsService) {
-    $scope.eventData = {
+.controller('EventController', function($state, $scope, $firebaseArray, eventsService, Auth) {
+  var authObj = Auth;
+
+  console.log('hello event');
+  $scope.eventData = {
       name:"Dinner",
       type:"Dinner out",
       host:"Alexey Soshin",
@@ -135,21 +145,19 @@ angular.module('joinMeApp').controller('WelcomeController', function($scope, $fi
 
     $scope.createMeetUpEvent= function(eventData){
       console.log(eventData);
-      //$scope.addMeetUpEvent();
+      $scope.addMeetUpEvent();
     };
 
     $scope.meetUpEvents = eventsService;
 
     $scope.addMeetUpEvent = function() {
       // $add on a synchronized array is like Array.push() except it saves to the database!
-      $scope.meetUpEvents.$add({
-        name: $scope.eventData.name,
-        type: $scope.eventData.type,
-        host:$scope.eventData
-        timestamp: Firebase.ServerValue.TIMESTAMP
-      });
+      $scope.eventData.timestamp = Firebase.ServerValue.TIMESTAMP;
+      $scope.eventData.uidOfuser = authObj.$getAuth().uid;
 
+      $scope.meetUpEvents.$add($scope.eventData);
       $scope.meetUpEvent = "";
+      $state.go('welcome');
     };
 
   });
