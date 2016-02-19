@@ -74,13 +74,12 @@ angular.module('joinMeApp').controller('WelcomeController', function($scope, $fi
       });//end of then
     };
 
-
-
-
     $scope.submitSignUp = function(user){
       //get validity status of the form
       var formValitityStatus = signUpFormValidation(user);
-      authCtrl.register();
+      if(formValitityStatus){
+        authCtrl.register();
+      }
     };
 
     function signUpFormValidation(user){
@@ -111,10 +110,9 @@ angular.module('joinMeApp').controller('WelcomeController', function($scope, $fi
       return form.checkValidity();
     }
 })
-.controller('EventController', function($state, $scope, $firebaseArray, eventsService, Auth) {
+.controller('EventController', function($state, $scope, $firebaseArray, eventsService, Auth, ValidateService) {
   var authObj = Auth;
   var currentDate = new Date();
-  console.log('hello event');
   $scope.eventData = {
       name:"Dinner",
       type:"Dinner out",
@@ -135,29 +133,53 @@ angular.module('joinMeApp').controller('WelcomeController', function($scope, $fi
       guests:"example@example.com"
     };
 
-    window.eventData = $scope.eventData;
+  window.eventData = $scope.eventData;
 
-  if ("geolocation" in navigator) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-        console.log(position)
-      });
+  $scope.createMeetUpEvent= function(eventData){
+    console.log(eventData);
+    var formValitityStatus = eventFormValidation();
+    if(formValitityStatus){
+      addMeetUpEvent();
+    }
+  };
+
+  $scope.meetUpEvents = eventsService;
+
+  function addMeetUpEvent() {
+    // $add on a synchronized array is like Array.push() except it saves to the database!
+    $scope.eventData.timestamp = Firebase.ServerValue.TIMESTAMP;
+    $scope.eventData.uidOfuser = authObj.$getAuth().uid;
+    $scope.meetUpEvents.$add($scope.eventData);
+    $scope.meetUpEvent = "";
+    $state.go('welcome');
+  };
+
+  function eventFormValidation(){
+    //create a map of id of input ->input
+    //map contains all field with custom validation
+    var listForValidation = new Map();
+    //fill map with data
+    $('form#create-event .custom-validation').each(function(){
+      listForValidation.set($(this).attr('id'), this);
+    });
+
+    //create validation errors trackers for every field with custom validation
+    for (var key of listForValidation.keys()) {
+      ValidateService.createTracker(key);
     }
 
-    $scope.createMeetUpEvent= function(eventData){
-      console.log(eventData);
-      $scope.addMeetUpEvent();
-    };
+    //check every field that required custom validation
+    ValidateService.collection.checkName(listForValidation.get("event_name"), ValidateService.trackers["event_name"]);
+    ValidateService.collection.checkName(listForValidation.get("event_host"), ValidateService.trackers["event_host"]);
 
-    $scope.meetUpEvents = eventsService;
+    //set custom validation messages to form fields
+    for (var [key, value] of listForValidation) {
+      value.setCustomValidity(ValidateService.trackers[key].retrieve());
+    }
+    var form = document.getElementById("create-event");
+    return form.checkValidity();
+  }
 
-    $scope.addMeetUpEvent = function() {
-      // $add on a synchronized array is like Array.push() except it saves to the database!
-      $scope.eventData.timestamp = Firebase.ServerValue.TIMESTAMP;
-      $scope.eventData.uidOfuser = authObj.$getAuth().uid;
 
-      $scope.meetUpEvents.$add($scope.eventData);
-      $scope.meetUpEvent = "";
-      $state.go('welcome');
-    };
 
   });

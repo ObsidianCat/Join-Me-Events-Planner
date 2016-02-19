@@ -4,10 +4,32 @@ $icon-font-path: '../fonts/';
 @import "bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
 // endbower
 
+@media (min-width: 768px) {
+  .container{
+    width: 100%;
+  }
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .container{
+    width: 80%;
+  }
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  .container{
+    width: 80%;
+  }
+}
+
 h1{
   color: hotpink !important;
 }
-
+header ul.nav-pills{
+  margin: 1rem 0 1rem 0;
+}
 form#create-event .form-group#address{
   label{
     display: inline-block;
@@ -23,4 +45,9 @@ form#create-event .form-group#address{
 
 form#create-event fieldset{
   margin-bottom: 2rem;
+  width: 100%;
+
+  .slimField, .wideFIeld{
+    margin-bottom: 15px;
+  }
 }

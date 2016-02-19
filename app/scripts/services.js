@@ -41,7 +41,7 @@ angular.module('joinMeApp')
       collection:{
         checkName:function(inputForCheck, tracker){
           if (!inputForCheck.value || inputForCheck.value.length < 2) {
-            tracker.add("fewer than 1 character");
+            tracker.add("fewer than 2 character");
           } else if (inputForCheck.value.length > 60) {
             tracker.add("greater than 60 characters");
           }

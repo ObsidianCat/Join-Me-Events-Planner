@@ -1,8 +1,8 @@
-<form class="form-horizontal" id="create-event" >
+<form class="" id="create-event" >
   <fieldset id="event-basic-info">
     <div class="form-group">
       <label for="event_name">*Name of event</label>
-      <input  id="event_name" ng-model="eventData.name" class="validation-text form-control" type="text" name="event_name" placeholder="Friday`s Dinner" required>
+      <input  id="event_name" ng-model="eventData.name" class="custom-validation validation-text form-control" type="text" name="event_name" placeholder="Friday`s Dinner" required>
     </div>
     <div class="form-group">
       <label for="event_type">*Event type</label>
@@ -17,7 +17,7 @@
     </div>
     <div class="form-group">
       <label for="event_host">*Event Host</label>
-      <input  id="event_host" ng-model="eventData.host" class="validation-text form-control" type="text" name="name" placeholder="Lula Leus" autocomplete="name" required>
+      <input  id="event_host" ng-model="eventData.host" class="custom-validation validation-text form-control" type="text" name="name" placeholder="Lula Leus" autocomplete="name" required>
     </div>
   </fieldset>
 
@@ -81,7 +81,7 @@
   <fieldset id="event-additional-info">
   <div class="form-group">
     <label>Guest list</label>
-    <textarea id="event-emails=list"  ng-model="eventData.guests" class="form-control" rows="2" placeholder="example@example.com, example2@example.com, example@example.com"></textarea>
+    <textarea id="event-emails=list"  ng-model="eventData.guests" class="form-control" rows="2" placeholder="example@example.com, example2@example.com, example3@example.com"></textarea>
   </div>
   <div class="form-group">
     <label for="event_message">Additional information</label>
