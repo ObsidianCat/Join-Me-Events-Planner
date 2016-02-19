@@ -28,7 +28,7 @@
     </div>
     <div class="form-group">
       <label for="event_start_time">*Event start time</label>
-      <input  id="event_start_time" ng-model="eventData.timeStart" class="validation-time form-control" type="text" name="event_start_time" placeholder="" required>
+      <input  id="event_start_time" ng-model="eventData.timeStart" class="validation-time form-control" type="time" name="event_start_time" placeholder="" required>
     </div>
     <div class="form-group">
       <label for="event_end_date">Event end date</label>
@@ -36,7 +36,7 @@
     </div>
     <div class="form-group">
       <label for="event_end_time">Event end time</label>
-      <input  id="event_end_time" ng-model="eventData.timeEnd" class="validation-time form-control" type="text" name="event_end_time" placeholder="" required>
+      <input  id="event_end_time" time-format ng-model="eventData.timeEnd" class="validation-time form-control" type="time" name="event_end_time" placeholder="" required>
     </div>
   </fieldset>
 

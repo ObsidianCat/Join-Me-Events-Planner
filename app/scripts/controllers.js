@@ -113,17 +113,17 @@ angular.module('joinMeApp').controller('WelcomeController', function($scope, $fi
 })
 .controller('EventController', function($state, $scope, $firebaseArray, eventsService, Auth) {
   var authObj = Auth;
-
+  var currentDate = new Date();
   console.log('hello event');
   $scope.eventData = {
       name:"Dinner",
       type:"Dinner out",
       host:"Alexey Soshin",
       message:"This is public event",
-      dateStart:new Date(),
-      dateEnd:new Date(),
-      timeStart:new Date(),
-      timeEnd:new Date(),
+      dateStart:currentDate,
+      dateEnd:currentDate,
+      timeStart:new Date(currentDate.getFullYear(),currentDate.getMonth(), currentDate.getDay(), currentDate.getHours(), currentDate.getMinutes(), 0),
+      timeEnd:new Date(currentDate.getFullYear(),currentDate.getMonth(), currentDate.getDay(), currentDate.getHours()+2, currentDate.getMinutes(), 0),
       address:{
         streetPartOne:"",
         streetPartTwo:"",
