@@ -31,13 +31,13 @@ angular.module('joinMeApp').controller('WelcomeController', function($scope, $fi
 
   // if the messages are empty, add something for fun!
   $scope.meetUpEvents.$loaded(function() {
-    if ($scope.meetUpEvents.length === 0) {
-      $scope.meetUpEvents.$add({
-        name: "Friday Dinner",
-        type: "Dinner Out",
-        timestamp: Firebase.ServerValue.TIMESTAMP
-      });
-    }
+    //if ($scope.meetUpEvents.length === 0) {
+    //  $scope.meetUpEvents.$add({
+    //    name: "Friday Dinner",
+    //    type: "Dinner Out",
+    //    timestamp: Firebase.ServerValue.TIMESTAMP
+    //  });
+    //}
   });
 
 })

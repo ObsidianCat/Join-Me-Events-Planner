@@ -1,7 +1,9 @@
 $icon-font-path: '../fonts/';
 
 // bower:scss
+@import "customVariables";
 @import "bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+
 // endbower
 .container{
   width:95%;
@@ -15,6 +17,11 @@ $icon-font-path: '../fonts/';
 @media (min-width: 992px) {
   .container{
     width: 80%;
+  }
+  .list-group-item{
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
   }
 }
 
@@ -30,6 +37,10 @@ h1{
 }
 header ul.nav-pills{
   margin: 1rem 0 1rem 0;
+  .text-muted{
+    color: $brand-primary;
+    font-weight: 700;
+  }
 }
 form#create-event .form-group#address{
   label{
@@ -56,6 +67,20 @@ form#create-event fieldset{
 .list-group.events{
   .remove{
     position: absolute;
-    right: 1rem;
+    right: 5rem;
+  }
+  .header{
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+
+    i{
+      margin-right: 0px;
+      margin-left: auto;
+      font-size: 1.2em;
+      &.open{
+        transform: rotate(180deg);
+      }
+    }
   }
 }

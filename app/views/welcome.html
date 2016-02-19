@@ -4,16 +4,27 @@
 </div>
 
 <div class="row events-list">
-  <div class="col-lg-6">
+  <div class="col-xs-12">
     <h4>Current events</h4>
     <ul class="events list-group">
       <li class="list-group-item" ng-repeat="meetUpEvent in meetUpEvents | orderBy:orderBy">
-        <span>{{ meetUpEvent.name }}</span><span> host: {{ meetUpEvent.host}}</span>
-        <!-- delete a message using $remove -->
-        <span class="small" ng-if="checkUid(meetUpEvent.uidOfuser)">(your event)</span>
-        <a href="" ng-click="meetUpEvents.$remove(meetUpEvent)"  ng-if="checkUid(meetUpEvent.uidOfuser)" class="remove">X</a>
-        <div class="event-detailes">
-
+        <div ng-click="collapsed=!collapsed" class="header">
+            <span>{{ meetUpEvent.name }}</span><span> host: {{ meetUpEvent.host}}</span>
+          <!-- delete a message using $remove -->
+          <span class="small" ng-if="checkUid(meetUpEvent.uidOfuser)">(your event)</span>
+          <a href="" ng-click="meetUpEvents.$remove(meetUpEvent)"  ng-if="checkUid(meetUpEvent.uidOfuser)" class="remove">X</a>
+          <i ng-class="collapsed?'open':'closed';" class="glyphicon glyphicon-menu-down"></i>
+        </div>
+          <div  ng-show="collapsed" class="event-details">
+            <p>Start: {{meetUpEvent.timeStart}},  {{meetUpEvent.dateStart}}</p>
+            <p>Start: {{meetUpEvent.timeEnd}},  {{meetUpEvent.dateEnd}}</p>
+            <p>Event notes: {{meetUpEvent.message}}</p>
+            <h5>Address:</h5>
+            <p>{{meetUpEvent.message.address.streetPartOne}}</p>
+            <p>{{meetUpEvent.message.address.streetPartTwo}}</p>
+            <p>{{meetUpEvent.message.address.city}}</p>
+            <p>{{meetUpEvent.message.address.administrativeArea}}</p>
+            <p>{{meetUpEvent.message.address.country}}</p>
         </div>
       </li>
     </ul>
