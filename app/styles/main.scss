@@ -52,3 +52,10 @@ form#create-event fieldset{
     margin-bottom: 15px;
   }
 }
+
+.list-group.events{
+  .remove{
+    position: absolute;
+    right: 1rem;
+  }
+}

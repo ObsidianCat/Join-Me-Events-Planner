@@ -6,12 +6,15 @@
 <div class="row events-list">
   <div class="col-lg-6">
     <h4>Current events</h4>
-    <ul class="events">
-      <li ng-repeat="meetUpEvent in meetUpEvents | orderBy:orderBy">
-        {{ meetUpEvent.name }}: {{ meetUpEvent.type}}
-
+    <ul class="events list-group">
+      <li class="list-group-item" ng-repeat="meetUpEvent in meetUpEvents | orderBy:orderBy">
+        <span>{{ meetUpEvent.name }}</span><span> host: {{ meetUpEvent.host}}</span>
         <!-- delete a message using $remove -->
-        <a href="" ng-click="meetUpEvents.$remove(meetUpEvent)"  ng-if="checkUid(meetUpEvent.uidOfuser)">X</a>
+        <span class="small" ng-if="checkUid(meetUpEvent.uidOfuser)">(your event)</span>
+        <a href="" ng-click="meetUpEvents.$remove(meetUpEvent)"  ng-if="checkUid(meetUpEvent.uidOfuser)" class="remove">X</a>
+        <div class="event-detailes">
+
+        </div>
       </li>
     </ul>
   </div>
