@@ -74,6 +74,9 @@ form#create-event fieldset{
     display: flex;
     flex-direction: row;
 
+    span{
+      margin-right: 1rem;
+    }
     i{
       margin-right: 0px;
       margin-left: auto;
