@@ -1,10 +1,10 @@
+@import "customVariables";
 $icon-font-path: '../fonts/';
 
 // bower:scss
-@import "customVariables";
 @import "bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
-
 // endbower
+
 .container{
   width:95%;
 }

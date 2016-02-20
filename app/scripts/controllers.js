@@ -1,7 +1,9 @@
 /**
  * Created by Lula on 1/18/2016.
  */
-angular.module('joinMeApp').controller('WelcomeController', function($scope, $firebaseArray, $state, Auth, eventsService) {
+angular.module('joinMeApp').controller('WelcomeController',
+ ['$scope', '$firebaseArray', '$state', 'Auth', 'eventsService',
+   function($scope, $firebaseArray, $state, Auth, eventsService) {
   console.log('WelcomeController');
   $scope.authObj = Auth;
   $scope.authData = $scope.authObj.$getAuth();
@@ -40,8 +42,11 @@ angular.module('joinMeApp').controller('WelcomeController', function($scope, $fi
     //}
   });
 
-})
-.controller('AuthController', function($scope, ValidateService, Auth, $state) {
+}])
+.controller('AuthController', [
+
+    '$scope', 'ValidateService', 'Auth', '$state',
+    function($scope, ValidateService, Auth, $state) {
     var authCtrl = this;
 
     //data from form
@@ -109,8 +114,12 @@ angular.module('joinMeApp').controller('WelcomeController', function($scope, $fi
 
       return form.checkValidity();
     }
-})
-.controller('EventController', function($state, $scope, $firebaseArray, eventsService, Auth, ValidateService) {
+}])
+.controller('EventController',
+
+  [
+    '$state', '$scope', '$firebaseArray','eventsService', 'Auth', 'ValidateService',
+  function($state, $scope, $firebaseArray, eventsService, Auth, ValidateService) {
   var authObj = Auth;
   var currentDate = new Date();
   $scope.eventData = {
@@ -182,4 +191,4 @@ angular.module('joinMeApp').controller('WelcomeController', function($scope, $fi
 
 
 
-  });
+  }]);

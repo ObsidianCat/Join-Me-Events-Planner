@@ -75,18 +75,18 @@ angular.module('joinMeApp')
     // Our first service
     return serviceInstance;
   })
-  .factory('Auth', function($firebaseAuth, FirebaseUrl){
+  .factory('Auth', ['$firebaseAuth', 'FirebaseUrl', function($firebaseAuth, FirebaseUrl){
     var ref = new Firebase(FirebaseUrl);
     var auth = $firebaseAuth(ref);
 
     return auth;
-  })
+  }])
   .factory('Users', function($firebaseArray, $firebaseObject, FirebaseUrl){
     var Users = {};
     return Users;
   })
-  .factory("eventsService", function($firebaseArray, FirebaseUrl) {
+  .factory("eventsService", ['$firebaseArray', 'FirebaseUrl', function($firebaseArray, FirebaseUrl) {
       // create a reference to the database where we will store our data
       var ref = new Firebase(FirebaseUrl);
       return $firebaseArray(ref);
-  });
+  }]);
