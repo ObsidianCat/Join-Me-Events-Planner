@@ -38,6 +38,48 @@ angular.module('joinMeApp')
       setAsValid:function(validatedInput){
         validatedInput.setCustomValidity("");
       },
+      formBeforeSubmitCheck: function(formId){
+        console.log('formBeforeSubmitCheck');
+        var form = document.getElementById(formId);
+        return form.checkValidity();
+      },
+      inputActions:{
+        setInputError: function setInputError(input){
+          console.log(input.validity);
+          $(input).parent().addClass("has-error");
+        },
+        setInputClear: function setInputClear(input){
+          $(input).parent().removeClass("has-error");
+        },
+        setInputEventListeners:function(){
+          $('.custom-validation').on("focus", function(e) {
+            serviceInstance.inputActions.setInputClear(e.target);
+          });
+
+          $('.custom-validation').on("invalid", function(e) {
+            serviceInstance.inputActions.setInputError(e.target);
+          });
+
+          $('.custom-validation').on("blur", function(e) {
+            //e.target.checkValidity();
+            serviceInstance.inputActions.checkInput(e.target);
+          });
+        },
+        checkInput:function checkInput(input){
+          input.checkValidity();
+          serviceInstance.createTracker(input.id);
+          if($(input).hasClass("v-name")){
+            serviceInstance.collection.checkName(input, serviceInstance.trackers[input.id]);
+          }
+          if($(input).hasClass("v-password")){
+            serviceInstance.collection.checkPassword(input, serviceInstance.trackers[input.id]);
+          }
+          if($(input).hasClass("v-repeat-password")){
+            ValidateService.collection.checkPasswordRepeat(input, $scope.user.password, serviceInstance.trackers[input.id]);
+          }
+          input.setCustomValidity(serviceInstance.trackers[input.id].retrieve());
+        }
+      },
       collection:{
         checkName:function(inputForCheck, tracker){
           if (!inputForCheck.value || inputForCheck.value.length < 2) {
@@ -71,6 +113,7 @@ angular.module('joinMeApp')
           }
         }//end of check password repeat
       }//end of collection
+
     };
     // Our first service
     return serviceInstance;

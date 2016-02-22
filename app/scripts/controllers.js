@@ -44,98 +44,57 @@ angular.module('joinMeApp').controller('WelcomeController',
 
 }])
 .controller('AuthController', [
-    '$scope', 'ValidateService', 'Auth', '$state',
-    function($scope, ValidateService, Auth, $state) {
+'$scope', 'ValidateService', 'Auth', '$state',
+function($scope, ValidateService, Auth, $state) {
 
-    var authCtrl = this;
+  var authCtrl = this;
 
-    //data from form
-    //id`s to use in sign in form
-    //currently some values filled with dummy date for sake of development
-    $scope.user = {
-      "name": "",
-      "password": "abcd1234",
-      "passwordId": "user_password",
-      "repeatPassword": "abcd1",
-      "email": "alexey@gmail.com"
-    };
+  //data from form
+  //id`s to use in sign in form
+  //currently some values filled with dummy date for sake of development
+  $scope.user = {
+    "name": "",
+    "password": "abcd1234",
+    "passwordId": "user_password",
+    "repeatPassword": "abcd1",
+    "email": "alexey@gmail.com"
+  };
 
-    function setInputError(input){
-      console.log(input.validity);
-       $(input).parent().addClass("has-error");
+
+  ValidateService.inputActions.setInputEventListeners();
+
+
+  $scope.login = function(){
+    Auth.$authWithPassword( $scope.user).then(function(auth){
+      $state.go('welcome');
+    }, function(error){
+      authCtrl.error = error;
+    });//end of then
+  };//end of login
+
+  authCtrl.register = function(){
+    Auth.$createUser( $scope.user).then(function(user){
+      $scope.login();
+    }, function(error){
+      $scope.error = error;
+    });//end of then
+  };
+
+  $scope.submitSignUp = function(user){
+    //get validity status of the form
+    if(ValidateService.formBeforeSubmitCheck("user_new")){
+      authCtrl.register();
     }
-
-    function setInputClear(input){
-      $(input).parent().removeClass("has-error");
+    else{
+      console.error('errors in the form')
     }
+  };
 
-    function checkInput(input){
-      input.checkValidity();
-      ValidateService.createTracker(input.id);
-      if($(input).hasClass("v-name")){
-        ValidateService.collection.checkName(input, ValidateService.trackers[input.id]);
-      }
-      if($(input).hasClass("v-password")){
-        ValidateService.collection.checkPassword(input, ValidateService.trackers[input.id]);
-      }
-      if($(input).hasClass("v-repeat-password")){
-        ValidateService.collection.checkPasswordRepeat(input, $scope.user.password, ValidateService.trackers[input.id]);
-      }
-      input.setCustomValidity(ValidateService.trackers[input.id].retrieve());
-    }
-
-     $('.custom-validation').on("blur", function(e) {
-       //e.target.checkValidity();
-       checkInput(e.target);
-     });
-
-    $('.custom-validation').on("focus", function(e) {
-      setInputClear(e.target);
-    });
-
-
-    $('.custom-validation').on("invalid", function(e) {
-      console.log('custom validation invalid fired');
-      setInputError(e.target);
-    });
-
-    $scope.login = function(){
-      Auth.$authWithPassword( $scope.user).then(function(auth){
-        $state.go('welcome');
-      }, function(error){
-        authCtrl.error = error;
-      });//end of then
-    };//end of login
-
-    authCtrl.register = function(){
-      Auth.$createUser( $scope.user).then(function(user){
-        $scope.login();
-      }, function(error){
-        $scope.error = error;
-      });//end of then
-    };
-
-    $scope.submitSignUp = function(user){
-      //get validity status of the form
-      var formValitityStatus = signUpFormSubmitCheck();
-      if(formValitityStatus){
-        authCtrl.register();
-      }
-      else{
-        console.error('errors in the form')
-      }
-    };
-
-    function signUpFormSubmitCheck(){
-      var form = document.getElementById("user_new");
-      return form.checkValidity();
-    }
 }])
 .controller('EventController',
-
-  [
-    '$state', '$scope', '$firebaseArray','eventsService', 'Auth', 'ValidateService',
-  function($state, $scope, $firebaseArray, eventsService, Auth, ValidateService) {
+[
+  '$state', '$scope', '$firebaseArray','eventsService', 'Auth', 'ValidateService',
+function($state, $scope, $firebaseArray, eventsService, Auth, ValidateService) {
   var authObj = Auth;
   var currentDate = new Date();
   $scope.eventData = {
@@ -160,11 +119,17 @@ angular.module('joinMeApp').controller('WelcomeController',
 
   window.eventData = $scope.eventData;
 
+  ValidateService.inputActions.setInputEventListeners();
+
+
   $scope.createMeetUpEvent= function(eventData){
     console.log(eventData);
     var formValitityStatus = eventFormValidation();
-    if(formValitityStatus){
+    if(ValidateService.formBeforeSubmitCheck("create-event")){
       addMeetUpEvent();
+    }
+    else{
+      console.error('some data in form are invalid');
     }
   };
 
@@ -177,34 +142,6 @@ angular.module('joinMeApp').controller('WelcomeController',
     $scope.meetUpEvents.$add($scope.eventData);
     $scope.meetUpEvent = "";
     $state.go('welcome');
-  };
-
-  function eventFormValidation(){
-    //create a map of id of input ->input
-    //map contains all field with custom validation
-    var listForValidation = new Map();
-    //fill map with data
-    $('form#create-event .custom-validation').each(function(){
-      listForValidation.set($(this).attr('id'), this);
-    });
-
-    //create validation errors trackers for every field with custom validation
-    for (var key of listForValidation.keys()) {
-      ValidateService.createTracker(key);
-    }
-
-    //check every field that required custom validation
-    ValidateService.collection.checkName(listForValidation.get("event_name"), ValidateService.trackers["event_name"]);
-    ValidateService.collection.checkName(listForValidation.get("event_host"), ValidateService.trackers["event_host"]);
-
-    //set custom validation messages to form fields
-    for (var [key, value] of listForValidation) {
-      value.setCustomValidity(ValidateService.trackers[key].retrieve());
-    }
-    var form = document.getElementById("create-event");
-    return form.checkValidity();
   }
 
-
-
-  }]);
+}]);
