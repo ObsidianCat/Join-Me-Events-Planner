@@ -124,7 +124,6 @@ function($state, $scope, $firebaseArray, eventsService, Auth, ValidateService) {
 
   $scope.createMeetUpEvent= function(eventData){
     console.log(eventData);
-    var formValitityStatus = eventFormValidation();
     if(ValidateService.formBeforeSubmitCheck("create-event")){
       addMeetUpEvent();
     }
