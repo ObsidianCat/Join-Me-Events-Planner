@@ -4,21 +4,25 @@
 
 <form class="signup-form form-horizontal" id="user_new"  >
   <form-group>
-    <label class="control-label" for="{{user.nameId}}">*First Name
+    <label class="control-label" for="user_name">*First Name
     </label>
-    <input  required ng-model="user.name" id="{{user.nameId}}" class="custom-validation form-control" type="text" name="name" placeholder="Tony Smith" autocomplete="name">
+    <input  required ng-model="user.name" id="user_name" class="custom-validation v-name form-control" type="text" name="name" placeholder="Tony Smith" autocomplete="name">
+    <span class='help-block'></span>
   </form-group>
   <form-group>
     <label for="user_email">*Email </label>
-      <input required pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" id="user_email" ng-model="user.email" class="form-control" type="email" name="email" placeholder="example@example.com" autocomplete="email">
+    <input required pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" id="user_email" ng-model="user.email" class="custom-validation form-control" type="email" name="email" placeholder="example@example.com" autocomplete="email">
+    <span class='help-block'></span>
   </form-group>
   <form-group>
-    <label for="{{user.passwordId}}">*Password (min. 8 characters)</label>
-    <input required id="{{user.passwordId}}" ng-model="user.password" class="custom-validation form-control" type="password" name="password" autocomplete="off">
+    <label for="user_password">*Password (min. 8 characters)</label>
+    <input required id="user_password" ng-model="user.password" class="v-password custom-validation form-control" type="password" name="password" autocomplete="off">
+    <span class='help-block'></span>
   </form-group>
   <form-group>
     <label for="{{user.repeatPasswordId}}">*Please repeat your password</label>
-    <input required id="{{user.repeatPasswordId}}" ng-model="user.repeatPassword" class="custom-validation form-control" type="password" name="password" autocomplete="off">
+    <input required id="{{user.repeatPasswordId}}" ng-model="user.repeatPassword" class="v-repeat-password custom-validation form-control " type="password" name="password" autocomplete="off">
+    <span class='help-block'></span>
   </form-group>
   <form-group>
     <label for="user_bday">Birthday</label>

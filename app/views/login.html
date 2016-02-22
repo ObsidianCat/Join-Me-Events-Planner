@@ -4,7 +4,7 @@
 <form class="signup-form form-horizontal" id="user_new"  >
   <form-group>
     <label for="user_email">*Email </label>
-    <input required pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" id="user_email" ng-model="user.email" class="form-control" type="email" name="email" placeholder="example@example.com" autocomplete="email">
+    <input required pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" id="user_email" ng-model="user.email" class="custom-validation form-control" type="email" name="email" placeholder="example@example.com" autocomplete="email">
   </form-group>
   <form-group>
     <label for="{{user.passwordId}}">*Password (min. 8 characters)</label>

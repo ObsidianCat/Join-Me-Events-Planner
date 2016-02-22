@@ -44,24 +44,60 @@ angular.module('joinMeApp').controller('WelcomeController',
 
 }])
 .controller('AuthController', [
-
     '$scope', 'ValidateService', 'Auth', '$state',
     function($scope, ValidateService, Auth, $state) {
+
     var authCtrl = this;
 
     //data from form
     //id`s to use in sign in form
     //currently some values filled with dummy date for sake of development
     $scope.user = {
-      "name": "Alexey",
-      "nameId":'user_name',
+      "name": "",
       "password": "abcd1234",
       "passwordId": "user_password",
-      "repeatPasswordId": "user_repeat_password",
       "repeatPassword": "abcd1",
       "email": "alexey@gmail.com"
     };
 
+    function setInputError(input){
+      console.log(input.validity);
+       $(input).parent().addClass("has-error");
+    }
+
+    function setInputClear(input){
+      $(input).parent().removeClass("has-error");
+    }
+
+    function checkInput(input){
+      input.checkValidity();
+      ValidateService.createTracker(input.id);
+      if($(input).hasClass("v-name")){
+        ValidateService.collection.checkName(input, ValidateService.trackers[input.id]);
+      }
+      if($(input).hasClass("v-password")){
+        ValidateService.collection.checkPassword(input, ValidateService.trackers[input.id]);
+      }
+      if($(input).hasClass("v-repeat-password")){
+        ValidateService.collection.checkPasswordRepeat(input, $scope.user.password, ValidateService.trackers[input.id]);
+      }
+      input.setCustomValidity(ValidateService.trackers[input.id].retrieve());
+    }
+
+     $('.custom-validation').on("blur", function(e) {
+       //e.target.checkValidity();
+       checkInput(e.target);
+     });
+
+    $('.custom-validation').on("focus", function(e) {
+      setInputClear(e.target);
+    });
+
+
+    $('.custom-validation').on("invalid", function(e) {
+      console.log('custom validation invalid fired');
+      setInputError(e.target);
+    });
 
     $scope.login = function(){
       Auth.$authWithPassword( $scope.user).then(function(auth){
@@ -81,37 +117,17 @@ angular.module('joinMeApp').controller('WelcomeController',
 
     $scope.submitSignUp = function(user){
       //get validity status of the form
-      var formValitityStatus = signUpFormValidation(user);
+      var formValitityStatus = signUpFormSubmitCheck();
       if(formValitityStatus){
         authCtrl.register();
       }
+      else{
+        console.error('errors in the form')
+      }
     };
 
-    function signUpFormValidation(user){
-      //create a map of id of input ->input
-      //map contains all field with custom validation
-      var listForValidation = new Map();
-      //fill map with data
-      $('.signup-form .custom-validation').each(function(){
-        listForValidation.set($(this).attr('id'), this);
-      });
-
-      //create validation errors trackers for every field with custom validation
-      for (var key of listForValidation.keys()) {
-        ValidateService.createTracker(key);
-      }
-
-      //check every field that required custom validation
-      ValidateService.collection.checkName(listForValidation.get(user.nameId), ValidateService.trackers[user.nameId]);
-      ValidateService.collection.checkPassword(listForValidation.get(user.passwordId), ValidateService.trackers[user.passwordId]);
-      ValidateService.collection.checkPasswordRepeat(listForValidation.get(user.repeatPasswordId), user.password, ValidateService.trackers[user.repeatPasswordId]);
-
-      //set custom validation messages to form fields
-      for (var [key, value] of listForValidation) {
-        value.setCustomValidity(ValidateService.trackers[key].retrieve());
-      }
+    function signUpFormSubmitCheck(){
       var form = document.getElementById("user_new");
-
       return form.checkValidity();
     }
 }])
