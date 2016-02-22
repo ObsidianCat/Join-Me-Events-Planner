@@ -68,7 +68,7 @@ function($scope, ValidateService, Auth, $state) {
     Auth.$authWithPassword( $scope.user).then(function(auth){
       $state.go('welcome');
     }, function(error){
-      authCtrl.error = error;
+      $scope.error = error;
     });//end of then
   };//end of login
 

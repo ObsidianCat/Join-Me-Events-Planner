@@ -1,15 +1,19 @@
-<div ng-show="authCtrl.error">
-  <span>{{authCtrl.error.message}}</span>
+<div class="row">
+  <div ng-show="error" class="alert alert-danger" >
+    <span class="sr-only">Error:</span>
+    <span>{{error.message}}</span>
+  </div>
+  <form class="signup-form" id="user_new"  >
+    <div class="form-group">
+      <label for="user_email">*Email </label>
+      <input required pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" id="user_email" ng-model="user.email" class="custom-validation form-control" type="email" name="email" placeholder="example@example.com" autocomplete="email">
+    </div>
+    <div class="form-group">
+      <label for="{{user.passwordId}}">*Password (min. 8 characters)</label>
+      <input required id="{{user.passwordId}}" ng-model="user.password" class="custom-validation form-control" type="password" name="password" autocomplete="off">
+    </div>
+    <div class="form-group">
+    <button type="submit" class="btn btn-default" ng-click="login(user)">Submit</button>
+    </div>
+  </form>
 </div>
-<form class="signup-form form-horizontal" id="user_new"  >
-  <form-group>
-    <label for="user_email">*Email </label>
-    <input required pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" id="user_email" ng-model="user.email" class="custom-validation form-control" type="email" name="email" placeholder="example@example.com" autocomplete="email">
-  </form-group>
-  <form-group>
-    <label for="{{user.passwordId}}">*Password (min. 8 characters)</label>
-    <input required id="{{user.passwordId}}" ng-model="user.password" class="custom-validation form-control" type="password" name="password" autocomplete="off">
-  </form-group>
-
-  <button type="submit" class="btn btn-default" ng-click="login(user)">Submit</button>
-</form>
