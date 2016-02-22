@@ -41,7 +41,7 @@ angular.module('joinMeApp')
       collection:{
         checkName:function(inputForCheck, tracker){
           if (!inputForCheck.value || inputForCheck.value.length < 2) {
-            tracker.add("fewer than 1 character");
+            tracker.add("fewer than 2 character");
           } else if (inputForCheck.value.length > 60) {
             tracker.add("greater than 60 characters");
           }
@@ -75,31 +75,18 @@ angular.module('joinMeApp')
     // Our first service
     return serviceInstance;
   })
-  .factory('Auth', function($firebaseAuth, FirebaseUrl){
+  .factory('Auth', ['$firebaseAuth', 'FirebaseUrl', function($firebaseAuth, FirebaseUrl){
     var ref = new Firebase(FirebaseUrl);
     var auth = $firebaseAuth(ref);
 
     return auth;
-  })
+  }])
   .factory('Users', function($firebaseArray, $firebaseObject, FirebaseUrl){
     var Users = {};
     return Users;
   })
-  .factory("eventsService", function($firebaseArray, FirebaseUrl) {
+  .factory("eventsService", ['$firebaseArray', 'FirebaseUrl', function($firebaseArray, FirebaseUrl) {
       // create a reference to the database where we will store our data
       var ref = new Firebase(FirebaseUrl);
       return $firebaseArray(ref);
-  })
-  .service('LocationService', function(){
-    var userPosition;
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(function(position) {
-        userPosition = position;
-      });
-
-    } else {
-      console.error('geo location unavailable')
-    }
-    return userPosition;
-
-  });
+  }]);

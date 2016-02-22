@@ -52,6 +52,8 @@ gulp.task('scripts', () => {
 //gulp.task('lint:test', lint('test/spec/**/*.js', testLintOptions));
 
 gulp.task('html', ['styles', 'scripts'], () => {
+
+  gulp.src('app/views/*.html').pipe(gulp.dest('dist/views'));
   return gulp.src('app/*.html')
     .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
     .pipe($.if('*.js', $.uglify()))

@@ -1,14 +1,46 @@
+@import "customVariables";
 $icon-font-path: '../fonts/';
-$color-violet-dark: #8C288C;
+
 // bower:scss
 @import "bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
 // endbower
 
-h1{
-  color: $color-violet-dark !important;
+.container{
+  width:95%;
 }
-a{
-  color: $color-violet-dark;
+
+@media (min-width: 768px) {
+
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .container{
+    width: 80%;
+  }
+  .list-group-item{
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+  }
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  .container{
+    width: 80%;
+  }
+}
+
+h1{
+  color: hotpink !important;
+}
+header ul.nav-pills{
+  margin: 1rem 0 1rem 0;
+  .text-muted{
+    color: $brand-primary;
+    font-weight: 700;
+  }
 }
 form#create-event .form-group#address{
   label{
@@ -25,4 +57,33 @@ form#create-event .form-group#address{
 
 form#create-event fieldset{
   margin-bottom: 2rem;
+  width: 100%;
+
+  .slimField, .wideFIeld{
+    margin-bottom: 15px;
+  }
+}
+
+.list-group.events{
+  .remove{
+    position: absolute;
+    right: 5rem;
+  }
+  .header{
+    cursor: pointer;
+    display: flex;
+    flex-direction: row;
+
+    span{
+      margin-right: 1rem;
+    }
+    i{
+      margin-right: 0px;
+      margin-left: auto;
+      font-size: 1.2em;
+      &.open{
+        transform: rotate(180deg);
+      }
+    }
+  }
 }

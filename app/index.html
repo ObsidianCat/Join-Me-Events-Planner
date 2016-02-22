@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="" ng-app="joinMeApp">
+<html lang="en" ng-app="joinMeApp">
   <head>
     <meta charset="utf-8">
     <meta name="description" content="">
@@ -27,7 +27,7 @@
     <![endif]-->
 
     <div class="container" ng-controller="WelcomeController as WelcomeCtrl">
-      <div class="header">
+      <header class="row header">
         <ul class="nav nav-pills pull-right" ng-cloak >
           <li ng-class="setNavigationActive('welcome')" set-active><a ui-sref="welcome">Home</a></li>
           <li ng-class="setNavigationActive('login')" ng-hide="authData" set-active><a ui-sref="login">Log In</a></li>
@@ -36,12 +36,12 @@
           <li ng-show="authData"><a href="#" ng-click="authObj.$unauth()">Log Out</a></li>
         </ul>
         <h3 class="text-muted">Join Me</h3>
-      </div>
+      </header>
 
-      <div ui-view id="main-content-wrapper"></div>
-      <div class="footer">
+      <div ui-view id="main-content-wrapper" class="row"></div>
+      <footer class="row footer">
         <p>@ 2016, Lula Leus</p>
-      </div>
+      </footer>
     </div>
 
 
@@ -57,7 +57,6 @@
     <script src="/bower_components/firebase/firebase.js"></script>
     <script src="/bower_components/angularfire/dist/angularfire.js"></script>
     <script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-
     <!-- endbower -->
     <!-- endbuild -->
 
