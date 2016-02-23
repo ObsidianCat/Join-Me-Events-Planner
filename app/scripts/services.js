@@ -35,17 +35,16 @@ angular.module('joinMeApp')
         this.trackers[trackerName] = new IssueTracker();
       },
       trackers:{},
+      isAllDataValid:true,
+      checkTotalDataValidity:function(){
+        serviceInstance.isAllDataValid = (jQuery.isEmptyObject(serviceInstance.trackers))?true:false;
+        return serviceInstance.isAllDataValid ;
+      },
       setAsValid:function(validatedInput){
         validatedInput.setCustomValidity("");
       },
-      formBeforeSubmitCheck: function(formId){
-        console.log('formBeforeSubmitCheck');
-        var form = document.getElementById(formId);
-        return form.checkValidity();
-      },
       inputActions:{
         setInputError: function setInputError(input){
-          console.log(input.validity);
           $(input).parent().addClass("has-error");
         },
         setInputClear: function setInputClear(input){
@@ -53,11 +52,15 @@ angular.module('joinMeApp')
         },
         setInputEventListeners:function(){
           $('.custom-validation').on("focus", function(e) {
+            serviceInstance.isAllDataValid = true;
             serviceInstance.inputActions.setInputClear(e.target);
+            $(e.target).next("span").remove();
           });
 
           $('.custom-validation').on("invalid", function(e) {
             serviceInstance.inputActions.setInputError(e.target);
+            serviceInstance.isAllDataValid = false;
+
           });
 
           $('.custom-validation').on("blur", function(e) {
@@ -67,17 +70,28 @@ angular.module('joinMeApp')
         },
         checkInput:function checkInput(input){
           input.checkValidity();
+          console.log(input.validity);
           serviceInstance.createTracker(input.id);
+          var currentTracker = serviceInstance.trackers[input.id];
+          if(input.validity.valueMissing){
+            currentTracker.add("Field cannot be empty");
+          }
+          if($(input).hasClass("v-email") && input.validity.typeMismatch){
+            currentTracker.add("invalid email");
+          }
           if($(input).hasClass("v-name")){
-            serviceInstance.collection.checkName(input, serviceInstance.trackers[input.id]);
+            serviceInstance.collection.checkName(input, currentTracker);
           }
           if($(input).hasClass("v-password")){
-            serviceInstance.collection.checkPassword(input, serviceInstance.trackers[input.id]);
+            serviceInstance.collection.checkPassword(input, currentTracker);
           }
           if($(input).hasClass("v-repeat-password")){
-            ValidateService.collection.checkPasswordRepeat(input, $scope.user.password, serviceInstance.trackers[input.id]);
+            serviceInstance.collection.checkPasswordRepeat(input, document.querySelector(".v-password"), currentTracker);
           }
-          input.setCustomValidity(serviceInstance.trackers[input.id].retrieve());
+          input.setCustomValidity(currentTracker.retrieve());
+
+          var errorMessage = $("<span class='help-block'></span>").text(currentTracker.retrieve());
+          $(input).after(errorMessage);
         }
       },
       collection:{

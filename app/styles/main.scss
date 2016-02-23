@@ -91,3 +91,7 @@ form#create-event fieldset{
 .form-group .help-block{
   display: none;
 }
+
+.form-group.has-error .help-block{
+  display: inherit;
+}

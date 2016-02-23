@@ -2,7 +2,7 @@
   <fieldset id="event-basic-info">
     <div class="form-group">
       <label for="event_name">*Name of event</label>
-      <input  id="event_name" ng-model="eventData.name" class="custom-validation validation-text form-control" type="text" name="event_name" placeholder="Friday`s Dinner" required>
+      <input  id="event_name" ng-model="eventData.name" class="custom-validation v-name validation-text form-control" type="text" name="event_name" placeholder="Friday`s Dinner" required>
     </div>
     <div class="form-group">
       <label for="event_type">*Event type</label>
@@ -17,7 +17,7 @@
     </div>
     <div class="form-group">
       <label for="event_host">*Event Host</label>
-      <input  id="event_host" ng-model="eventData.host" class="custom-validation validation-text form-control" type="text" name="name" placeholder="Lula Leus" autocomplete="name" required>
+      <input  id="event_host" ng-model="eventData.host" class="custom-validation v-name validation-text form-control" type="text" name="name" placeholder="Lula Leus" autocomplete="name" required>
     </div>
   </fieldset>
 
@@ -89,7 +89,13 @@
   </div>
   </fieldset>
 
-  <button type="submit" class="btn btn-default" ng-click="createMeetUpEvent(eventData)">Submit</button>
+  <fieldset id="submit">
+    <div class="form-group" ng-class="formValitidyStatus?'allright':'has-error'">
+      <button type="button" id="btn_submit_event" class="btn btn-default" ng-click="createMeetUpEvent(eventData)">Submit</button>
+      <span class="help-block">Please fill all required fields, before submit</span>
+
+    </div>
+  </fieldset>
 </form>
 
 <!--START location auto-complete code-->

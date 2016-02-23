@@ -46,6 +46,7 @@ angular.module('joinMeApp').controller('WelcomeController',
 .controller('AuthController', [
 '$scope', 'ValidateService', 'Auth', '$state',
 function($scope, ValidateService, Auth, $state) {
+  $scope.formValitidyStatus = ValidateService.isAllDataValid;
 
   var authCtrl = this;
 
@@ -80,14 +81,15 @@ function($scope, ValidateService, Auth, $state) {
     });//end of then
   };
 
-  $scope.submitSignUp = function(user){
-    //get validity status of the form
-    if(ValidateService.formBeforeSubmitCheck("user_new")){
+  $scope.submitSignUp = function(){
+    if(jQuery.isEmptyObject(ValidateService.trackers)){
       authCtrl.register();
     }
     else{
-      console.error('errors in the form')
+      $scope.formValitidyStatus = ValidateService.checkTotalDataValidity();
+      console.error("missing data");
     }
+
   };
 
 }])
@@ -97,8 +99,11 @@ function($scope, ValidateService, Auth, $state) {
 function($state, $scope, $firebaseArray, eventsService, Auth, ValidateService) {
   var authObj = Auth;
   var currentDate = new Date();
+  $scope.formValitidyStatus = ValidateService.isAllDataValid;
+
+  window.validate = ValidateService;
   $scope.eventData = {
-      name:"Dinner",
+      name:"",
       type:"Dinner out",
       host:"Alexey Soshin",
       message:"This is public event",
@@ -123,12 +128,11 @@ function($state, $scope, $firebaseArray, eventsService, Auth, ValidateService) {
 
 
   $scope.createMeetUpEvent= function(eventData){
-    console.log(eventData);
-    if(ValidateService.formBeforeSubmitCheck("create-event")){
+    if(jQuery.isEmptyObject(ValidateService.trackers)){
       addMeetUpEvent();
     }
     else{
-      console.error('some data in form are invalid');
+      $scope.formValitidyStatus = ValidateService.checkTotalDataValidity();
     }
   };
 
