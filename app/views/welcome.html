@@ -16,8 +16,8 @@
           <i ng-class="collapsed?'open':'closed';" class="glyphicon glyphicon-menu-down"></i>
         </div>
           <div  ng-show="collapsed" class="event-details">
-            <p>Start: {{meetUpEvent.timeStart}},  {{meetUpEvent.dateStart}}</p>
-            <p>Start: {{meetUpEvent.timeEnd}},  {{meetUpEvent.dateEnd}}</p>
+            <p>Start: {{meetUpEvent.timeStartString}},  {{meetUpEvent.dateStartString}}</p>
+            <p>End: {{meetUpEvent.timeEndString}},  {{meetUpEvent.dateEndString}}</p>
             <p>Event notes: {{meetUpEvent.message}}</p>
             <h5>Address:</h5>
             <p>{{meetUpEvent.message.address.streetPartOne}}</p>

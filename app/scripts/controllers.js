@@ -135,10 +135,23 @@ function($state, $scope, $firebaseArray, eventsService, Auth, ValidateService) {
   $scope.meetUpEvents = eventsService;
 
   function addMeetUpEvent() {
+    var dataForSave = {};
+    angular.copy($scope.eventData, dataForSave);
+    dataForSave.dateStartString =  dataForSave.dateStart.toDateString();
+    dataForSave.dateEndString =  dataForSave.dateEnd.toDateString();
+    dataForSave.timeStartString =  dataForSave.timeStart.toLocaleTimeString();
+    dataForSave.timeEndString =  dataForSave.timeEnd.toLocaleTimeString();
+
+    delete dataForSave.dateStart;
+    delete dataForSave.dateEnd;
+    delete dataForSave.timeStart;
+    delete dataForSave.timeEnd;
+
     // $add on a synchronized array is like Array.push() except it saves to the database!
-    $scope.eventData.timestamp = Firebase.ServerValue.TIMESTAMP;
-    $scope.eventData.uidOfuser = authObj.$getAuth().uid;
-    $scope.meetUpEvents.$add($scope.eventData);
+    dataForSave.timestamp = Firebase.ServerValue.TIMESTAMP;
+    dataForSave.uidOfuser = authObj.$getAuth().uid;
+
+    $scope.meetUpEvents.$add(dataForSave);
     $scope.meetUpEvent = "";
     $state.go('welcome');
   }
