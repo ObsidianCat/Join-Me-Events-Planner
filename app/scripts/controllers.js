@@ -86,7 +86,7 @@ function($scope, ValidateService, Auth, $state) {
       authCtrl.register();
     }
     else{
-      $scope.formValitidyStatus = ValidateService.checkTotalDataValidity();
+      $scope.formValitidyStatus = ValidateService.checkTotalDataValidity($scope);
       console.error("missing data");
     }
 
@@ -132,7 +132,7 @@ function($state, $scope, $firebaseArray, eventsService, Auth, ValidateService) {
       addMeetUpEvent();
     }
     else{
-      $scope.formValitidyStatus = ValidateService.checkTotalDataValidity();
+      $scope.formValitidyStatus = ValidateService.checkTotalDataValidity($scope);
     }
   };
 

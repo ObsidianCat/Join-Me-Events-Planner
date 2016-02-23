@@ -36,7 +36,8 @@ angular.module('joinMeApp')
       },
       trackers:{},
       isAllDataValid:true,
-      checkTotalDataValidity:function(){
+      checkTotalDataValidity:function(_scope){
+        serviceInstance.scope = _scope;
         serviceInstance.isAllDataValid = (jQuery.isEmptyObject(serviceInstance.trackers))?true:false;
         return serviceInstance.isAllDataValid ;
       },
@@ -53,14 +54,9 @@ angular.module('joinMeApp')
         setInputEventListeners:function(){
           $('.custom-validation').on("focus", function(e) {
             serviceInstance.isAllDataValid = true;
+            serviceInstance.scope.formValitidyStatus = true;
             serviceInstance.inputActions.setInputClear(e.target);
             $(e.target).next("span").remove();
-          });
-
-          $('.custom-validation').on("invalid", function(e) {
-            serviceInstance.inputActions.setInputError(e.target);
-            serviceInstance.isAllDataValid = false;
-
           });
 
           $('.custom-validation').on("blur", function(e) {
@@ -71,6 +67,7 @@ angular.module('joinMeApp')
         checkInput:function checkInput(input){
           input.checkValidity();
           console.log(input.validity);
+          //debugger;
           serviceInstance.createTracker(input.id);
           var currentTracker = serviceInstance.trackers[input.id];
           if(input.validity.valueMissing){
@@ -89,6 +86,11 @@ angular.module('joinMeApp')
             serviceInstance.collection.checkPasswordRepeat(input, document.querySelector(".v-password"), currentTracker);
           }
           input.setCustomValidity(currentTracker.retrieve());
+
+          if (currentTracker.retrieve()) {
+            serviceInstance.inputActions.setInputError(input);
+            serviceInstance.isAllDataValid = false;
+          }
 
           var errorMessage = $("<span class='help-block'></span>").text(currentTracker.retrieve());
           $(input).after(errorMessage);
