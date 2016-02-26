@@ -48,17 +48,15 @@ function($scope, ValidateService, Auth, $state) {
   ValidateService.checkTotalDataValidity($scope);
   $scope.formValitidyStatus = ValidateService.isAllDataValid;
 
-  var authCtrl = this;
-
   //data from form
   //id`s to use in sign in form
   //currently some values filled with dummy date for sake of development
   $scope.user = {
     "name": "",
-    "password": "abcd1234",
-    "passwordId": "user_password",
-    "repeatPassword": "abcd1",
-    "email": "alexey@gmail.com"
+    "password": "",
+    "passwordId": "",
+    "repeatPassword": "",
+    "email": ""
   };
 
 
@@ -73,7 +71,7 @@ function($scope, ValidateService, Auth, $state) {
     });//end of then
   };//end of login
 
-  authCtrl.register = function(){
+  function register(){
     Auth.$createUser( $scope.user).then(function(user){
       $scope.login();
     }, function(error){
@@ -84,7 +82,7 @@ function($scope, ValidateService, Auth, $state) {
   $scope.submitSignUp = function(){
     ValidateService.inputActions.validationOnSubmit();
     if(jQuery.isEmptyObject(ValidateService.trackers)){
-      authCtrl.register();
+      register();
     }
     else{
       $scope.formValitidyStatus = ValidateService.checkTotalDataValidity($scope);
@@ -106,15 +104,15 @@ function($state, $scope, $firebaseArray, eventsService, Auth, ValidateService) {
   window.validate = ValidateService;
   $scope.eventData = {
       name:"",
-      type:"Dinner out",
-      host:"Alexey Soshin",
-      message:"This is public event",
+      type:"",
+      host:"",
+      message:"",
       dateStart:currentDate,
       dateEnd:currentDate,
       timeStart:new Date(currentDate.getFullYear(),currentDate.getMonth(), currentDate.getDay(), currentDate.getHours(), currentDate.getMinutes(), 0),
       timeEnd:new Date(currentDate.getFullYear(),currentDate.getMonth(), currentDate.getDay(), currentDate.getHours()+2, currentDate.getMinutes(), 0),
       address:{},
-      guests:"example@example.com"
+      guests:""
     };
 
   window.eventData = $scope.eventData;
