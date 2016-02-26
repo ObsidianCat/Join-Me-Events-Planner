@@ -4,7 +4,6 @@
 angular.module('joinMeApp').controller('WelcomeController',
  ['$scope', '$firebaseArray', '$state', 'Auth', 'eventsService',
    function($scope, $firebaseArray, $state, Auth, eventsService) {
-  console.log('WelcomeController');
   $scope.authObj = Auth;
   $scope.authData = $scope.authObj.$getAuth();
   window.authObj = $scope.authObj;
@@ -46,6 +45,7 @@ angular.module('joinMeApp').controller('WelcomeController',
 .controller('AuthController', [
 '$scope', 'ValidateService', 'Auth', '$state',
 function($scope, ValidateService, Auth, $state) {
+  ValidateService.checkTotalDataValidity($scope);
   $scope.formValitidyStatus = ValidateService.isAllDataValid;
 
   var authCtrl = this;
@@ -100,6 +100,7 @@ function($scope, ValidateService, Auth, $state) {
 function($state, $scope, $firebaseArray, eventsService, Auth, ValidateService) {
   var authObj = Auth;
   var currentDate = new Date();
+  ValidateService.checkTotalDataValidity($scope);
   $scope.formValitidyStatus = ValidateService.isAllDataValid;
 
   window.validate = ValidateService;
