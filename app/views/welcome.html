@@ -9,7 +9,7 @@
     <ul class="events list-group">
       <li class="list-group-item" ng-repeat="meetUpEvent in meetUpEvents | orderBy:orderBy">
         <div ng-click="collapsed=!collapsed" class="header">
-            <span>{{ meetUpEvent.name }}</span><span> host: {{ meetUpEvent.host}}</span>
+            <span><strong>{{ meetUpEvent.name }}</strong></span><span> host: {{ meetUpEvent.host}}</span>
           <!-- delete a message using $remove -->
           <span class="small" ng-if="checkUid(meetUpEvent.uidOfuser)">(your event)</span>
           <a href="" ng-click="meetUpEvents.$remove(meetUpEvent)"  ng-if="checkUid(meetUpEvent.uidOfuser)" class="remove">X</a>

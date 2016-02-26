@@ -4,33 +4,33 @@
 
 <form class="signup-form form-horizontal" id="user_new"  >
   <div class="form-group">
-    <label class="control-label" for="user_name">*First Name
+    <label class="control-label" for="user_name">*Full Name
     </label>
-    <input  required ng-model="user.name" id="user_name" class="custom-validation v-name form-control" type="text" name="name" placeholder="Tony Smith" autocomplete="name">
+    <input aria-label="required input full name" required ng-model="user.name" id="user_name" class="custom-validation v-name form-control" type="text" name="name" placeholder="Tony Smith" autocomplete="name">
     <span class='help-block'></span>
   </div>
   <div class="form-group">
     <label for="user_email">*Email </label>
-    <input required pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" id="user_email" ng-model="user.email" class="custom-validation v-email form-control" type="email" name="email" placeholder="example@example.com" autocomplete="email">
+    <input aria-label="required input email" required pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" id="user_email" ng-model="user.email" class="custom-validation v-email form-control" type="email" name="email" placeholder="example@example.com" autocomplete="email">
     <span class='help-block'></span>
   </div>
   <div class="form-group">
     <label for="user_password">*Password (min. 8 characters)</label>
-    <input required id="user_password" ng-model="user.password" class="v-password custom-validation form-control" type="password" name="password" autocomplete="off">
+    <input required id="user_password" aria-label="required input password" ng-model="user.password" class="v-password custom-validation form-control" type="password" name="password" autocomplete="off">
     <span class='help-block'></span>
   </div>
   <div class="form-group">
     <label for="repeat_password">*Please repeat your password</label>
-    <input required id="repeat_password" ng-model="user.repeatPassword" class="v-repeat-password custom-validation form-control " type="password" name="password" autocomplete="off">
+    <input required aria-label="required input repeat password" id="repeat_password" ng-model="user.repeatPassword" class="v-repeat-password custom-validation form-control " type="password" name="password" autocomplete="off">
     <span class='help-block'></span>
   </div>
   <div class="form-group">
     <label for="user_bday">Birthday</label>
-    <input id="user_bday" class="form-control" ng-model="user.bday" type="date" name="bday" autocomplete="bday">
+    <input aria-label="optional input birthday" id="user_bday" class="form-control" ng-model="user.bday" type="date" name="bday" autocomplete="bday">
   </div>
   <div class="form-group">
     <label for="user_favourite_event">You favorite type of event:</label>
-    <input id="user_favourite_event" class="form-control" ng-model="user.favorite" list="event-types" name="favorite_event">
+    <input aria-label="optional input  favorite type of event" id="user_favourite_event" class="form-control" ng-model="user.favorite" list="event-types" name="favorite_event">
     <datalist id="event-types">
       <option value="Birthday party">
       <option value="Masquerade ball">

@@ -142,7 +142,7 @@ function($state, $scope, $firebaseArray, eventsService, Auth, ValidateService) {
    */
   function getAddress(){
     $("#address input").each(function(){
-      var addressData = this.val;
+      var addressData = this.value;
       if(addressData){
         var id = $(this).attr("id");
         $scope.eventData.address[id] = addressData;
@@ -164,6 +164,7 @@ function($state, $scope, $firebaseArray, eventsService, Auth, ValidateService) {
     return dataForSave
   }
   function addMeetUpEvent() {
+    debugger
     var dataForSave = {};
     angular.copy($scope.eventData, dataForSave);
 

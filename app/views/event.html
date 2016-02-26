@@ -2,11 +2,11 @@
   <fieldset id="event-basic-info">
     <div class="form-group">
       <label for="event_name">*Name of event</label>
-      <input id="event_name" ng-model="eventData.name" class="custom-validation v-name validation-text form-control" type="text" name="event_name" placeholder="Friday`s Dinner" required>
+      <input id="event_name" aria-label="required input Name of event" ng-model="eventData.name" class="custom-validation v-name validation-text form-control" type="text" name="event_name" placeholder="Friday`s Dinner" required>
     </div>
     <div class="form-group">
       <label for="event_type">*Event type</label>
-      <input id="event_type" class="form-control validation-text" ng-model="eventData.type" list="event-types" name="event_type" placeholder="Dinner out">
+      <input aria-label="required input Event type"  id="event_type" class="form-control validation-text" ng-model="eventData.type" list="event-types" name="event_type" placeholder="Dinner out">
       <datalist id="event-types">
         <option value="Birthday party">
         <option value="Masquerade ball">
@@ -17,26 +17,26 @@
     </div>
     <div class="form-group">
       <label for="event_host">*Event Host</label>
-      <input  id="event_host" ng-model="eventData.host" class="custom-validation v-name validation-text form-control" type="text" name="name" placeholder="Lula Leus" autocomplete="name" required>
+      <input  aria-label="required input Event Host" id="event_host" ng-model="eventData.host" class="custom-validation v-name validation-text form-control" type="text" name="name" placeholder="Lula Leus" autocomplete="name" required>
     </div>
   </fieldset>
 
   <fieldset id="event-time-and-date">
     <div class="form-group">
       <label for="event_start_date">*Event start date</label>
-      <input  id="event_start_date" ng-model="eventData.dateStart" class="validation-date form-control" type="date" name="event_start_date" placeholder="" required>
+      <input  id="event_start_date" aria-label="required input Event start date" ng-model="eventData.dateStart" class="validation-date form-control" type="date" name="event_start_date" placeholder="" required>
     </div>
     <div class="form-group">
       <label for="event_start_time">*Event start time</label>
-      <input  id="event_start_time" ng-model="eventData.timeStart" class="validation-time form-control" type="time" name="event_start_time" placeholder="" required>
+      <input  id="event_start_time" aria-label="required input Event start time" ng-model="eventData.timeStart" class="validation-time form-control" type="time" name="event_start_time" placeholder="" required>
     </div>
     <div class="form-group">
       <label for="event_end_date">Event end date</label>
-      <input  id="event_end_date" ng-model="eventData.dateEnd" class="validation-date form-control" type="date" name="event_end_date" placeholder="" required>
+      <input  id="event_end_date" aria-label="optional input Event end date" ng-model="eventData.dateEnd" class="validation-date form-control" type="date" name="event_end_date" placeholder="" required>
     </div>
     <div class="form-group">
       <label for="event_end_time">Event end time</label>
-      <input  id="event_end_time" time-format ng-model="eventData.timeEnd" class="validation-time form-control" type="time" name="event_end_time" placeholder="" required>
+      <input  id="event_end_time" aria-label="optional input Event end time" time-format ng-model="eventData.timeEnd" class="validation-time form-control" type="time" name="event_end_time" placeholder="" required>
     </div>
   </fieldset>
 
@@ -44,7 +44,7 @@
   <fieldset id="event-location">
     <div class="form-group" id="location-auto-complete">
       <div id="locationField">
-        <input id="autocomplete" class="form-control" placeholder="Enter your address" onFocus="geolocate()" type="text">
+        <input id="autocomplete" aria-label="optional input for address"  class="form-control" placeholder="Enter your address" onFocus="geolocate()" type="text">
       </div>
     </div>
     <div class="form-group" id="address">
@@ -81,11 +81,11 @@
   <fieldset id="event-additional-info">
   <div class="form-group">
     <label>Guest list</label>
-    <textarea id="event-emails=list"  ng-model="eventData.guests" class="form-control" rows="2" placeholder="example@example.com, example2@example.com, example3@example.com"></textarea>
+    <textarea id="event-emails=list" aria-label="optional input guests list"  ng-model="eventData.guests" class="form-control" rows="2" placeholder="example@example.com, example2@example.com, example3@example.com"></textarea>
   </div>
   <div class="form-group">
     <label for="event_message">Additional information</label>
-    <textarea id="event_message"  ng-model="eventData.message" class="form-control" rows="3" placeholder="Dress code is casual. Please bring with you a positive vibe and smiles :)"></textarea>
+    <textarea id="event_message" aria-label="optional input event message"  ng-model="eventData.message" class="form-control" rows="3" placeholder="Dress code is casual. Please bring with you a positive vibe and smiles :)"></textarea>
   </div>
   </fieldset>
 
