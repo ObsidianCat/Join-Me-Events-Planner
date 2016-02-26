@@ -52,8 +52,8 @@
         <div class="slimField">
           <input class="form-control field" id="street_number" ng-model="eventData.address.streetPartOne" disabled="true">
         </div>
-        <div class="wideField" colspan="2">
-          <input class="form-control field" ng-model="eventData.address.streetPartTwo" id="route" disabled="true">
+        <div class="wideField">
+          <input class="form-control field" id="route" disabled="true">
         </div>
 
         <label class="label">City</label>
@@ -72,7 +72,7 @@
         </div>
 
         <label class="label">Country</label>
-        <div class="wideField" colspan="3">
+        <div class="wideField" >
           <input class="form-control field" id="country" ng-model="eventData.address.country" disabled="true">
         </div>
     </div>
@@ -91,7 +91,7 @@
 
   <fieldset id="submit">
     <div class="form-group" ng-class="formValitidyStatus?'allright':'has-error'">
-      <button type="button" id="btn_submit_event" class="btn btn-default" ng-click="createMeetUpEvent(eventData)">Submit</button>
+      <button type="button" id="btn_submit_event" class="btn btn-default" ng-click="submitMeetUpEventForm(eventData)">Submit</button>
       <span class="help-block">Please fill all required fields, before submit</span>
 
     </div>

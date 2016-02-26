@@ -45,8 +45,10 @@ angular.module('joinMeApp')
         validatedInput.setCustomValidity("");
       },
       inputActions:{
-        setInputError: function setInputError(input){
+        setInputError: function setInputError(input, currentTracker){
           $(input).parent().addClass("has-error");
+          var errorMessage = $("<span class='help-block'></span>").text(currentTracker.retrieve());
+          $(input).after(errorMessage);
         },
         setInputClear: function setInputClear(input){
           $(input).parent().removeClass("has-error");
@@ -60,13 +62,18 @@ angular.module('joinMeApp')
           });
 
           $('.custom-validation').on("blur", function(e) {
+            $(e.target).next("span").remove();
+
             //e.target.checkValidity();
             serviceInstance.inputActions.checkInput(e.target);
           });
         },
+        validationOnSubmit:function(){
+          serviceInstance.trackers = {};
+          $('.custom-validation').blur();
+        },
         checkInput:function checkInput(input){
           input.checkValidity();
-          console.log(input.validity);
           //debugger;
           serviceInstance.createTracker(input.id);
           var currentTracker = serviceInstance.trackers[input.id];
@@ -88,12 +95,18 @@ angular.module('joinMeApp')
           input.setCustomValidity(currentTracker.retrieve());
 
           if (currentTracker.retrieve()) {
-            serviceInstance.inputActions.setInputError(input);
+            //there are problem
+            serviceInstance.inputActions.setInputError(input, currentTracker);
             serviceInstance.isAllDataValid = false;
+
+          }
+          else{
+            //input valid
+            delete serviceInstance.trackers[input.id];
+
           }
 
-          var errorMessage = $("<span class='help-block'></span>").text(currentTracker.retrieve());
-          $(input).after(errorMessage);
+
         }
       },
       collection:{

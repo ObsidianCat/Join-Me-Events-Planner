@@ -82,6 +82,7 @@ function($scope, ValidateService, Auth, $state) {
   };
 
   $scope.submitSignUp = function(){
+    ValidateService.inputActions.validationOnSubmit();
     if(jQuery.isEmptyObject(ValidateService.trackers)){
       authCtrl.register();
     }
@@ -111,14 +112,7 @@ function($state, $scope, $firebaseArray, eventsService, Auth, ValidateService) {
       dateEnd:currentDate,
       timeStart:new Date(currentDate.getFullYear(),currentDate.getMonth(), currentDate.getDay(), currentDate.getHours(), currentDate.getMinutes(), 0),
       timeEnd:new Date(currentDate.getFullYear(),currentDate.getMonth(), currentDate.getDay(), currentDate.getHours()+2, currentDate.getMinutes(), 0),
-      address:{
-        streetPartOne:"",
-        streetPartTwo:"",
-        city:"",
-        administrativeArea:"",
-        postalCode:"",
-        country:""
-      },
+      address:{},
       guests:"example@example.com"
     };
 
@@ -127,8 +121,11 @@ function($state, $scope, $firebaseArray, eventsService, Auth, ValidateService) {
   ValidateService.inputActions.setInputEventListeners();
 
 
-  $scope.createMeetUpEvent= function(eventData){
+  $scope.submitMeetUpEventForm= function(eventData){
+    ValidateService.inputActions.validationOnSubmit();
+
     if(jQuery.isEmptyObject(ValidateService.trackers)){
+      getAddress();
       addMeetUpEvent();
     }
     else{
@@ -138,9 +135,22 @@ function($state, $scope, $firebaseArray, eventsService, Auth, ValidateService) {
 
   $scope.meetUpEvents = eventsService;
 
-  function addMeetUpEvent() {
-    var dataForSave = {};
-    angular.copy($scope.eventData, dataForSave);
+  /**
+   * get address data from form
+   * data can be auto completed
+   * or entered by user
+   */
+  function getAddress(){
+    $("#address input").each(function(){
+      var addressData = this.val;
+      if(addressData){
+        var id = $(this).attr("id");
+        $scope.eventData.address[id] = addressData;
+      }
+    });
+  }
+
+  function convertDateAndTimeToStrings(dataForSave){
     dataForSave.dateStartString =  dataForSave.dateStart.toDateString();
     dataForSave.dateEndString =  dataForSave.dateEnd.toDateString();
     dataForSave.timeStartString =  dataForSave.timeStart.toLocaleTimeString();
@@ -150,6 +160,14 @@ function($state, $scope, $firebaseArray, eventsService, Auth, ValidateService) {
     delete dataForSave.dateEnd;
     delete dataForSave.timeStart;
     delete dataForSave.timeEnd;
+
+    return dataForSave
+  }
+  function addMeetUpEvent() {
+    var dataForSave = {};
+    angular.copy($scope.eventData, dataForSave);
+
+    dataForSave = convertDateAndTimeToStrings(dataForSave);
 
     // $add on a synchronized array is like Array.push() except it saves to the database!
     dataForSave.timestamp = Firebase.ServerValue.TIMESTAMP;

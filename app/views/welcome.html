@@ -20,11 +20,11 @@
             <p>End: {{meetUpEvent.timeEndString}},  {{meetUpEvent.dateEndString}}</p>
             <p>Event notes: {{meetUpEvent.message}}</p>
             <h5>Address:</h5>
-            <p>{{meetUpEvent.message.address.streetPartOne}}</p>
-            <p>{{meetUpEvent.message.address.streetPartTwo}}</p>
-            <p>{{meetUpEvent.message.address.city}}</p>
-            <p>{{meetUpEvent.message.address.administrativeArea}}</p>
-            <p>{{meetUpEvent.message.address.country}}</p>
+            <p ng-repeat="text in meetUpEvent.address">{{text}}</p>
+            <!--<p>{{meetUpEvent.message.address.streetPartTwo}}</p>-->
+            <!--<p>{{meetUpEvent.message.address.city}}</p>-->
+            <!--<p>{{meetUpEvent.message.address.administrativeArea}}</p>-->
+            <!--<p>{{meetUpEvent.message.address.country}}</p>-->
         </div>
       </li>
     </ul>
