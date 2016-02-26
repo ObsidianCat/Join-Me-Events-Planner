@@ -68,13 +68,16 @@ angular.module('joinMeApp')
             serviceInstance.inputActions.checkInput(e.target);
           });
         },
+        /**
+         * trigger validation of all inputs with specific class
+         * that currently on the pagein form
+         */
         validationOnSubmit:function(){
           serviceInstance.trackers = {};
           $('.custom-validation').blur();
         },
         checkInput:function checkInput(input){
           input.checkValidity();
-          //debugger;
           serviceInstance.createTracker(input.id);
           var currentTracker = serviceInstance.trackers[input.id];
           if(input.validity.valueMissing){
@@ -95,13 +98,13 @@ angular.module('joinMeApp')
           input.setCustomValidity(currentTracker.retrieve());
 
           if (currentTracker.retrieve()) {
-            //there are problem
+            //input is invalid
             serviceInstance.inputActions.setInputError(input, currentTracker);
             serviceInstance.isAllDataValid = false;
 
           }
           else{
-            //input valid
+            //input is valid
             delete serviceInstance.trackers[input.id];
 
           }
@@ -110,6 +113,7 @@ angular.module('joinMeApp')
         }
       },
       collection:{
+        //set of fucntion for validation of different data types
         checkName:function(inputForCheck, tracker){
           if (!inputForCheck.value || inputForCheck.value.length < 2) {
             tracker.add("fewer than 2 character");
@@ -140,11 +144,9 @@ angular.module('joinMeApp')
           else {
             tracker.add("Passwords must match!");
           }
-        }//end of check password repeat
-      }//end of collection
-
+        }
+      }
     };
-    // Our first service
     return serviceInstance;
   })
   .factory('Auth', ['$firebaseAuth', 'FirebaseUrl', function($firebaseAuth, FirebaseUrl){
@@ -158,7 +160,7 @@ angular.module('joinMeApp')
     return Users;
   })
   .factory("eventsService", ['$firebaseArray', 'FirebaseUrl', function($firebaseArray, FirebaseUrl) {
-      // create a reference to the database where we will store our data
+      // create a reference to the database where we store our data
       var ref = new Firebase(FirebaseUrl);
       return $firebaseArray(ref);
   }]);
