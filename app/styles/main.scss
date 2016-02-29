@@ -9,39 +9,24 @@ $icon-font-path: '../fonts/';
   width:95%;
 }
 
-@media (min-width: 768px) {
 
-}
-
-/* Medium devices (desktops, 992px and up) */
-@media (min-width: 992px) {
-  .container{
-    width: 80%;
-  }
-  .list-group-item{
-    width: 50%;
-    display: inline-block;
-    vertical-align: top;
-  }
-}
-
-/* Large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px) {
-  .container{
-    width: 80%;
-  }
-}
 
 h1{
   color: hotpink !important;
 }
-header ul.nav-pills{
-  margin: 1rem 0 1rem 0;
-  .text-muted{
-    color: $brand-primary;
-    font-weight: 700;
+
+header{
+  display: flex;
+  flex-direction: column;
+  ul.nav-pills{
+    margin: 1rem 0 1rem 0;
+    .text-muted{
+      color: $brand-primary;
+      font-weight: 700;
+    }
   }
 }
+
 form#create-event .form-group#address{
   label{
     display: inline-block;
@@ -94,4 +79,36 @@ form#create-event fieldset{
 
 .form-group.has-error .help-block{
   display: inherit;
+}
+
+
+
+/*START adjastments according to screen sizes*/
+/* Small devices (phines landscape and tablets) */
+@media (min-width: 768px) {
+  header{
+    flex-direction: row;
+    ul{
+      margin-left: auto !important;
+    }
+  }
+}
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .container{
+    width: 80%;
+  }
+  .list-group-item{
+    width: 50%;
+    display: inline-block;
+    vertical-align: top;
+  }
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  .container{
+    width: 80%;
+  }
 }
