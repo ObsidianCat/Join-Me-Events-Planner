@@ -1,5 +1,5 @@
 /**
- * Created by Lula on 1/25/2016.
+ * Created by lulaleus on 29/02/2016.
  */
 angular.module('joinMeApp')
   .service('ValidateService', function() {
@@ -146,19 +146,4 @@ angular.module('joinMeApp')
     };
     // Our first service
     return serviceInstance;
-  })
-  .factory('Auth', ['$firebaseAuth', 'FirebaseUrl', function($firebaseAuth, FirebaseUrl){
-    var ref = new Firebase(FirebaseUrl);
-    var auth = $firebaseAuth(ref);
-
-    return auth;
-  }])
-  .factory('Users', function($firebaseArray, $firebaseObject, FirebaseUrl){
-    var Users = {};
-    return Users;
-  })
-  .factory("eventsService", ['$firebaseArray', 'FirebaseUrl', function($firebaseArray, FirebaseUrl) {
-      // create a reference to the database where we will store our data
-      var ref = new Firebase(FirebaseUrl);
-      return $firebaseArray(ref);
-  }]);
+  });

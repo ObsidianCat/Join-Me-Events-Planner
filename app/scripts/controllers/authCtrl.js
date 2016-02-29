@@ -1,8 +1,11 @@
 /**
  * Created by lulaleus on 29/02/2016.
  */
-angular.module('joinMeApp').controller('AuthController', [
-  '$scope', 'ValidateService', 'Auth', '$state',
+angular.module('joinMeApp').controller('AuthController',[
+  '$scope',
+  'ValidateService',
+  'Auth',
+  '$state',
   function($scope, ValidateService, Auth, $state) {
     ValidateService.checkTotalDataValidity($scope);
     $scope.formValitidyStatus = ValidateService.isAllDataValid;
@@ -50,4 +53,5 @@ angular.module('joinMeApp').controller('AuthController', [
 
     };
 
-  }]);
+  }
+]);
