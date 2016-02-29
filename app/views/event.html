@@ -2,11 +2,11 @@
   <fieldset id="event-basic-info">
     <div class="form-group">
       <label for="event_name">*Name of event</label>
-      <input id="event_name" aria-label="required input Name of event" ng-model="eventData.name" class="custom-validation v-name validation-text form-control" type="text" name="event_name" placeholder="Friday`s Dinner" required>
+      <input id="event_name" aria-label="required input Name of event" ng-model="eventData.name" class="custom-validation v-name form-control" type="text" name="event_name" placeholder="Friday`s Dinner" required>
     </div>
     <div class="form-group">
       <label for="event_type">*Event type</label>
-      <input aria-label="required input Event type"  id="event_type" class="form-control validation-text" ng-model="eventData.type" list="event-types" name="event_type" placeholder="Dinner out">
+      <input aria-label="required input Event type"  id="event_type" class="form-control" ng-model="eventData.type" list="event-types" name="event_type" placeholder="Dinner out">
       <datalist id="event-types">
         <option value="Birthday party">
         <option value="Masquerade ball">
@@ -17,7 +17,7 @@
     </div>
     <div class="form-group">
       <label for="event_host">*Event Host</label>
-      <input  aria-label="required input Event Host" id="event_host" ng-model="eventData.host" class="custom-validation v-name validation-text form-control" type="text" name="name" placeholder="Lula Leus" autocomplete="name" required>
+      <input  aria-label="required input Event Host" id="event_host" ng-model="eventData.host" class="custom-validation v-name form-control" type="text" name="name" placeholder="Lula Leus" autocomplete="name" required>
     </div>
   </fieldset>
 
@@ -43,9 +43,7 @@
 
   <fieldset id="event-location">
     <div class="form-group" id="location-auto-complete">
-      <div id="locationField">
-        <input id="autocomplete" aria-label="optional input for address"  class="form-control" placeholder="Enter your address" onFocus="geolocate()" type="text">
-      </div>
+        <input id="autocomplete" aria-label="optional input for address"  class="custom-validation v-name  form-control" placeholder="Enter your address" onFocus="geolocate()" type="text" required>
     </div>
     <div class="form-group" id="address">
         <label class="label">Street address</label>
@@ -81,7 +79,7 @@
   <fieldset id="event-additional-info">
   <div class="form-group">
     <label>Guest list</label>
-    <textarea id="event-emails=list" aria-label="optional input guests list"  ng-model="eventData.guests" class="form-control" rows="2" placeholder="example@example.com, example2@example.com, example3@example.com"></textarea>
+    <textarea id="event-emails=list" aria-label="optional input guests list"  ng-model="eventData.guests" class="custom-validation v-name  form-control" rows="2" placeholder="example@example.com, example2@example.com, example3@example.com" required></textarea>
   </div>
   <div class="form-group">
     <label for="event_message">Additional information</label>
