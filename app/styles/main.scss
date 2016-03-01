@@ -18,6 +18,10 @@ h1{
 header{
   display: flex;
   flex-direction: column;
+
+  >a, >a:hover{
+    text-decoration: none;
+  }
   ul.nav-pills{
     margin: 1rem 0 1rem 0;
     .text-muted{

@@ -130,8 +130,8 @@ angular.module('joinMeApp')
             serviceInstance.setAsValid(inputForCheck);
           }
         },
-        checkPasswordRepeat:function(inputForCheck, valueForCompare, tracker){
-          if (inputForCheck.value === valueForCompare && inputForCheck.value.length > 0) {
+        checkPasswordRepeat:function(inputForCheck, inputForCompare, tracker){
+          if (inputForCheck.value === inputForCompare.value && inputForCheck.value.length > 0) {
             /*
              They match, so make sure the rest of the requirements have been met.
              */

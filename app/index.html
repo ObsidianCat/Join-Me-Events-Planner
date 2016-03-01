@@ -28,7 +28,7 @@
 
     <div class="container" ng-controller="WelcomeController as WelcomeCtrl">
       <header class="header">
-        <h3 class="text-muted">Join Me</h3>
+        <a ui-sref="welcome"><h3 class="text-muted">Join Me</h3></a>
         <ul class="nav nav-pills col-md-pull-right" role="navigation" ng-cloak >
           <li ng-class="setNavigationActive('welcome')" set-active><a ui-sref="welcome">Home</a></li>
           <li ng-class="setNavigationActive('login')" ng-hide="authData" set-active><a ui-sref="login">Log In</a></li>
