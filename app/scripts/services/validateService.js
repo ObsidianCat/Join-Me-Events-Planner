@@ -1,8 +1,9 @@
 /**
  * Created by lulaleus on 29/02/2016.
  */
-angular.module('joinMeApp')
-  .service('ValidateService', function() {
+angular.module('joinMeApp').service('ValidateService', [
+  'ValidateRules',
+  function(ValidateRules) {
     function IssueTracker() {
       this.issues = [];
     }
@@ -84,13 +85,13 @@ angular.module('joinMeApp')
             currentTracker.add("invalid email");
           }
           if($(input).hasClass("v-name")){
-            serviceInstance.collection.checkName(input, currentTracker);
+            ValidateRules.checkName(input, currentTracker);
           }
           if($(input).hasClass("v-password")){
-            serviceInstance.collection.checkPassword(input, currentTracker);
+            ValidateRules.checkPassword(input, currentTracker);
           }
           if($(input).hasClass("v-repeat-password")){
-            serviceInstance.collection.checkPasswordRepeat(input, document.querySelector(".v-password"), currentTracker);
+            ValidateRules.checkPasswordRepeat(input, document.querySelector(".v-password"), currentTracker);
           }
           input.setCustomValidity(currentTracker.retrieve());
 
@@ -108,42 +109,10 @@ angular.module('joinMeApp')
 
 
         }
-      },
-      collection:{
-        checkName:function(inputForCheck, tracker){
-          if (!inputForCheck.value || inputForCheck.value.length < 2) {
-            tracker.add("fewer than 2 character");
-          } else if (inputForCheck.value.length > 60) {
-            tracker.add("greater than 60 characters");
-          }
-          else{
-            serviceInstance.setAsValid(inputForCheck);
-          }
-        },
-        checkPassword:function(inputForCheck, tracker){
-          if (!inputForCheck.value ||inputForCheck.value.length < 8) {
-            tracker.add("fewer than 8 characters");
-          } else if (inputForCheck.value.length > 100) {
-            tracker.add("greater than 100 characters");
-          }
-          else{
-            serviceInstance.setAsValid(inputForCheck);
-          }
-        },
-        checkPasswordRepeat:function(inputForCheck, inputForCompare, tracker){
-          if (inputForCheck.value === inputForCompare.value && inputForCheck.value.length > 0) {
-            /*
-             They match, so make sure the rest of the requirements have been met.
-             */
-            serviceInstance.setAsValid(inputForCheck);
-          }
-          else {
-            tracker.add("Passwords must match!");
-          }
-        }//end of check password repeat
-      }//end of collection
+      }
 
     };
     // Our first service
     return serviceInstance;
-  });
+  }
+]);
