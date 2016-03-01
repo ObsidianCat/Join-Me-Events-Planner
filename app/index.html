@@ -27,19 +27,19 @@
     <![endif]-->
 
     <div class="container" ng-controller="WelcomeController as WelcomeCtrl">
-      <header class="row header">
-        <ul class="nav nav-pills pull-right" role="navigation" ng-cloak >
+      <header class="header">
+        <a ui-sref="welcome"><h3 class="text-muted">Join Me</h3></a>
+        <ul class="nav nav-pills col-md-pull-right" role="navigation" ng-cloak >
           <li ng-class="setNavigationActive('welcome')" set-active><a ui-sref="welcome">Home</a></li>
           <li ng-class="setNavigationActive('login')" ng-hide="authData" set-active><a ui-sref="login">Log In</a></li>
           <li ng-class="setNavigationActive('signup')" ng-hide="authData" set-active><a ui-sref="signup">Sign Up</a></li>
           <li ng-class="setNavigationActive('event')" ng-show="authData" set-active><a ui-sref="event">Create Event</a></li>
           <li ng-show="authData"><a href="#" ng-click="authObj.$unauth()">Log Out</a></li>
         </ul>
-        <h3 class="text-muted">Join Me</h3>
       </header>
 
-      <div ui-view id="main-content-wrapper" class="row"></div>
-      <footer class="row footer">
+      <div ui-view id="main-content-wrapper"></div>
+      <footer class="footer">
         <p>@ 2016, Lula Leus</p>
       </footer>
     </div>
@@ -78,8 +78,16 @@
     <!-- build:js scripts/main.js -->
     <script src="scripts/main.js"></script>
     <script src="scripts/app.js"></script>
-    <script src="scripts/controllers.js"></script>
-    <script src="scripts/services.js"></script>
+    <script src="scripts/controllers/welcomeCtrl.js"></script>
+    <script src="scripts/controllers/authCtrl.js"></script>
+    <script src="scripts/controllers/eventCtrl.js"></script>
+
+    <script src="scripts/services/authFactory.js"></script>
+    <script src="scripts/services/eventsFactory.js"></script>
+    <script src="scripts/services/usersFactory.js"></script>
+    <script src="scripts/services/validateRulesService.js"></script>
+    <script src="scripts/services/validateService.js"></script>
+
 
 
     <!-- endbuild -->

@@ -1,8 +1,9 @@
 /**
- * Created by Lula on 1/25/2016.
+ * Created by lulaleus on 29/02/2016.
  */
-angular.module('joinMeApp')
-  .service('ValidateService', function() {
+angular.module('joinMeApp').service('ValidateService', [
+  'ValidateRules',
+  function(ValidateRules) {
     function IssueTracker() {
       this.issues = [];
     }
@@ -68,16 +69,13 @@ angular.module('joinMeApp')
             serviceInstance.inputActions.checkInput(e.target);
           });
         },
-        /**
-         * trigger validation of all inputs with specific class
-         * that currently on the pagein form
-         */
         validationOnSubmit:function(){
           serviceInstance.trackers = {};
           $('.custom-validation').blur();
         },
         checkInput:function checkInput(input){
           input.checkValidity();
+          //debugger;
           serviceInstance.createTracker(input.id);
           var currentTracker = serviceInstance.trackers[input.id];
           if(input.validity.valueMissing){
@@ -87,80 +85,34 @@ angular.module('joinMeApp')
             currentTracker.add("invalid email");
           }
           if($(input).hasClass("v-name")){
-            serviceInstance.collection.checkName(input, currentTracker);
+            ValidateRules.checkName(input, currentTracker);
           }
           if($(input).hasClass("v-password")){
-            serviceInstance.collection.checkPassword(input, currentTracker);
+            ValidateRules.checkPassword(input, currentTracker);
           }
           if($(input).hasClass("v-repeat-password")){
-            serviceInstance.collection.checkPasswordRepeat(input, document.querySelector(".v-password"), currentTracker);
+            ValidateRules.checkPasswordRepeat(input, document.querySelector(".v-password"), currentTracker);
           }
           input.setCustomValidity(currentTracker.retrieve());
 
           if (currentTracker.retrieve()) {
-            //input is invalid
+            //there are problem
             serviceInstance.inputActions.setInputError(input, currentTracker);
             serviceInstance.isAllDataValid = false;
 
           }
           else{
-            //input is valid
+            //input valid
             delete serviceInstance.trackers[input.id];
 
           }
 
 
         }
-      },
-      collection:{
-        //set of fucntion for validation of different data types
-        checkName:function(inputForCheck, tracker){
-          if (!inputForCheck.value || inputForCheck.value.length < 2) {
-            tracker.add("fewer than 2 character");
-          } else if (inputForCheck.value.length > 60) {
-            tracker.add("greater than 60 characters");
-          }
-          else{
-            serviceInstance.setAsValid(inputForCheck);
-          }
-        },
-        checkPassword:function(inputForCheck, tracker){
-          if (!inputForCheck.value ||inputForCheck.value.length < 8) {
-            tracker.add("fewer than 8 characters");
-          } else if (inputForCheck.value.length > 100) {
-            tracker.add("greater than 100 characters");
-          }
-          else{
-            serviceInstance.setAsValid(inputForCheck);
-          }
-        },
-        checkPasswordRepeat:function(inputForCheck, valueForCompare, tracker){
-          if (inputForCheck.value === valueForCompare && inputForCheck.value.length > 0) {
-            /*
-             They match, so make sure the rest of the requirements have been met.
-             */
-            serviceInstance.setAsValid(inputForCheck);
-          }
-          else {
-            tracker.add("Passwords must match!");
-          }
-        }
       }
-    };
-    return serviceInstance;
-  })
-  .factory('Auth', ['$firebaseAuth', 'FirebaseUrl', function($firebaseAuth, FirebaseUrl){
-    var ref = new Firebase(FirebaseUrl);
-    var auth = $firebaseAuth(ref);
 
-    return auth;
-  }])
-  .factory('Users', function($firebaseArray, $firebaseObject, FirebaseUrl){
-    var Users = {};
-    return Users;
-  })
-  .factory("eventsService", ['$firebaseArray', 'FirebaseUrl', function($firebaseArray, FirebaseUrl) {
-      // create a reference to the database where we store our data
-      var ref = new Firebase(FirebaseUrl);
-      return $firebaseArray(ref);
-  }]);
+    };
+    // Our first service
+    return serviceInstance;
+  }
+]);

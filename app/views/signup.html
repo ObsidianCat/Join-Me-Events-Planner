@@ -2,11 +2,11 @@
   <span>{{authCtrl.error.message}}</span>
 </div>
 
-<form class="signup-form form-horizontal" id="user_new"  >
+<form class="signup-form" id="user_new"  >
   <div class="form-group">
     <label class="control-label" for="user_name">*Full Name
     </label>
-    <input aria-label="required input full name" required ng-model="user.name" id="user_name" class="custom-validation v-name form-control" type="text" name="name" placeholder="Tony Smith" autocomplete="name">
+    <input autofocus aria-label="required input full name" required ng-model="user.name" id="user_name" class="custom-validation v-name form-control" type="text" name="name" placeholder="Tony Smith" autocomplete="name">
     <span class='help-block'></span>
   </div>
   <div class="form-group">
