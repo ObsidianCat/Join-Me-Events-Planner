@@ -23,20 +23,12 @@
 
   <fieldset id="event-time-and-date">
     <div class="form-group">
-      <label for="event_start_date">*Event start date</label>
-      <input  id="event_start_date" aria-label="required input Event start date" ng-model="eventData.dateStart" class="validation-date form-control" type="date" name="event_start_date" placeholder="" required>
+      <label for="event_start_date_time">*Event starts</label>
+      <input type="datetime-local" id="event_start_date_time" aria-label="required input Event start date and time" ng-model="eventData.event_start_date_time" class="form-control" name="event_start_date_time" placeholder="" required>
     </div>
     <div class="form-group">
-      <label for="event_start_time">*Event start time</label>
-      <input  id="event_start_time" aria-label="required input Event start time" ng-model="eventData.timeStart" class="validation-time form-control" type="time" name="event_start_time" placeholder="" required>
-    </div>
-    <div class="form-group">
-      <label for="event_end_date">Event end date</label>
-      <input  id="event_end_date" aria-label="optional input Event end date" ng-model="eventData.dateEnd" class="validation-date form-control" type="date" name="event_end_date" placeholder="" required>
-    </div>
-    <div class="form-group">
-      <label for="event_end_time">Event end time</label>
-      <input  id="event_end_time" aria-label="optional input Event end time" time-format ng-model="eventData.timeEnd" class="validation-time form-control" type="time" name="event_end_time" placeholder="" required>
+      <label for="event_end_date_time">*Event ends</label>
+      <input type="datetime-local" id="event_end_date_time" aria-label="required input Event end date and time" ng-model="eventData.event_end_date_time" class="form-control" name="event_end_date_time" placeholder="" required>
     </div>
   </fieldset>
 

@@ -20,10 +20,8 @@ angular.module('joinMeApp').controller('EventController', [
       type:"",
       host:"",
       message:"",
-      dateStart:currentDate,
-      dateEnd:currentDate,
-      timeStart:new Date(currentDate.getFullYear(),currentDate.getMonth(), currentDate.getDay(), currentDate.getHours(), currentDate.getMinutes(), 0),
-      timeEnd:new Date(currentDate.getFullYear(),currentDate.getMonth(), currentDate.getDay(), currentDate.getHours()+2, currentDate.getMinutes(), 0),
+      event_start_date_time:new Date(currentDate.getFullYear(),currentDate.getMonth(), currentDate.getDay(), currentDate.getHours(), currentDate.getMinutes(), 0),
+      event_end_date_time:new Date(currentDate.getFullYear(),currentDate.getMonth(), currentDate.getDay(), currentDate.getHours()+2, currentDate.getMinutes(), 0),
       address:{},
       guests:""
     };
@@ -63,15 +61,13 @@ angular.module('joinMeApp').controller('EventController', [
     }
 
     function convertDateAndTimeToStrings(dataForSave){
-      dataForSave.dateStartString =  dataForSave.dateStart.toDateString();
-      dataForSave.dateEndString =  dataForSave.dateEnd.toDateString();
-      dataForSave.timeStartString =  dataForSave.timeStart.toLocaleTimeString();
-      dataForSave.timeEndString =  dataForSave.timeEnd.toLocaleTimeString();
+      dataForSave.dateStartString =  dataForSave.event_start_date_time.toDateString();
+      dataForSave.timeStartString =  dataForSave.event_start_date_time.toLocaleTimeString();
+      dataForSave.dateEndString =  dataForSave.event_end_date_time.toDateString();
+      dataForSave.timeEndString =  dataForSave.event_end_date_time.toLocaleTimeString();
 
-      delete dataForSave.dateStart;
-      delete dataForSave.dateEnd;
-      delete dataForSave.timeStart;
-      delete dataForSave.timeEnd;
+      delete dataForSave.event_start_date_time;
+      delete dataForSave.event_end_date_time;
 
       return dataForSave
     }
