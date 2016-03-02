@@ -24,11 +24,11 @@
   <fieldset id="event-time-and-date">
     <div class="form-group">
       <label for="event_start_date_time">*Event starts</label>
-      <input type="datetime-local" id="event_start_date_time" aria-label="required input Event start date and time" ng-model="eventData.event_start_date_time" class="form-control" name="event_start_date_time" placeholder="" required>
+      <input type="datetime-local" id="event_start_date_time" min="{{minDate}}" aria-label="required input Event start date and time" ng-model="eventData.event_start_date_time" class="form-control" name="event_start_date_time" placeholder="" required>
     </div>
     <div class="form-group">
       <label for="event_end_date_time">*Event ends</label>
-      <input type="datetime-local" id="event_end_date_time" aria-label="required input Event end date and time" ng-model="eventData.event_end_date_time" class="form-control" name="event_end_date_time" placeholder="" required>
+      <input type="datetime-local" id="event_end_date_time" min="{{minDate}}" aria-label="required input Event end date and time" ng-model="eventData.event_end_date_time" class="form-control" name="event_end_date_time" placeholder="" required>
     </div>
   </fieldset>
 

@@ -11,6 +11,7 @@ angular.module('joinMeApp').controller('EventController', [
   function($state, $scope, $firebaseArray, eventsService, Auth, ValidateService) {
     var authObj = Auth;
     var currentDate = new Date();
+    $scope.minDate = new Date(currentDate.getFullYear(),currentDate.getMonth(), currentDate.getDay(), currentDate.getHours(), currentDate.getMinutes(), 0),
     ValidateService.checkTotalDataValidity($scope);
     $scope.formValitidyStatus = ValidateService.isAllDataValid;
 
