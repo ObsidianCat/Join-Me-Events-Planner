@@ -73,7 +73,7 @@
   <fieldset id="event-additional-info">
   <div class="form-group">
     <label>Guest list</label>
-    <textarea id="event-emails=list" aria-label="optional input guests list"  ng-model="eventData.guests" class="custom-validation v-name  form-control" rows="2" placeholder="example@example.com, example2@example.com, example3@example.com" required></textarea>
+    <textarea id="event-emails=list" aria-label="optional input guests list"  pattern="[@]" ng-model="eventData.guests" class="custom-validation v-guests-list form-control" rows="2" placeholder="example@example.com example2@example.com example3@example.com" required></textarea>
   </div>
   <div class="form-group">
     <label for="event_message">Additional information</label>
