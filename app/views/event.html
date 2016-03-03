@@ -35,36 +35,37 @@
 
   <fieldset id="event-location">
     <div class="form-group" id="location-auto-complete">
-      <label for="autocomplete" class="label">Address search</label>
-      <input id="autocomplete" aria-label="required input, start type your address"  class="custom-validation v-name  form-control" placeholder="Enter your address" onFocus="geolocate()" type="text" required>
+      <label for="autocomplete">Address search</label>
+      <input id="autocomplete" aria-label="required input, start type your address"  class="custom-validation v-name  form-control" placeholder="Enter your address" onFocus="geolocate()" type="text">
     </div>
-    <div class="form-group" id="address">
-        <label class="label">Street address</label>
-        <div class="slimField">
-          <input class="form-control field" id="street_number" ng-model="eventData.address.streetPartOne" disabled="true">
+    <div id="address">
+        <div class="form-group">
+          <label for="street_number">*Street address: line 1</label>
+          <input aria-label="required input address street line one" class="custom-validation form-control field" id="street_number" ng-model="eventData.address.streetPartOne" disabled="true" required>
+          <!--<input aria-label="required input address street line two"  class="form-control field" id="route" disabled="true" required>-->
         </div>
-        <div class="wideField">
-          <input class="form-control field" id="route" disabled="true">
-        </div>
-
-        <label class="label">City</label>
-        <div class="wideField" colspan="3">
-          <input class="form-control field" id="locality" ng-model="eventData.address.city"  disabled="true">
-        </div>
-
-        <label class="label">State</label>
-        <div class="slimField">
-          <input class="form-control field" ng-model="eventData.address.administrativeArea" id="administrative_area_level_1" disabled="true">
+      <div class="form-group">
+        <label for="street_number">*Street address: line 2</label>
+        <input aria-label="required input address street line two"  class="custom-validation form-control field" id="route" disabled="true" required>
+      </div>
+        <div class="form-group">
+          <label for="locality">*City</label>
+          <input class="custom-validation form-control field" aria-label="required input address city" id="locality" ng-model="eventData.address.city"  disabled="true" required>
         </div>
 
-        <label class="label">Zip code</label>
-        <div class="wideField">
-          <input class="form-control field" id="postal_code" ng-model="eventData.address.postalCode" disabled="true">
+        <div class="form-group">
+          <label for="administrative_area_level_1">State</label>
+          <input class="form-control field" aria-label="optional input address state"  ng-model="eventData.address.administrativeArea" id="administrative_area_level_1" disabled="true">
         </div>
 
-        <label class="label">Country</label>
-        <div class="wideField" >
-          <input class="form-control field" id="country" ng-model="eventData.address.country" disabled="true">
+        <div class="form-group">
+          <label for="postal_code">Zip code</label>
+          <input class="form-control field" aria-label="optional input address zip code"  id="postal_code" ng-model="eventData.address.postalCode" disabled="true">
+        </div>
+
+        <div class="form-group">
+          <label for="country">*Country</label>
+          <input class="custom-validation form-control field" id="country" aria-label="required input address country"  ng-model="eventData.address.country" disabled="true" required>
         </div>
     </div>
   </fieldset>

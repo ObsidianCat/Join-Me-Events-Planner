@@ -29,7 +29,7 @@ angular.module('joinMeApp').controller('EventController', [
 
     window.eventData = $scope.eventData;
 
-    ValidateService.inputActions.setInputEventListeners($scope.eventData);
+    ValidateService.inputActions.setInputEventListeners();
 
 
     $scope.submitMeetUpEventForm = function(){
