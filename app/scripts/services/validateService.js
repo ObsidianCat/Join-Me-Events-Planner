@@ -82,13 +82,11 @@ angular.module('joinMeApp').service('ValidateService', [
           if(input.validity.valueMissing){
             currentTracker.add("Field cannot be empty");
           }
-
-
           if($(input).hasClass("v-email") && input.validity.patternMismatch){
             currentTracker.add("invalid email");
           }
-          else if($(input).hasClass("v-guests-list") && input.validity.patternMismatch){
-            currentTracker.add("Please follow format example@example.com example2@example.com");
+          else if($(input).hasClass("v-guests-list")){
+            ValidateRules.checkEmailsList(input, currentTracker, serviceInstance.setAsValid);
           }
           else if($(input).hasClass("v-name")){
             ValidateRules.checkName(input, currentTracker, serviceInstance.setAsValid);

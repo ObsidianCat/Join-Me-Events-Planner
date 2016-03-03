@@ -33,6 +33,16 @@ angular.module('joinMeApp')
             setAsValid(inputForCheck);
           }
         },
+        checkEmailsList:function(inputForCheck, tracker, setAsValid){
+          var emailListPattern = new RegExp(".+\@.+\..+");
+          var isInRightFormat = emailListPattern.test(inputForCheck.value);
+          if(isInRightFormat){
+            setAsValid(inputForCheck);
+          }
+          else{
+            tracker.add("Please follow format example@example.com example2@example.com");
+          }
+        },
         checkDateEnd:function(inputForCheck, tracker, setAsValid){
           if($(inputForCheck).hasClass('ng-invalid-min')){
             tracker.add("Event end date/time should be later than event start date/time");
