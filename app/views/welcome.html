@@ -9,17 +9,19 @@
     <ul class="events list-group">
       <li class="list-group-item" ng-repeat="meetUpEvent in meetUpEvents | orderBy:orderBy">
         <div ng-click="collapsed=!collapsed" class="header">
-            <span><strong>{{ meetUpEvent.name }}</strong></span><span> host: {{ meetUpEvent.host}}</span>
+            <h4><strong>{{ meetUpEvent.name }}</strong></h4><p> host: {{ meetUpEvent.host}}</p>
           <!-- delete a message using $remove -->
           <span class="small" ng-if="checkUid(meetUpEvent.uidOfuser)">(your event)</span>
-          <a href="" ng-click="meetUpEvents.$remove(meetUpEvent)"  ng-if="checkUid(meetUpEvent.uidOfuser)" class="remove">X</a>
-          <i ng-class="collapsed?'open':'closed';" class="glyphicon glyphicon-menu-down"></i>
+          <div class="actions">
+            <a href="" ng-click="meetUpEvents.$remove(meetUpEvent)"  ng-if="checkUid(meetUpEvent.uidOfuser)" class="remove">X</a>
+            <i ng-class="collapsed?'open':'closed';" class="glyphicon glyphicon-menu-down"></i>
+          </div>
         </div>
           <div  ng-show="collapsed" class="event-details">
-            <p>Start: {{meetUpEvent.timeStartString}},  {{meetUpEvent.dateStartString}}</p>
-            <p>End: {{meetUpEvent.timeEndString}},  {{meetUpEvent.dateEndString}}</p>
-            <p>Event notes: {{meetUpEvent.message}}</p>
-            <h5>Address:</h5>
+            <p><strong>Start:</strong> {{meetUpEvent.timeStartString}},  {{meetUpEvent.dateStartString}}</p>
+            <p><strong>End:</strong> {{meetUpEvent.timeEndString}},  {{meetUpEvent.dateEndString}}</p>
+            <p><strong>Event notes:</strong> {{meetUpEvent.message}}</p>
+            <h5><strong>Address:</strong></h5>
             <p ng-repeat="text in meetUpEvent.address">{{text}}</p>
             <!--<p>{{meetUpEvent.message.address.streetPartTwo}}</p>-->
             <!--<p>{{meetUpEvent.message.address.city}}</p>-->

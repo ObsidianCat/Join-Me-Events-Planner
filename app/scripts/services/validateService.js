@@ -34,6 +34,7 @@ angular.module('joinMeApp').service('ValidateService', [
     var serviceInstance = {
       createTracker:function(trackerName){
         this.trackers[trackerName] = new IssueTracker();
+        return this.trackers[trackerName];
       },
       trackers:{},
       isAllDataValid:true,
@@ -64,8 +65,6 @@ angular.module('joinMeApp').service('ValidateService', [
 
           $('.custom-validation').on("blur", function(e) {
             $(e.target).next("span").remove();
-
-            //e.target.checkValidity();
             serviceInstance.inputActions.checkInput(e.target);
           });
         },
@@ -76,51 +75,49 @@ angular.module('joinMeApp').service('ValidateService', [
         checkInput:function checkInput(input){
           input.checkValidity();
 
-          serviceInstance.createTracker(input.id);
-          var currentTracker = serviceInstance.trackers[input.id];
+          var currentTracker = serviceInstance.createTracker(input.id);
 
           if(input.validity.valueMissing){
             currentTracker.add("Field cannot be empty");
           }
-          if($(input).hasClass("v-email") && input.validity.patternMismatch){
-            currentTracker.add("invalid email");
-          }
-          else if($(input).hasClass("v-guests-list")){
-            ValidateRules.checkEmailsList(input, currentTracker, serviceInstance.setAsValid);
-          }
-          else if($(input).hasClass("v-name")){
-            ValidateRules.checkName(input, currentTracker, serviceInstance.setAsValid);
-          }
-          else if($(input).hasClass("v-password")){
-            ValidateRules.checkPassword(input, currentTracker, serviceInstance.setAsValid);
-          }
-          else if($(input).hasClass("v-repeat-password")){
-            ValidateRules.checkPasswordRepeat(input, document.querySelector(".v-password"), currentTracker, serviceInstance.setAsValid);
-          }
-          else if($(input).hasClass("v-date-start")){
-            ValidateRules.checkDateStart(input,currentTracker, serviceInstance.setAsValid);
-          }
-          else if($(input).hasClass("v-date-end")){
-            ValidateRules.checkDateEnd(input,currentTracker, serviceInstance.setAsValid);
+          else{
+            if($(input).hasClass("v-email") && input.validity.patternMismatch){
+              currentTracker.add("invalid email");
+            }
+            else if($(input).hasClass("v-guests-list")){
+              ValidateRules.checkEmailsList(input, currentTracker, serviceInstance.setAsValid);
+            }
+            else if($(input).hasClass("v-name")){
+              ValidateRules.checkName(input, currentTracker, serviceInstance.setAsValid);
+            }
+            else if($(input).hasClass("v-password")){
+              ValidateRules.checkPassword(input, currentTracker, serviceInstance.setAsValid);
+            }
+            else if($(input).hasClass("v-repeat-password")){
+              ValidateRules.checkPasswordRepeat(input, document.querySelector(".v-password"), currentTracker, serviceInstance.setAsValid);
+            }
+            else if($(input).hasClass("v-date-start")){
+              ValidateRules.checkDateStart(input,currentTracker, serviceInstance.setAsValid);
+            }
+            else if($(input).hasClass("v-date-end")){
+              ValidateRules.checkDateEnd(input,currentTracker, serviceInstance.setAsValid);
+            }
           }
 
+          //if everything valid I need it anyway for passing ""
           input.setCustomValidity(currentTracker.retrieve());
-
           if (currentTracker.retrieve()) {
             //there are problem
             serviceInstance.inputActions.setInputError(input, currentTracker);
             serviceInstance.isAllDataValid = false;
-
           }
           else{
             //input valid
             delete serviceInstance.trackers[input.id];
-
           }
 
-
         }
-      }
+      }//end input actions
 
     };
     // Our first service

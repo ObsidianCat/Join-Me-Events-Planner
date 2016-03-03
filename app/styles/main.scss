@@ -12,7 +12,7 @@ $icon-font-path: '../fonts/';
 
 
 h1{
-  color: hotpink !important;
+  color: $brand-primary !important;
 }
 
 header{
@@ -54,15 +54,37 @@ form#create-event fieldset{
 }
 
 .list-group.events{
-  .remove{
-    position: absolute;
-    right: 5rem;
+
+
+  //.remove{
+  //  position: absolute;
+  //  right: 5rem;
+  //}
+  .actions{
+    display: flex;
+    flex-direction: row;
+    margin-left: auto !important;
+    a{
+      margin: 0 $event-margin-small 0 $event-margin-small;
+      cursor: pointer;
+    }
+    span{
+      cursor: pointer;
+    }
   }
   .header{
     cursor: pointer;
     display: flex;
     flex-direction: row;
+    align-items: baseline;
 
+    > * {
+      margin: $event-margin-small;
+    }
+
+    h4{
+      color:$brand-primary;
+    }
     span{
       margin-right: 1rem;
     }
@@ -74,6 +96,9 @@ form#create-event fieldset{
         transform: rotate(180deg);
       }
     }
+  }
+  .event-details{
+    margin: $event-margin-small;
   }
 }
 

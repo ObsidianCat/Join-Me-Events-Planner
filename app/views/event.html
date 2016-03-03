@@ -41,31 +41,31 @@
     <div id="address">
         <div class="form-group">
           <label for="street_number">*Street address: line 1</label>
-          <input aria-label="required input address street line one" class="custom-validation form-control field" id="street_number" ng-model="eventData.address.streetPartOne" disabled="true" required>
+          <input aria-label="required input address street line one" class="custom-validation form-control field" id="street_number" disabled="true" required>
           <!--<input aria-label="required input address street line two"  class="form-control field" id="route" disabled="true" required>-->
         </div>
       <div class="form-group">
         <label for="street_number">*Street address: line 2</label>
-        <input aria-label="required input address street line two"  class="custom-validation form-control field" id="route" disabled="true" required>
+        <input aria-label="optional input address street line two"  class="custom-validation form-control field" id="route" disabled="true">
       </div>
         <div class="form-group">
           <label for="locality">*City</label>
-          <input class="custom-validation form-control field" aria-label="required input address city" id="locality" ng-model="eventData.address.city"  disabled="true" required>
+          <input class="custom-validation form-control field" aria-label="required input address city" id="locality" disabled="true" required>
         </div>
 
         <div class="form-group">
           <label for="administrative_area_level_1">State</label>
-          <input class="form-control field" aria-label="optional input address state"  ng-model="eventData.address.administrativeArea" id="administrative_area_level_1" disabled="true">
+          <input class="form-control field" aria-label="optional input address state"  id="administrative_area_level_1" disabled="true">
         </div>
 
         <div class="form-group">
           <label for="postal_code">Zip code</label>
-          <input class="form-control field" aria-label="optional input address zip code"  id="postal_code" ng-model="eventData.address.postalCode" disabled="true">
+          <input class="form-control field" aria-label="optional input address zip code"  id="postal_code" disabled="true">
         </div>
 
         <div class="form-group">
           <label for="country">*Country</label>
-          <input class="custom-validation form-control field" id="country" aria-label="required input address country"  ng-model="eventData.address.country" disabled="true" required>
+          <input class="custom-validation form-control field" id="country" aria-label="required input address country"  disabled="true" required>
         </div>
     </div>
   </fieldset>
