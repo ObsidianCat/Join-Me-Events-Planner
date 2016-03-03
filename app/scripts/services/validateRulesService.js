@@ -25,6 +25,16 @@ angular.module('joinMeApp')
             serviceInstance.setAsValid(inputForCheck);
           }
         },
+        checkDateStart:function(inputForCheck, tracker){
+          if($(inputForCheck).hasClass('ng-invalid-min')){
+            tracker.add("Event must be set in the future");
+          }
+        },
+        checkDateEnd:function(inputForCheck, tracker){
+          if($(inputForCheck).hasClass('ng-invalid-min')){
+            tracker.add("Event end date/time should be later than event start date/time");
+          }
+        },
         checkPasswordRepeat:function(inputForCheck, inputForCompare, tracker){
           if (inputForCheck.value === inputForCompare.value && inputForCheck.value.length > 0) {
             /*

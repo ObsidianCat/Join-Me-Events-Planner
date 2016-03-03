@@ -54,7 +54,7 @@ angular.module('joinMeApp').service('ValidateService', [
         setInputClear: function setInputClear(input){
           $(input).parent().removeClass("has-error");
         },
-        setInputEventListeners:function(){
+        setInputEventListeners:function(scopeEventData){
           $('.custom-validation').on("focus", function(e) {
             serviceInstance.isAllDataValid = true;
             serviceInstance.scope.formValitidyStatus = true;
@@ -66,14 +66,15 @@ angular.module('joinMeApp').service('ValidateService', [
             $(e.target).next("span").remove();
 
             //e.target.checkValidity();
-            serviceInstance.inputActions.checkInput(e.target);
+            serviceInstance.inputActions.checkInput(e.target, scopeEventData);
           });
         },
         validationOnSubmit:function(){
           serviceInstance.trackers = {};
           $('.custom-validation').blur();
         },
-        checkInput:function checkInput(input){
+        checkInput:function checkInput(input, scopeEventData){
+          //console.log(scopeEventData);
           input.checkValidity();
           //debugger;
           serviceInstance.createTracker(input.id);
@@ -84,15 +85,22 @@ angular.module('joinMeApp').service('ValidateService', [
           if($(input).hasClass("v-email") && input.validity.typeMismatch){
             currentTracker.add("invalid email");
           }
-          if($(input).hasClass("v-name")){
+          else if($(input).hasClass("v-name")){
             ValidateRules.checkName(input, currentTracker);
           }
-          if($(input).hasClass("v-password")){
+          else if($(input).hasClass("v-password")){
             ValidateRules.checkPassword(input, currentTracker);
           }
-          if($(input).hasClass("v-repeat-password")){
+          else if($(input).hasClass("v-repeat-password")){
             ValidateRules.checkPasswordRepeat(input, document.querySelector(".v-password"), currentTracker);
           }
+          else if($(input).hasClass("v-date-start")){
+            ValidateRules.checkDateStart(input,currentTracker);
+          }
+          else if($(input).hasClass("v-date-end")){
+            ValidateRules.checkDateEnd(input,currentTracker);
+          }
+
           input.setCustomValidity(currentTracker.retrieve());
 
           if (currentTracker.retrieve()) {

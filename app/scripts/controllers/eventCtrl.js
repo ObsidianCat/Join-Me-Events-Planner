@@ -29,10 +29,10 @@ angular.module('joinMeApp').controller('EventController', [
 
     window.eventData = $scope.eventData;
 
-    ValidateService.inputActions.setInputEventListeners();
+    ValidateService.inputActions.setInputEventListeners($scope.eventData);
 
 
-    $scope.submitMeetUpEventForm= function(eventData){
+    $scope.submitMeetUpEventForm = function(){
       ValidateService.inputActions.validationOnSubmit();
 
       if(jQuery.isEmptyObject(ValidateService.trackers)){
