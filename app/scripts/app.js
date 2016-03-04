@@ -1,7 +1,7 @@
 /**
  * Created by Lula on 1/18/2016.
  */
-angular.module('joinMeApp', ['ui.router', 'firebase', 'ui.bootstrap', 'ui.bootstrap.datetimepicker'])
+angular.module('joinMeApp', ['ui.router', 'firebase', ])
   .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('welcome', {
@@ -17,10 +17,10 @@ angular.module('joinMeApp', ['ui.router', 'firebase', 'ui.bootstrap', 'ui.bootst
           resolve:{
             requireNoAuth:['$state', 'Auth', function($state, Auth){
               return Auth.$requireAuth().then(function(auth){
-                console.log('logged');
+                //console.log('logged');
                 $state.go('welcome')
               }, function(error){
-                console.log(error);
+                //console.log(error);
                 return;
               })
             }]

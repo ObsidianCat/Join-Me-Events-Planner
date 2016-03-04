@@ -9,6 +9,9 @@ angular.module('joinMeApp').controller('EventController', [
   'Auth',
   'ValidateService',
   function($state, $scope, $firebaseArray, eventsService, Auth, ValidateService) {
+
+    $('form input').first().focus();
+
     var authObj = Auth;
     var currentDate = new Date();
 
@@ -42,8 +45,8 @@ angular.module('joinMeApp').controller('EventController', [
       type:"",
       host:"",
       message:"",
-      event_start_date_time:$scope.startDateTime,
-      event_end_date_time:$scope.endDateTime,
+      start_date_time:$scope.startDateTime,
+      end_date_time:$scope.endDateTime,
       address:{},
       guests:""
     };
@@ -82,14 +85,20 @@ angular.module('joinMeApp').controller('EventController', [
       });
     }
 
+    /**
+     * create date and tome strings
+     * in object-copy from object with data from form
+     * @param dataForSave{obj}
+     * @returns {*}
+     */
     function convertDateAndTimeToStrings(dataForSave){
-      dataForSave.dateStartString =  dataForSave.event_start_date_time.toDateString();
-      dataForSave.timeStartString =  dataForSave.event_start_date_time.toLocaleTimeString();
-      dataForSave.dateEndString =  dataForSave.event_end_date_time.toDateString();
-      dataForSave.timeEndString =  dataForSave.event_end_date_time.toLocaleTimeString();
+      dataForSave.dateStartString =  dataForSave.start_date_time.toDateString();
+      dataForSave.timeStartString =  dataForSave.start_date_time.toLocaleTimeString();
+      dataForSave.dateEndString =  dataForSave.end_date_time.toDateString();
+      dataForSave.timeEndString =  dataForSave.end_date_time.toLocaleTimeString();
 
-      delete dataForSave.event_start_date_time;
-      delete dataForSave.event_end_date_time;
+      delete dataForSave.start_date_time;
+      delete dataForSave.end_date_time;
 
       return dataForSave
     }

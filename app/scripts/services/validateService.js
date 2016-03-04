@@ -54,18 +54,15 @@ angular.module('joinMeApp').service('ValidateService', [
           $(container).append(errorMessage);
         },
         setInputClear: function setInputClear(input){
-          $(input).closest(".form-group").removeClass("has-error");
+          var formGroup = $(input).closest(".form-group");
+          formGroup.removeClass("has-error");
+          formGroup.find("span.help-block").remove();
         },
         setInputEventListeners:function(){
           $('.custom-validation').on("focus", function(e) {
             serviceInstance.isAllDataValid = true;
             serviceInstance.scope.formValitidyStatus = true;
             serviceInstance.inputActions.setInputClear(e.target);
-
-            var container = $(e.target).closest(".form-group");
-            $(container).remove("span.help-block");
-
-
             //$(e.target).closest("span.help-block").remove();
           });
 
