@@ -15,6 +15,8 @@ angular.module('joinMeApp').controller('EventController', [
     $scope.startDateTime =  new Date();
     $scope.endDateTime =  new Date();
 
+    window.startTime = $scope.startDateTime;
+
     $scope.isCalendarOpen = {
       start:false,
       end:false

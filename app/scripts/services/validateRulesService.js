@@ -26,7 +26,9 @@ angular.module('joinMeApp')
           }
         },
         checkDateStart:function(inputForCheck, tracker, setAsValid){
-          if($(inputForCheck).hasClass('ng-invalid-min')){
+          var currentDate = new Date();
+          var chosenDateTime = Date.parse(inputForCheck.value);
+          if(chosenDateTime<currentDate){
             tracker.add("Event must be set in the future");
           }
           else{
@@ -44,7 +46,10 @@ angular.module('joinMeApp')
           }
         },
         checkDateEnd:function(inputForCheck, tracker, setAsValid){
-          if($(inputForCheck).hasClass('ng-invalid-min')){
+          var startDateTime = Date.parse(document.getElementById("event_start_date_time").value);
+          var chosenDateTime = Date.parse(inputForCheck.value);
+
+          if(chosenDateTime<startDateTime){
             tracker.add("Event end date/time should be later than event start date/time");
           }
           else{

@@ -48,19 +48,25 @@ angular.module('joinMeApp').service('ValidateService', [
       },
       inputActions:{
         setInputError: function setInputError(input, currentTracker){
-          $(input).parent().addClass("has-error");
+          var container = $(input).closest(".form-group");
           var errorMessage = $("<span class='help-block'></span>").text(currentTracker.retrieve());
-          $(input).after(errorMessage);
+          container.addClass("has-error");
+          $(container).append(errorMessage);
         },
         setInputClear: function setInputClear(input){
-          $(input).parent().removeClass("has-error");
+          $(input).closest(".form-group").removeClass("has-error");
         },
         setInputEventListeners:function(){
           $('.custom-validation').on("focus", function(e) {
             serviceInstance.isAllDataValid = true;
             serviceInstance.scope.formValitidyStatus = true;
             serviceInstance.inputActions.setInputClear(e.target);
-            $(e.target).next("span").remove();
+
+            var container = $(e.target).closest(".form-group");
+            $(container).remove("span.help-block");
+
+
+            //$(e.target).closest("span.help-block").remove();
           });
 
           $('.custom-validation').on("blur", function(e) {
