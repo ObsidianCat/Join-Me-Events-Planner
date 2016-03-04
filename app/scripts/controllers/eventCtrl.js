@@ -30,6 +30,8 @@ angular.module('joinMeApp').controller('EventController', [
     $scope.openCalendar = function(e, prop, type) {
       e.preventDefault();
       e.stopPropagation();
+      $scope.isCalendarOpen.start = false;
+      $scope.isCalendarOpen.end = false;
       $scope.isCalendarOpen[type] = true;
 
     };
