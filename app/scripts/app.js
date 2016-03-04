@@ -1,7 +1,7 @@
 /**
  * Created by Lula on 1/18/2016.
  */
-angular.module('joinMeApp', ['ui.router', 'firebase'])
+angular.module('joinMeApp', ['ui.router', 'firebase', 'ui.bootstrap', 'ui.bootstrap.datetimepicker'])
   .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('welcome', {

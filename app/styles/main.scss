@@ -110,6 +110,20 @@ form#create-event fieldset{
   display: inherit;
 }
 
+.form-group.date-time{
+  > div{
+    display: flex;
+    justify-content: space-between;
+  }
+  input{
+    width: 80%;
+    display: inline-block;
+  }
+  label{
+    display: block;
+  }
+}
+
 
 
 /*START adjastments according to screen sizes*/
@@ -119,6 +133,13 @@ form#create-event fieldset{
     flex-direction: row;
     ul{
       margin-left: auto !important;
+    }
+  }
+
+  .form-group.date-time {
+    input {
+      width: 95%;
+      display: inline-block;
     }
   }
 }
@@ -133,6 +154,10 @@ form#create-event fieldset{
     display: inline-block;
     vertical-align: top;
   }
+
+
+
+
 }
 
 /* Large devices (large desktops, 1200px and up) */

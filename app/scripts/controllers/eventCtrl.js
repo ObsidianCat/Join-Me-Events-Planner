@@ -11,7 +11,26 @@ angular.module('joinMeApp').controller('EventController', [
   function($state, $scope, $firebaseArray, eventsService, Auth, ValidateService) {
     var authObj = Auth;
     var currentDate = new Date();
-    $scope.minDate = new Date(currentDate.getFullYear(),currentDate.getMonth(), currentDate.getDay(), currentDate.getHours(), currentDate.getMinutes(), 0),
+
+    $scope.startDateTime =  new Date();
+    $scope.endDateTime =  new Date();
+
+    $scope.isCalendarOpen = {
+      start:false,
+      end:false
+    };
+
+    $scope.isOpen = false;
+
+    $scope.openCalendar = function(e, prop, type) {
+      e.preventDefault();
+      e.stopPropagation();
+      $scope.isCalendarOpen[type] = true;
+
+    };
+
+
+    $scope.minDate = new Date(currentDate.getFullYear(),currentDate.getMonth(), currentDate.getDay(), currentDate.getHours(), currentDate.getMinutes(), 0);
     ValidateService.checkTotalDataValidity($scope);
     $scope.formValitidyStatus = ValidateService.isAllDataValid;
 
@@ -21,8 +40,8 @@ angular.module('joinMeApp').controller('EventController', [
       type:"",
       host:"",
       message:"",
-      event_start_date_time:new Date(currentDate.getFullYear(),currentDate.getMonth(), currentDate.getDay(), currentDate.getHours(), currentDate.getMinutes(), 0),
-      event_end_date_time:new Date(currentDate.getFullYear(),currentDate.getMonth(), currentDate.getDay(), currentDate.getHours()+2, currentDate.getMinutes(), 0),
+      event_start_date_time:$scope.startDateTime,
+      event_end_date_time:$scope.endDateTime,
       address:{},
       guests:""
     };
