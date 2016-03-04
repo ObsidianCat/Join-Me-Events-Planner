@@ -111,6 +111,7 @@ form#create-event fieldset{
 }
 
 .form-group.date-time{
+  position: relative;
   > div{
     display: flex;
     justify-content: space-between;
