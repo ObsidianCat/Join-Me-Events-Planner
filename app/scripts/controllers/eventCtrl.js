@@ -37,7 +37,7 @@ angular.module('joinMeApp').controller('EventController', [
 
     $scope.minDate = new Date(currentDate.getFullYear(),currentDate.getMonth(), currentDate.getDay(), currentDate.getHours(), currentDate.getMinutes(), 0);
     ValidateService.checkTotalDataValidity($scope);
-    $scope.formValitidyStatus = ValidateService.isAllDataValid;
+    $scope.formValitidyStatus = true;
 
     window.validate = ValidateService;
     $scope.eventData = {

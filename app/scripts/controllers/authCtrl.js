@@ -9,7 +9,7 @@ angular.module('joinMeApp').controller('AuthController',[
   function($scope, ValidateService, Auth, $state) {
     $('form input').first().focus();
     ValidateService.checkTotalDataValidity($scope);
-    $scope.formValitidyStatus = ValidateService.isAllDataValid;
+    $scope.formValitidyStatus = true;
 
     //data from form
     //id`s to use in sign in form
