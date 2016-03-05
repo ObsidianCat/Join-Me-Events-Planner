@@ -28,13 +28,13 @@
         <input type="text"
                id="event_start_date_time"
                aria-label="required input Event start date and time"
-               class="custom-validation v-date-start form-control"
+               class="date-picker custom-validation v-date-start form-control"
                name="event_start_date_time"
                required
                datetime-picker="dd MMM yyyy HH:mm"
                ng-model="eventData.start_date_time"
                is-open="isCalendarOpen.start"  />
-        <button aria-label="calendar" type="button" class="btn btn-default" ng-click="openCalendar($event, prop, 'start')">
+        <button aria-label="calendar" type="button" class="btn btn-default" ng-mousedown="openCalendar($event, prop, 'start')">
           <i class="glyphicon glyphicon-calendar" aria-hidden="true"></i>
         </button>
       </div>
@@ -48,10 +48,10 @@
                  id="event_end_date_time"
                  aria-label="required input Event end date and time"
                  ng-model="eventData.end_date_time"
-                 class="custom-validation v-date-end form-control"
+                 class="date-picker custom-validation v-date-end form-control"
                  name="event_end_date_time"
                  required />
-            <button aria-label="calendar" type="button" class="btn btn-default" ng-click="openCalendar($event, prop, 'end')">
+            <button aria-label="calendar" type="button" class="btn btn-default" ng-mousedown="openCalendar($event, prop, 'end')">
               <i class="glyphicon glyphicon-calendar" aria-hidden="true"></i>
             </button>
       </div>

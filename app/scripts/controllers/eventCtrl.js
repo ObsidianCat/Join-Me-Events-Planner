@@ -24,7 +24,7 @@ angular.module('joinMeApp').controller('EventController', [
       start:false,
       end:false
     };
-
+    
     $scope.isOpen = false;
 
     $scope.openCalendar = function(e, prop, type) {
