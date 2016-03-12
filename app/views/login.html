@@ -6,7 +6,7 @@
   <form class="signup-form" id="user_new"  >
     <div class="form-group">
       <label for="user_email">*Email </label>
-      <input autofocus aria-label="required input email" required pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" id="user_email" ng-model="user.email" class="custom-validation v-email form-control" type="email" name="email" placeholder="example@example.com" autocomplete="email">
+      <input input-focus autofocus aria-label="required input email" required pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$" id="user_email" ng-model="user.email" class="custom-validation v-email form-control" type="email" name="email" placeholder="example@example.com" autocomplete="email">
     </div>
     <div class="form-group">
       <label for="{{user.passwordId}}">*Password (min. 8 characters)</label>

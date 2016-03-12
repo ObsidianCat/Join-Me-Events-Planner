@@ -9,9 +9,7 @@ angular.module('joinMeApp').controller('EventController', [
   'Auth',
   'ValidateService',
   function($state, $scope, $firebaseArray, eventsService, Auth, ValidateService) {
-
-    $('form input').first().focus();
-
+    
     var authObj = Auth;
     var currentDate = new Date();
 
@@ -24,7 +22,7 @@ angular.module('joinMeApp').controller('EventController', [
       start:false,
       end:false
     };
-    
+
     $scope.isOpen = false;
 
     $scope.openCalendar = function(e, prop, type) {

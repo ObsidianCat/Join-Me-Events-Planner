@@ -7,7 +7,6 @@ angular.module('joinMeApp').controller('AuthController',[
   'Auth',
   '$state',
   function($scope, ValidateService, Auth, $state) {
-    $('form input').first().focus();
     ValidateService.checkTotalDataValidity($scope);
     $scope.formValitidyStatus = true;
 
