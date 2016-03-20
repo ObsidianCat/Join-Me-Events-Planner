@@ -11,10 +11,6 @@ angular.module('joinMeApp').controller('EventController', [
   'ValidateService',
   function($state,  $stateParams, $scope, $firebaseArray, eventsService, Auth, ValidateService) {
 
-    var currentDate = new Date();
-    $scope.startDateTime =  new Date();
-    $scope.endDateTime =  new Date();
-
     var eventDataModel = {
       name:"",
       type:"",
@@ -29,11 +25,13 @@ angular.module('joinMeApp').controller('EventController', [
     if($stateParams.eventData){
       $scope.eventData = $stateParams.eventData;
 
-
-      $scope.eventDataForEditing = $stateParams.eventData;
-      window.eventData = $scope.eventDataForEditing;
+      $scope.eventData.start_date_time = Date.parse($scope.eventData.start);
+      $scope.eventData.end_date_time = Date.parse($scope.eventData.end);
       $scope.eventActionType = 'edit';
     }else{
+      var currentDate = new Date();
+      $scope.startDateTime =  new Date();
+      $scope.endDateTime =  new Date();
       $scope.eventData = eventDataModel;
       $scope.eventActionType = 'create';
     }
