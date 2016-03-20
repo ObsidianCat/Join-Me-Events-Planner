@@ -13,6 +13,7 @@
           <!-- delete a message using $remove -->
           <span class="small" ng-if="checkUid(meetUpEvent.uidOfuser)">(your event)</span>
           <div class="actions">
+            <a ui-sref="edit-event({ eventData: meetUpEvent })" ng-if="checkUid(meetUpEvent.uidOfuser)">edit</a>
             <a href="" ng-click="meetUpEvents.$remove(meetUpEvent)"  ng-if="checkUid(meetUpEvent.uidOfuser)" class="remove">X</a>
             <i ng-class="collapsed?'open':'closed';" class="glyphicon glyphicon-menu-down"></i>
           </div>
@@ -23,10 +24,6 @@
             <p><strong>Event notes:</strong> {{meetUpEvent.message}}</p>
             <h5><strong>Address:</strong></h5>
             <p ng-repeat="text in meetUpEvent.address">{{text}}</p>
-            <!--<p>{{meetUpEvent.message.address.streetPartTwo}}</p>-->
-            <!--<p>{{meetUpEvent.message.address.city}}</p>-->
-            <!--<p>{{meetUpEvent.message.address.administrativeArea}}</p>-->
-            <!--<p>{{meetUpEvent.message.address.country}}</p>-->
         </div>
       </li>
     </ul>

@@ -33,7 +33,7 @@ angular.module('joinMeApp').controller('WelcomeController', [
     };
 
     $scope.meetUpEvents = eventsService;
-
+    window.events = $scope.meetUpEvents;
     // if the messages are empty, add something for fun!
     $scope.meetUpEvents.$loaded(function() {
       //if ($scope.meetUpEvents.length === 0) {

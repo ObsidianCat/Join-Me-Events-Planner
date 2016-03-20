@@ -42,7 +42,18 @@ angular.module('joinMeApp', ['ui.router', 'firebase','ui.bootstrap', 'ui.bootstr
           }
         })
         .state('event', {
+        params: {
+          eventData: null
+        },
         url:"/create-event",
+        templateUrl: 'views/event.html',
+        controller: 'EventController as eventCtrl'
+      })
+      .state('edit-event', {
+        url:"/edit-event",
+        params: {
+          eventData: null
+        },
         templateUrl: 'views/event.html',
         controller: 'EventController as eventCtrl'
       });

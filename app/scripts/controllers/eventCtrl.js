@@ -3,27 +3,49 @@
  */
 angular.module('joinMeApp').controller('EventController', [
   '$state',
+  '$stateParams',
   '$scope',
   '$firebaseArray',
   'eventsService',
   'Auth',
   'ValidateService',
-  function($state, $scope, $firebaseArray, eventsService, Auth, ValidateService) {
-    
-    var authObj = Auth;
-    var currentDate = new Date();
+  function($state,  $stateParams, $scope, $firebaseArray, eventsService, Auth, ValidateService) {
 
+    var currentDate = new Date();
     $scope.startDateTime =  new Date();
     $scope.endDateTime =  new Date();
 
-    window.startTime = $scope.startDateTime;
+    var eventDataModel = {
+      name:"",
+      type:"",
+      host:"",
+      message:"",
+      start_date_time:$scope.startDateTime,
+      end_date_time:$scope.endDateTime,
+      address:{},
+      guests:""
+    };
+
+    if($stateParams.eventData){
+      $scope.eventData = $stateParams.eventData;
+
+
+      $scope.eventDataForEditing = $stateParams.eventData;
+      window.eventData = $scope.eventDataForEditing;
+      $scope.eventActionType = 'edit';
+    }else{
+      $scope.eventData = eventDataModel;
+      $scope.eventActionType = 'create';
+    }
+    window.eventData = $scope.eventData;
+
+    var authObj = Auth;
+
 
     $scope.isCalendarOpen = {
       start:false,
       end:false
     };
-
-    $scope.isOpen = false;
 
     $scope.openCalendar = function(e, prop, type) {
       e.preventDefault();
@@ -40,18 +62,7 @@ angular.module('joinMeApp').controller('EventController', [
     $scope.formValitidyStatus = true;
 
     window.validate = ValidateService;
-    $scope.eventData = {
-      name:"",
-      type:"",
-      host:"",
-      message:"",
-      start_date_time:$scope.startDateTime,
-      end_date_time:$scope.endDateTime,
-      address:{},
-      guests:""
-    };
 
-    window.eventData = $scope.eventData;
 
     ValidateService.inputActions.setInputEventListeners();
 
@@ -96,9 +107,8 @@ angular.module('joinMeApp').controller('EventController', [
       dataForSave.timeStartString =  dataForSave.start_date_time.toLocaleTimeString();
       dataForSave.dateEndString =  dataForSave.end_date_time.toDateString();
       dataForSave.timeEndString =  dataForSave.end_date_time.toLocaleTimeString();
-
-      delete dataForSave.start_date_time;
-      delete dataForSave.end_date_time;
+      dataForSave.start = dataForSave.start_date_time.toString();
+      dataForSave.end = dataForSave.end_date_time.toString();
 
       return dataForSave
     }
