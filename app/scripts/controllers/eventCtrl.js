@@ -9,37 +9,26 @@ angular.module('joinMeApp').controller('EventController', [
   'eventsService',
   'Auth',
   'ValidateService',
-  function($state,  $stateParams, $scope, $firebaseArray, eventsService, Auth, ValidateService) {
+  'eventModelFactory',
+  function($state,  $stateParams, $scope, $firebaseArray, eventsService, Auth, ValidateService, eventModelFactory) {
 
-    var eventDataModel = {
-      name:"",
-      type:"",
-      host:"",
-      message:"",
-      start_date_time:$scope.startDateTime,
-      end_date_time:$scope.endDateTime,
-      address:{},
-      guests:""
-    };
+    var currentDate = new Date();
+    var authObj = Auth;
 
     if($stateParams.eventData){
+      //load existing event for edit
       $scope.eventData = $stateParams.eventData;
-
       $scope.eventData.start_date_time = Date.parse($scope.eventData.start);
       $scope.eventData.end_date_time = Date.parse($scope.eventData.end);
       $scope.eventActionType = 'edit';
     }else{
-      var currentDate = new Date();
-      $scope.startDateTime =  new Date();
-      $scope.endDateTime =  new Date();
-      $scope.eventData = eventDataModel;
+      //create new event
+      $scope.eventData = eventModelFactory;
       $scope.eventActionType = 'create';
     }
     window.eventData = $scope.eventData;
 
-    var authObj = Auth;
-
-
+    $scope.isOpen = false;
     $scope.isCalendarOpen = {
       start:false,
       end:false
