@@ -110,7 +110,7 @@ angular.module('joinMeApp').controller('EventController', [
     }
 
 
-    function addEventTodatabase(dataForSave){
+    function addEventToDatabase(dataForSave){
       // $add on a synchronized array is like Array.push() except it saves to the database!
       dataForSave.timestamp = Firebase.ServerValue.TIMESTAMP;
       dataForSave.uidOfuser = authObj.$getAuth().uid;
@@ -120,17 +120,20 @@ angular.module('joinMeApp').controller('EventController', [
       $state.go('welcome');
     }
     function updateEventInDatabase(dataForSave){
-      console.log('eventData',$scope.eventData);
       console.log('dataForSave',dataForSave);
 
       var item = $scope.meetUpEvents.$getRecord(dataForSave.$id);
       item.name = "Coco-Rico";
-      $scope.meetUpEvents.$save(item).then(function() {
-        // data has been saved to our database
-        $scope.meetUpEvent = "";
-        $state.go('welcome');
-      });
+      for(let prop in item){
+        console.log(prop);
+      };
+      //$scope.meetUpEvents.$save(item).then(function() {
+      //  // data has been saved to our database
+      //  $scope.meetUpEvent = "";
+      //  $state.go('welcome');
+      //});
     }
+
     function eventAction() {
       var dataForSave = {};
       angular.copy($scope.eventData, dataForSave);
@@ -138,7 +141,7 @@ angular.module('joinMeApp').controller('EventController', [
       dataForSave = convertDateAndTimeToStrings(dataForSave);
 
       if(eventActionType == "create"){
-        addEventTodatabase(dataForSave);
+        addEventToDatabase(dataForSave);
       }
       else if(eventActionType == "edit"){
         updateEventInDatabase(dataForSave);
