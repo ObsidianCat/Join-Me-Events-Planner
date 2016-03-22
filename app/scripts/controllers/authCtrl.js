@@ -22,7 +22,7 @@ angular.module('joinMeApp').controller('AuthController',[
     };
 
 
-    ValidateService.inputActions.setInputEventListeners();
+    ValidateService.inputActions.setListeners();
 
 
     $scope.login = function(){

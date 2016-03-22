@@ -20,11 +20,11 @@ angular.module('joinMeApp').controller('EventController', [
       $scope.eventData = $stateParams.eventData;
       $scope.eventData.start_date_time = Date.parse($scope.eventData.start);
       $scope.eventData.end_date_time = Date.parse($scope.eventData.end);
-      $scope.eventActionType = 'edit';
+      var eventActionType = 'edit';
     }else{
       //create new event
       $scope.eventData = eventModelFactory;
-      $scope.eventActionType = 'create';
+      var eventActionType = 'create';
     }
     window.eventData = $scope.eventData;
 
@@ -51,16 +51,18 @@ angular.module('joinMeApp').controller('EventController', [
     window.validate = ValidateService;
 
 
-    ValidateService.inputActions.setInputEventListeners();
+    ValidateService.inputActions.setListeners();
 
 
     $scope.submitMeetUpEventForm = function(){
+      //run validation
       ValidateService.inputActions.validationOnSubmit();
-
+      //data valid
       if(jQuery.isEmptyObject(ValidateService.trackers)){
         getAddress();
-        addMeetUpEvent();
+        eventAction();
       }
+      //set data as invalid
       else{
         $scope.formValitidyStatus = ValidateService.checkTotalDataValidity($scope);
       }
@@ -90,21 +92,25 @@ angular.module('joinMeApp').controller('EventController', [
      * @returns {*}
      */
     function convertDateAndTimeToStrings(dataForSave){
-      dataForSave.dateStartString =  dataForSave.start_date_time.toDateString();
-      dataForSave.timeStartString =  dataForSave.start_date_time.toLocaleTimeString();
-      dataForSave.dateEndString =  dataForSave.end_date_time.toDateString();
-      dataForSave.timeEndString =  dataForSave.end_date_time.toLocaleTimeString();
-      dataForSave.start = dataForSave.start_date_time.toString();
-      dataForSave.end = dataForSave.end_date_time.toString();
+      if((typeof dataForSave.start_date_time) == "object"){
+        var start_date_time = dataForSave.start_date_time;
 
+        dataForSave.dateStartString =  start_date_time.toDateString();
+        dataForSave.timeStartString =  start_date_time.toLocaleTimeString();
+        dataForSave.start = start_date_time.toString();
+      }
+      if((typeof dataForSave.end_date_time) == "object"){
+        var end_date_time = dataForSave.end_date_time;
+        dataForSave.dateEndString =  end_date_time.toDateString();
+        dataForSave.timeEndString =  end_date_time.toLocaleTimeString();
+        dataForSave.end = end_date_time.toString();
+
+      }
       return dataForSave
     }
-    function addMeetUpEvent() {
-      var dataForSave = {};
-      angular.copy($scope.eventData, dataForSave);
 
-      dataForSave = convertDateAndTimeToStrings(dataForSave);
 
+    function addEventTodatabase(dataForSave){
       // $add on a synchronized array is like Array.push() except it saves to the database!
       dataForSave.timestamp = Firebase.ServerValue.TIMESTAMP;
       dataForSave.uidOfuser = authObj.$getAuth().uid;
@@ -112,6 +118,32 @@ angular.module('joinMeApp').controller('EventController', [
       $scope.meetUpEvents.$add(dataForSave);
       $scope.meetUpEvent = "";
       $state.go('welcome');
+    }
+    function updateEventInDatabase(dataForSave){
+      console.log('eventData',$scope.eventData);
+      console.log('dataForSave',dataForSave);
+
+      var item = $scope.meetUpEvents.$getRecord(dataForSave.$id);
+      item.name = "Coco-Rico";
+      $scope.meetUpEvents.$save(item).then(function() {
+        // data has been saved to our database
+        $scope.meetUpEvent = "";
+        $state.go('welcome');
+      });
+    }
+    function eventAction() {
+      var dataForSave = {};
+      angular.copy($scope.eventData, dataForSave);
+
+      dataForSave = convertDateAndTimeToStrings(dataForSave);
+
+      if(eventActionType == "create"){
+        addEventTodatabase(dataForSave);
+      }
+      else if(eventActionType == "edit"){
+        updateEventInDatabase(dataForSave);
+
+      }
     }
 
   }
