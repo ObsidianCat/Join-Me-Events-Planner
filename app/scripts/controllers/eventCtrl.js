@@ -125,13 +125,18 @@ angular.module('joinMeApp').controller('EventController', [
       var item = $scope.meetUpEvents.$getRecord(dataForSave.$id);
       item.name = "Coco-Rico";
       for(let prop in item){
-        console.log(prop);
+        if(prop.charAt(0)!="$"){
+          item[prop] = dataForSave[prop];
+        }
+
       };
-      //$scope.meetUpEvents.$save(item).then(function() {
-      //  // data has been saved to our database
-      //  $scope.meetUpEvent = "";
-      //  $state.go('welcome');
-      //});
+      $scope.meetUpEvents.$save(item).then(function() {
+        // data has been saved to our database
+        $scope.meetUpEvent = "";
+        $state.go('welcome');
+      }, function(){
+        console.error('Error occurred during updating object');
+      });
     }
 
     function eventAction() {
