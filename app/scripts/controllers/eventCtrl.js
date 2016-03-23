@@ -86,7 +86,7 @@ angular.module('joinMeApp').controller('EventController', [
     }
 
     /**
-     * create date and tome strings
+     * create date and time strings
      * in object-copy from object with data from form
      * @param dataForSave{obj}
      * @returns {*}
