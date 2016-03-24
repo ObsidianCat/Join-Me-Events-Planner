@@ -3,7 +3,8 @@
  */
 angular.module('joinMeApp')
   .factory("eventModelFactory", [
-    function() {
+    "Auth",
+    function(Auth) {
       var dataModel={
         name:"",
         type:"",
@@ -12,7 +13,8 @@ angular.module('joinMeApp')
         start_date_time: new Date(),
         end_date_time: new Date(),
         address:{},
-        guests:""
+        guests:"",
+        uidOfuser:Auth.$getAuth().uid
       };
 
       return dataModel;

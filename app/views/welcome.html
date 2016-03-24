@@ -21,6 +21,7 @@
           <div  ng-show="collapsed" class="event-details">
             <p><strong>Start:</strong> {{meetUpEvent.timeStartString}},  {{meetUpEvent.dateStartString}}</p>
             <p><strong>End:</strong> {{meetUpEvent.timeEndString}},  {{meetUpEvent.dateEndString}}</p>
+            <p><strong>type of activity:</strong> {{meetUpEvent.type}}</p>
             <p><strong>Event notes:</strong> {{meetUpEvent.message}}</p>
             <h5><strong>Address:</strong></h5>
             <p ng-repeat="text in meetUpEvent.address">{{text}}</p>
