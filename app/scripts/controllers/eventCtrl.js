@@ -12,19 +12,22 @@ angular.module('joinMeApp').controller('EventController', [
   'eventModelFactory',
   function($state,  $stateParams, $scope, $firebaseArray, eventsService, Auth, ValidateService, eventModelFactory) {
 
+
+    const ACTION_TYPE_EDIT = 'edit';
+    const ACTION_TYPE_CREATE = 'create';
     var currentDate = new Date();
     var authObj = Auth;
 
-    if($stateParams.eventData){
+    var eventActionType = ACTION_TYPE_CREATE;
+    if(!$stateParams.eventData){
+      //create new event
+      $scope.eventData = eventModelFactory;
+    }else{
       //load existing event for edit
       $scope.eventData = $stateParams.eventData;
       $scope.eventData.start_date_time = Date.parse($scope.eventData.start);
       $scope.eventData.end_date_time = Date.parse($scope.eventData.end);
-      var eventActionType = 'edit';
-    }else{
-      //create new event
-      $scope.eventData = eventModelFactory;
-      var eventActionType = 'create';
+      eventActionType = ACTION_TYPE_EDIT
     }
     window.eventData = $scope.eventData;
 
@@ -48,7 +51,7 @@ angular.module('joinMeApp').controller('EventController', [
     ValidateService.checkTotalDataValidity($scope);
     $scope.formValitidyStatus = true;
 
-    window.validate = ValidateService;
+  //  window.validate = ValidateService;
 
 
     ValidateService.inputActions.setListeners();
@@ -120,16 +123,14 @@ angular.module('joinMeApp').controller('EventController', [
       $state.go('welcome');
     }
     function updateEventInDatabase(dataForSave){
-      console.log('dataForSave',dataForSave);
-
       var item = $scope.meetUpEvents.$getRecord(dataForSave.$id);
-      item.name = "Coco-Rico";
+
       for(let prop in item){
         if(prop.charAt(0)!="$"){
           item[prop] = dataForSave[prop];
         }
 
-      };
+      }
       $scope.meetUpEvents.$save(item).then(function() {
         // data has been saved to our database
         $scope.meetUpEvent = "";

@@ -13,8 +13,8 @@
           <!-- delete a message using $remove -->
           <span class="small" ng-if="checkUid(meetUpEvent.uidOfuser)">(your event)</span>
           <div class="actions">
-            <a ui-sref="edit-event({ eventData: meetUpEvent })" ng-if="checkUid(meetUpEvent.uidOfuser)">edit</a>
-            <a href="" ng-click="meetUpEvents.$remove(meetUpEvent)"  ng-if="checkUid(meetUpEvent.uidOfuser)" class="remove">X</a>
+            <a ui-sref="edit-event({ eventData: meetUpEvent })" ng-if="checkUid(meetUpEvent.uidOfuser)">Edit</a>
+            <a href="" ng-click="meetUpEvents.$remove(meetUpEvent)"  ng-if="checkUid(meetUpEvent.uidOfuser)" class="remove">Delete</a>
             <i ng-class="collapsed?'open':'closed';" class="glyphicon glyphicon-menu-down"></i>
           </div>
         </div>
