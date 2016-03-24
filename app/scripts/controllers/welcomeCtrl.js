@@ -10,6 +10,7 @@ angular.module('joinMeApp').controller('WelcomeController', [
   function($scope, $firebaseArray, $state, Auth, eventsService) {
     $scope.authObj = Auth;
     $scope.authData = $scope.authObj.$getAuth();
+
     // any time auth status updates, add the user data to scope
     $scope.authObj.$onAuth(function(authData) {
       $scope.authData = authData;

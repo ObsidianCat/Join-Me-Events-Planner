@@ -11,23 +11,16 @@ angular.module('joinMeApp').controller('EventController', [
   'eventModelFactory',
   function($state,  $stateParams, $scope, $firebaseArray, eventsService, ValidateService, eventModelFactory) {
 
-
     const ACTION_TYPE_EDIT = 'edit';
     const ACTION_TYPE_CREATE = 'create';
+    var eventActionType = ACTION_TYPE_CREATE;
+
     var currentDate = new Date();
+    $scope.formValitidyStatus = true;
+    $scope.minDate = new Date(currentDate.getFullYear(),currentDate.getMonth(), currentDate.getDay(), currentDate.getHours(), currentDate.getMinutes(), 0);
+
     $scope.meetUpEvents = eventsService;
 
-    var eventActionType = ACTION_TYPE_CREATE;
-    if(!$stateParams.eventData){
-      //create new event
-      $scope.eventData = eventModelFactory;
-    }else{
-      //load existing event for edit
-      $scope.eventData = $stateParams.eventData;
-      $scope.eventData.start_date_time = Date.parse($scope.eventData.start);
-      $scope.eventData.end_date_time = Date.parse($scope.eventData.end);
-      eventActionType = ACTION_TYPE_EDIT
-    }
     window.eventData = $scope.eventData;
 
     $scope.isOpen = false;
@@ -46,13 +39,18 @@ angular.module('joinMeApp').controller('EventController', [
     };
 
 
-    $scope.minDate = new Date(currentDate.getFullYear(),currentDate.getMonth(), currentDate.getDay(), currentDate.getHours(), currentDate.getMinutes(), 0);
+    if(!$stateParams.eventData){
+      //create new event
+      $scope.eventData = eventModelFactory;
+    }else{
+      //load existing event for edit
+      $scope.eventData = $stateParams.eventData;
+      $scope.eventData.start_date_time = Date.parse($scope.eventData.start);
+      $scope.eventData.end_date_time = Date.parse($scope.eventData.end);
+      eventActionType = ACTION_TYPE_EDIT
+    }
+
     ValidateService.checkTotalDataValidity($scope);
-    $scope.formValitidyStatus = true;
-
-  //  window.validate = ValidateService;
-
-
     ValidateService.inputActions.setListeners();
 
 
