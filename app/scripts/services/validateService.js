@@ -88,22 +88,22 @@ angular.module('joinMeApp').service('ValidateService', [
             if(classes.indexOf("v-email") >= 0 && input.validity.patternMismatch){
               currentTracker.add("invalid email");
             }
-            else if(classes.indexOf("v-guests-list" >=0)){
+            else if(classes.indexOf("v-guests-list") >=0){
               ValidateRules.checkEmailsList(input, currentTracker, serviceInstance.setAsValid);
             }
-            else if(classes.indexOf("v-name" >=0)){
+            else if(classes.indexOf("v-name") >=0){
               ValidateRules.checkName(input, currentTracker, serviceInstance.setAsValid);
             }
-            else if(classes.indexOf("v-password" >=0)){
+            else if(classes.indexOf("v-password") >=0){
               ValidateRules.checkPassword(input, currentTracker, serviceInstance.setAsValid);
             }
-            else if(classes.indexOf("v-repeat-password" >=0)){
+            else if(classes.indexOf("v-repeat-password") >=0){
               ValidateRules.checkPasswordRepeat(input, document.querySelector(".v-password"), currentTracker, serviceInstance.setAsValid);
             }
-            else if(classes.indexOf("v-date-start" >=0)){
+            else if(classes.indexOf("v-date-start") >=0){
               ValidateRules.checkDateStart(input,currentTracker, serviceInstance.setAsValid);
             }
-            else if(classes.indexOf("v-date-end" >=0)){
+            else if(classes.indexOf("v-date-end") >=0){
               ValidateRules.checkDateEnd(input,currentTracker, serviceInstance.setAsValid);
             }
           }
