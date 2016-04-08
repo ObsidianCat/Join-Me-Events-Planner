@@ -3,11 +3,11 @@
  */
 angular.module('joinMeApp').controller('AuthController',[
   '$scope',
-  'ValidateService',
+  'Validation',
   'Auth',
   '$state',
-  function($scope, ValidateService, Auth, $state) {
-    ValidateService.checkTotalDataValidity($scope);
+  function($scope, Validation, Auth, $state) {
+    Validation.checkTotalDataValidity($scope);
     $scope.formValitidyStatus = true;
 
     //data from form
@@ -22,7 +22,7 @@ angular.module('joinMeApp').controller('AuthController',[
     };
 
 
-    ValidateService.inputActions.setListeners();
+    Validation.inputActions.setListeners();
 
 
     $scope.login = function(){
@@ -42,12 +42,12 @@ angular.module('joinMeApp').controller('AuthController',[
     };
 
     $scope.submitSignUp = function(){
-      ValidateService.inputActions.validationOnSubmit();
-      if(jQuery.isEmptyObject(ValidateService.trackers)){
+      Validation.inputActions.validationOnSubmit();
+      if(jQuery.isEmptyObject(Validation.trackers)){
         register();
       }
       else{
-        $scope.formValitidyStatus = ValidateService.checkTotalDataValidity($scope);
+        $scope.formValitidyStatus = Validation.checkTotalDataValidity($scope);
         console.error("missing data");
       }
 

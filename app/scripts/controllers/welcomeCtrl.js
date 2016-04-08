@@ -6,8 +6,8 @@ angular.module('joinMeApp').controller('WelcomeController', [
   '$firebaseArray',
   '$state',
   'Auth',
-  'eventsService',
-  function($scope, $firebaseArray, $state, Auth, eventsService) {
+  'Events',
+  function($scope, $firebaseArray, $state, Auth, Events) {
     $scope.authObj = Auth;
     $scope.authData = $scope.authObj.$getAuth();
 
@@ -32,7 +32,7 @@ angular.module('joinMeApp').controller('WelcomeController', [
       return eventBelongToUser;
     };
 
-    $scope.meetUpEvents = eventsService;
+    $scope.meetUpEvents = Events;
 
     $scope.meetUpEvents.$loaded();
 

@@ -6,10 +6,10 @@ angular.module('joinMeApp').controller('EventController', [
   '$stateParams',
   '$scope',
   '$firebaseArray',
-  'eventsService',
-  'ValidateService',
-  'eventModelFactory',
-  function($state,  $stateParams, $scope, $firebaseArray, eventsService, ValidateService, eventModelFactory) {
+  'Events',
+  'Validation',
+  'EventModel',
+  function($state,  $stateParams, $scope, $firebaseArray, Events, Validation, EventModel) {
 
     const ACTION_TYPE_EDIT = 'edit';
     const ACTION_TYPE_CREATE = 'create';
@@ -19,7 +19,7 @@ angular.module('joinMeApp').controller('EventController', [
     $scope.formValitidyStatus = true;
     $scope.minDate = new Date(currentDate.getFullYear(),currentDate.getMonth(), currentDate.getDay(), currentDate.getHours(), currentDate.getMinutes(), 0);
 
-    $scope.meetUpEvents = eventsService;
+    $scope.meetUpEvents = Events;
 
     //$scope.isOpen = false;
     $scope.isCalendarOpen = {
@@ -46,7 +46,7 @@ angular.module('joinMeApp').controller('EventController', [
 
     if(!$stateParams.eventData){
       //create new event
-      $scope.eventData = eventModelFactory;
+      $scope.eventData = EventModel;
     }else{
       //load existing event for edit
       $scope.eventData = $stateParams.eventData;
@@ -55,21 +55,21 @@ angular.module('joinMeApp').controller('EventController', [
       eventActionType = ACTION_TYPE_EDIT
     }
 
-    ValidateService.checkTotalDataValidity($scope);
-    ValidateService.inputActions.setListeners();
+    Validation.checkTotalDataValidity($scope);
+    Validation.inputActions.setListeners();
 
 
     $scope.submitMeetUpEventForm = function(){
       //run validation
-      ValidateService.inputActions.validationOnSubmit();
+      Validation.inputActions.validationOnSubmit();
       //data valid
-      if(jQuery.isEmptyObject(ValidateService.trackers)){
+      if(jQuery.isEmptyObject(Validation.trackers)){
         getAddress();
         eventAction();
       }
       //set data as invalid
       else{
-        $scope.formValitidyStatus = ValidateService.checkTotalDataValidity($scope);
+        $scope.formValitidyStatus = Validation.checkTotalDataValidity($scope);
       }
     };
 

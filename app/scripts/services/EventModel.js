@@ -2,7 +2,7 @@
  * Created by Lula on 3/20/2016.
  */
 angular.module('joinMeApp')
-  .factory("eventModelFactory", [
+  .factory("EventModel", [
     "Auth",
     function(Auth) {
       var dataModel={

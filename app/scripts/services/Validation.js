@@ -1,7 +1,7 @@
 /**
  * Created by lulaleus on 29/02/2016.
  */
-angular.module('joinMeApp').service('ValidateService', [
+angular.module('joinMeApp').service('Validation', [
   'ValidateRules',
   function(ValidateRules) {
     function IssueTracker() {
