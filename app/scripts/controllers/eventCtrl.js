@@ -21,9 +21,7 @@ angular.module('joinMeApp').controller('EventController', [
 
     $scope.meetUpEvents = eventsService;
 
-    window.eventData = $scope.eventData;
-
-    $scope.isOpen = false;
+    //$scope.isOpen = false;
     $scope.isCalendarOpen = {
       start:false,
       end:false
@@ -32,9 +30,16 @@ angular.module('joinMeApp').controller('EventController', [
     $scope.openCalendar = function(e, prop, type) {
       e.preventDefault();
       e.stopPropagation();
-      $scope.isCalendarOpen.start = false;
-      $scope.isCalendarOpen.end = false;
-      $scope.isCalendarOpen[type] = true;
+      switch (type) {
+        case "start":
+          $scope.isCalendarOpen.start = true;
+          $scope.isCalendarOpen.end = false;
+              break;
+        case "end":
+          $scope.isCalendarOpen.start = false;
+          $scope.isCalendarOpen.end = true;
+            break;
+      }
 
     };
 
