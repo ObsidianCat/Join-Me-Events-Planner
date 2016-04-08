@@ -13,7 +13,8 @@
     "angularfire": "^1.1.3",
     "angular-ui-router": "~0.2.17",
     "bootstrap-ui-datetime-picker": "^2.2.2",
-    "angular-bootstrap": "^1.2.2"
+    "angular-bootstrap": "^1.2.2",
+    "Proton": "proton#*"
   },
   "overrides": {
     "bootstrap-sass": {

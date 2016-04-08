@@ -31,6 +31,18 @@ header{
   }
 }
 
+.jumbotron{
+  position: relative;
+  overflow: hidden;
+
+  canvas{
+    position: absolute;
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    opacity: 0.2;
+  }
+}
 form#create-event .form-group#address{
   label{
     display: inline-block;
